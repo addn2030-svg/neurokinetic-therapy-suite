@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NKT Clinical Guide: Joint & Muscle Selection Interface</title>
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --primary-dark: #0f172a;
+            --secondary: #0d9488;
+            --accent: #d97706;
+            --danger: #dc2626;
+            --success: #16a34a;
+            --bg-main: #f8fafc;
+            --text-main: #1e293b;
+            --border: #e2e8f0;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg-main); color: var(--text-main); line-height: 1.6; }
+        header { background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%); color: white; padding: 2.5rem 2rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); }
+        .header-content { max-width: 1400px; margin: 0 auto; }
+        .badge { display: inline-block; background: rgba(255,255,255,0.15); color: #93c5fd; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; margin-bottom: 0.75rem; }
+        h1 { font-size: 2.25rem; font-weight: 800; margin-bottom: 0.5rem; }
+        .subtitle { font-size: 1.1rem; color: #cbd5e1; }
+        nav { background: white; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05); }
+        .nav-tabs { max-width: 1400px; margin: 0 auto; display: flex; overflow-x: auto; list-style: none; padding: 0 1rem; }
+        .nav-btn { background: none; border: none; padding: 1rem 1.25rem; cursor: pointer; font-size: 0.95rem; font-weight: 500; color: #64748b; border-bottom: 2px solid transparent; transition: all 0.2s; white-space: nowrap; }
+        .nav-btn:hover { color: var(--primary); background: var(--bg-main); }
+        .nav-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
+        .container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+        .content-section { display: none; }
+        .content-section.active { display: block; animation: fadeIn 0.3s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        h2 { font-size: 2rem; color: var(--primary-dark); margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 3px solid var(--primary); }
+        h3 { font-size: 1.5rem; color: var(--primary); margin: 2rem 0 1rem; }
+        h4 { font-size: 1.25rem; color: var(--primary-dark); margin: 1.5rem 0 0.75rem; }
+        .info-card, .protocol-box { background: white; border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1); border-left: 4px solid var(--primary); }
+        .protocol-box { border-left-color: var(--secondary); }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; background: white; }
+        th { background: var(--primary); color: white; padding: 0.75rem; text-align: left; font-weight: 600; }
+        td { padding: 0.75rem; border-bottom: 1px solid var(--border); }
+        tr:hover { background: var(--bg-main); }
+        .two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 1.5rem 0; }
+        select { width: 100%; padding: 0.75rem; border: 2px solid var(--border); border-radius: 6px; font-size: 1rem; margin: 1rem 0; background: white; }
+        .note { background: #fef3c7; border-left: 4px solid var(--accent); padding: 1rem; margin: 1rem 0; border-radius: 4px; }
+        .alert { padding: 1rem; border-radius: 6px; margin: 1rem 0; font-weight: 500; }
+        .alert-warning { background: #fef3c7; border: 2px solid var(--accent); color: #92400e; }
+        .alert-danger { background: #fee2e2; border: 2px solid var(--danger); color: #991b1b; }
+        .step { background: white; border: 2px solid var(--border); border-radius: 8px; margin-bottom: 1.5rem; overflow: hidden; }
+        .step-header { background: var(--primary); color: white; padding: 1rem 1.5rem; display: flex; align-items: center; gap: 1rem; }
+        .step-badge { background: white; color: var(--primary); padding: 0.25rem 0.75rem; border-radius: 20px; font-weight: 700; }
+        .step-content { padding: 1.5rem; }
+        .example-box { background: #dbeafe; border-left: 4px solid #3b82f6; padding: 1rem; margin: 1rem 0; border-radius: 4px; }
+        .case-study { background: white; border: 2px solid var(--primary); border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0; }
+        .case-header { background: var(--primary); color: white; padding: 1rem; margin: -1.5rem -1.5rem 1.5rem; border-radius: 6px 6px 0 0; font-weight: 700; }
+        ul, ol { margin-left: 1.5rem; margin-bottom: 1rem; }
+        li { margin-bottom: 0.5rem; }
+        strong { color: var(--primary-dark); }
+        .muscle-test { background: white; border: 2px solid var(--border); border-radius: 8px; margin-bottom: 1.5rem; overflow: hidden; }
+        .test-header { background: var(--secondary); color: white; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; }
+        .test-badge { background: rgba(255,255,255,0.2); padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.85rem; }
+        .test-details { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; padding: 1.5rem; }
+        @media (max-width: 768px) { .two-column { grid-template-columns: 1fr; } h1 { font-size: 1.75rem; } .container { padding: 1rem; } }
+        @media print { nav { display: none; } .content-section { display: block !important; } }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="badge">Clinical Practice Guide</div>
+            <h1>NeuroKinetic Therapy Clinical Assessment Guide</h1>
+            <p class="subtitle">Comprehensive Guide for Therapists Using Joint & Muscle Selection Dropdown Interface for Real Patient Assessment and Treatment</p>
+        </div>
+    </header>
+
+    <nav>
+        <ul class="nav-tabs">
+            <li><button class="nav-btn active" onclick="showSection('overview')">Interface Overview</button></li>
+            <li><button class="nav-btn" onclick="showSection('assessment')">Assessment Protocol</button></li>
+            <li><button class="nav-btn" onclick="showSection('testing')">Testing Methodology</button></li>
+            <li><button class="nav-btn" onclick="showSection('interpretation')">Interpretation</button></li>
+            <li><button class="nav-btn" onclick="showSection('treatment')">Treatment Application</button></li>
+            <li><button class="nav-btn" onclick="showSection('documentation')">Documentation</button></li>
+            <li><button class="nav-btn" onclick="showSection('decision-trees')">Clinical Decision Trees</button></li>
+            <li><button class="nav-btn" onclick="showSection('safety')">Safety & Contraindications</button></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <!-- Section 1: Interface Overview -->
+        <section id="overview" class="content-section active">
+            <h2>1. Interface Overview: Joint & Muscle Selection System</h2>
+            
+            <div class="info-card">
+                <h3>🎯 Purpose of the Hierarchical Interface</h3>
+                <p>The joint-first, muscle-second dropdown system mirrors the clinical reasoning process in NeuroKinetic Therapy:</p>
+                <ul>
+                    <li><strong>Anatomical Logic:</strong> Joints are primary movement centers; muscles are the motors</li>
+                    <li><strong>Patient-Centered:</strong> Patients report by region ("shoulder hurts"), not specific muscle</li>
+                    <li><strong>Kinetic Chain Thinking:</strong> Test muscles that cross or stabilize the same joint</li>
+                    <li><strong>Efficiency:</strong> Organizes 600+ muscles into manageable joint categories</li>
+                </ul>
+            </div>
+
+            <div class="protocol-box">
+                <h3>How the Interface Works</h3>
+                <div class="two-column">
+                    <div>
+                        <h4>Step 1: Select Joint</h4>
+                        <select>
+                            <option>Select Joint Region...</option>
+                            <option>Shoulder Complex</option>
+                            <option>Hip Joint</option>
+                            <option>Lumbar Spine</option>
+                            <option>Knee Joint</option>
+                            <option>Ankle/Foot</option>
+                            <option>Cervical Spine</option>
+                            <option>Sacroiliac Joint</option>
+                            <option>TMJ</option>
+                        </select>
+                        <p class="note">Start where patient reports symptoms or functional testing reveals dysfunction</p>
+                    </div>
+                    <div>
+                        <h4>Step 2: Select Muscle</h4>
+                        <select>
+                            <option>Select Muscle...</option>
+                            <optgroup label="Hip Extensors">
+                                <option>Gluteus Maximus</option>
+                                <option>Hamstrings</option>
+                            </optgroup>
+                            <optgroup label="Hip Flexors">
+                                <option>Psoas Major</option>
+                                <option>Iliacus</option>
+                                <option>Rectus Femoris</option>
+                            </optgroup>
+                        </select>
+                        <p class="note">Muscles grouped by function for systematic testing</p>
+                    </div>
+                </div>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Design Feature</th>
+                        <th>Clinical Benefit</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Functional Grouping</strong></td>
+                        <td>Test agonist-synergist relationships</td>
+                        <td>Hip Extensors: Glute Max, Hamstrings, Adductor Magnus</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Cross-Joint Muscles</strong></td>
+                        <td>Identify multi-joint compensation</td>
+                        <td>Rectus Femoris in Hip Flexors AND Knee Extensors</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bilateral Options</strong></td>
+                        <td>Test left vs. right asymmetry</td>
+                        <td>Right Psoas vs. Left Psoas in pelvic rotation</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Section 2: Assessment Protocol -->
+        <section id="assessment" class="content-section">
+            <h2>2. Clinical Assessment Protocol: Step-by-Step Process</h2>
+            
+            <div class="protocol-box">
+                <h3>Phase 1: Initial Patient Intake</h3>
+                
+                <div class="step">
+                    <div class="step-header">
+                        <span class="step-badge">Step 1</span>
+                        <h4>Listen & Map to Joint Region</h4>
+                    </div>
+                    <div class="step-content">
+                        <p><strong>Questions to Ask:</strong></p>
+                        <ul>
+                            <li>"Where exactly do you feel pain?" (Point with one finger)</li>
+                            <li>"What movements make it worse?"</li>
+                            <li>"When did this start? Any injury history?"</li>
+                        </ul>
+                        
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Patient Statement</th>
+                                    <th>Primary Joint Selection</th>
+                                    <th>Secondary Considerations</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>"My low back hurts"</td>
+                                    <td>Lumbar Spine</td>
+                                    <td>Hip Joint, Sacroiliac Joint</td>
+                                </tr>
+                                <tr>
+                                    <td>"Can't lift arm overhead"</td>
+                                    <td>Shoulder Complex</td>
+                                    <td>Cervical Spine, Thoracic Spine</td>
+                                </tr>
+                                <tr>
+                                    <td>"Knee hurts when squatting"</td>
+                                    <td>Knee Joint</td>
+                                    <td>Hip Joint, Ankle/Foot</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-header">
+                        <span class="step-badge">Step 2</span>
+                        <h4>Functional Movement Screen</h4>
+                    </div>
+                    <div class="step-content">
+                        <div class="two-column">
+                            <div>
+                                <h4>Lower Body Screens</h4>
+                                <ul>
+                                    <li><strong>Gait:</strong> Trendelenburg, shortened stance</li>
+                                    <li><strong>Single-Leg Stance:</strong> Hip drop, knee valgus</li>
+                                    <li><strong>Squat:</strong> Lumbar flexion, heel lift</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4>Upper Body Screens</h4>
+                                <ul>
+                                    <li><strong>Overhead Reach:</strong> Scapular winging</li>
+                                    <li><strong>Cervical Rotation:</strong> Asymmetry</li>
+                                    <li><strong>Push-Up:</strong> Scapular winging</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="example-box">
+                            <strong>Example:</strong> Patient limps with shortened right stance phase
+                            <br><strong>Interface Action:</strong> Select "Hip Joint" → Suspect inhibited Gluteus Maximus
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-header">
+                        <span class="step-badge">Step 3</span>
+                        <h4>Test Suspected Inhibited Muscle</h4>
+                    </div>
+                    <div class="step-content">
+                        <p><strong>Protocol:</strong></p>
+                        <ol>
+                            <li>Select muscle from dropdown</li>
+                            <li>Position patient (see Testing Methodology section)</li>
+                            <li>Apply 2-second isometric ramp force</li>
+                            <li>Classify as FACILITATED (strong) or INHIBITED (weak)</li>
+                        </ol>
+                        
+                        <div class="alert alert-warning">
+                            <strong>⚠️ Critical:</strong> If muscle tests STRONG, it's not the problem! Select different muscle.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-header">
+                        <span class="step-badge">Step 4</span>
+                        <h4>Identify Potential Drivers</h4>
+                    </div>
+                    <div class="step-content">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Inhibited Muscle</th>
+                                    <th>Common Drivers</th>
+                                    <th>Interface Path</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Gluteus Maximus</strong></td>
+                                    <td>Hamstrings, Psoas, Erector Spinae</td>
+                                    <td>Hip Joint → Hip Extensors (Hamstrings)<br>Hip Joint → Hip Flexors (Psoas)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Gluteus Medius</strong></td>
+                                    <td>TFL, QL, Adductors</td>
+                                    <td>Hip Joint → Hip Flexors (TFL)<br>Lumbar Spine → Lateral Flexors (QL)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Lower Trapezius</strong></td>
+                                    <td>Upper Trap, Levator Scap, Pec Minor</td>
+                                    <td>Shoulder Complex → Scapular Elevators</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-header">
+                        <span class="step-badge">Step 5</span>
+                        <h4>Therapy Localization Testing</h4>
+                    </div>
+                    <div class="step-content">
+                        <p><strong>For Each Potential Driver:</strong></p>
+                        <ol>
+                            <li>Select driver muscle from dropdown</li>
+                            <li>Patient touches driver OR clinician rubs muscle 2-3 seconds</li>
+                            <li>Immediately retest inhibited receiver (&lt;2 seconds)</li>
+                            <li>Document result</li>
+                        </ol>
+                        
+                        <div class="two-column">
+                            <div class="example-box" style="background: #d1fae5; border-left-color: #16a34a;">
+                                <strong>✓ Receiver Tests STRONG</strong>
+                                <p>REACTIVE PAIR CONFIRMED! Proceed to treatment.</p>
+                            </div>
+                            <div class="example-box" style="background: #fee2e2; border-left-color: #dc2626;">
+                                <strong>✗ Receiver Still WEAK</strong>
+                                <p>Not the driver. Test next candidate from dropdown.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Testing Methodology -->
+        <section id="testing" class="content-section">
+            <h2>3. Testing Methodology: Hands-On Muscle Testing Techniques</h2>
+            
+            <div class="info-card">
+                <h3>Universal NKT Testing Principles</h3>
+                <ul>
+                    <li><strong>⚡ Isometric Contraction:</strong> Patient matches force with NO joint movement</li>
+                    <li><strong>📏 Shortened Position:</strong> Start in inner-mid range to isolate active force</li>
+                    <li><strong>⏱️ 2-Second Ramp:</strong> Smooth 0% → 50% → 100% force application</li>
+                    <li><strong>🎯 Vector Precision:</strong> Force aligns with muscle's exact line of pull</li>
+                    <li><strong>🔒 Binary Classification:</strong> Facilitated (crisp lock) vs. Inhibited (spongy give)</li>
+                    <li><strong>💪 10-15 lbs Force:</strong> Testing motor control, not strength</li>
+                </ul>
+            </div>
+
+            <h3>Common Muscle Tests by Joint</h3>
+
+            <div class="muscle-test">
+                <div class="test-header">
+                    <h4>Gluteus Maximus</h4>
+                    <span class="test-badge">Hip Extensor</span>
+                </div>
+                <div class="test-details">
+                    <div>
+                        <strong>Patient Position:</strong>
+                        <ul>
+                            <li>Prone on table</li>
+                            <li>Knee flexed to 90°</li>
+                            <li>Hip in neutral</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong>Therapist Hands:</strong>
+                        <ul>
+                            <li>Stabilizing: Sacrum</li>
+                            <li>Testing: Posterior thigh above knee</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong>Force Direction:</strong>
+                        <ul>
+                            <li>Push thigh toward table</li>
+                            <li>Cue: "Lift heel up, don't let me push down"</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong>Inhibition Signs:</strong>
+                        <ul>
+                            <li>❌ Hamstrings cramp</li>
+                            <li>❌ Lumbar extension</li>
+                            <li>❌ Spongy resistance</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="muscle-test">
+                <div class="test-header">
+                    <h4>Gluteus Medius</h4>
+                    <span class="test-badge">Hip Abductor</span>
+                </div>
+                <div class="test-details">
+                    <div>
+                        <strong>Patient Position:</strong>
+                        <ul>
+                            <li>Side-lying</li>
+                            <li>Top leg in slight extension</li>
+                            <li>Hip abducted to 30°</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong>Therapist Hands:</strong>
+                        <ul>
+                            <li>Stabilizing: Iliac crest</li>
+                            <li>Testing: Lateral thigh above knee</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong>Force Direction:</strong>
+                        <ul>
+                            <li>Push leg down toward table</li>
+                            <li>Cue: "Hold leg up"</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong>Inhibition Signs:</strong>
+                        <ul>
+                            <li>❌ TFL substitutes</li>
+                            <li>❌ Trunk lateral flexion</li>
+                            <li>❌ Weak resistance</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="muscle-test">
+                <div class="test-header">
+                    <h4>Psoas Major</h4>
+                    <span class="test-badge">Hip Flexor</span>
+                </div>
+                <div class="test-details">
+                    <div>
+                        <strong>Patient Position:</strong>
+                        <ul>
+                            <li>Supine</li>
+                            <li>Hip flexed to 90°</li>
+                            <li>Knee flexed to 90°</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong>Therapist Hands:</strong>
+                        <ul>
+                            <li>Stabilizing: Opposite ASIS</li>
+                            <li>Testing: Anterior thigh above knee</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong>Force Direction:</strong>
+                        <ul>
+                            <li>Push thigh toward extension</li>
+                            <li>Cue: "Don't let me push your leg down"</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong>Inhibition Signs:</strong>
+                        <ul>
+                            <li>❌ Rectus femoris substitutes</li>
+                            <li>❌ Lumbar extension</li>
+                            <li>❌ Delayed resistance</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="muscle-test">
+                <div class="test-header">
+                    <h4>Lower Trapezius</h4>
+                    <span class="test-badge">Scapular Depressor</span>
+                </div>
+                <div class="test-details">
+                    <div>
+                        <strong>Patient Position:</strong>
+                        <ul>
+                            <li>Prone</li>
+                            <li>Arm overhead at 145°</li>
+                            <li>Thumb pointing up</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong>Therapist Hands:</strong>
+                        <ul>
+                            <li>Stabilizing: Opposite scapula</li>
+                            <li>Testing: Distal forearm</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong>Force Direction:</strong>
+                        <ul>
+                            <li>Push arm toward floor</li>
+                            <li>Cue: "Hold arm up"</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <strong>Inhibition Signs:</strong>
+                        <ul>
+                            <li>❌ Scapular winging</li>
+                            <li>❌ Upper trap dominance</li>
+                            <li>❌ Weak lock</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Interpretation Framework -->
+        <section id="interpretation" class="content-section">
+            <h2>4. Interpretation Framework: Analyzing Test Results</h2>
+            
+            <div class="protocol-box">
+                <h3>Understanding Compensation Patterns</h3>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Pattern Type</th>
+                            <th>Mechanism</th>
+                            <th>Clinical Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Synergistic Dominance</strong></td>
+                            <td>Synergist takes over for weak prime mover</td>
+                            <td>Hamstrings dominate for inhibited Glute Max → hamstring strains</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Reciprocal Inhibition</strong></td>
+                            <td>Tight antagonist inhibits agonist</td>
+                            <td>Tight Psoas inhibits Glute Max → anterior pelvic tilt</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Arthrokinematic Dysfunction</strong></td>
+                            <td>Joint restriction causes muscle inhibition</td>
+                            <td>Restricted SIJ inhibits ipsilateral Glute Max</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ligamento-Muscular Reflex</strong></td>
+                            <td>Ligament injury inhibits distant muscle</td>
+                            <td>Ankle sprain (ATFL) inhibits ipsilateral Glute Max</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="info-card">
+                <h3>Decision Matrix: What the Tests Tell You</h3>
+                
+                <h4>Scenario 1: Local Muscle Pair Found</h4>
+                <div class="example-box">
+                    <strong>Test Results:</strong>
+                    <ul>
+                        <li>Right Gluteus Maximus: INHIBITED (weak)</li>
+                        <li>TL to Right Hamstrings → Glute Max becomes STRONG</li>
+                    </ul>
+                    <strong>Interpretation:</strong> Synergistic dominance pattern. Hamstrings compensating for weak glute.
+                    <br><strong>Treatment:</strong> Release hamstrings → Activate glute max
+                </div>
+
+                <h4>Scenario 2: Antagonist Pattern</h4>
+                <div class="example-box">
+                    <strong>Test Results:</strong>
+                    <ul>
+                        <li>Right Gluteus Maximus: INHIBITED</li>
+                        <li>TL to Right Psoas → Glute Max becomes STRONG</li>
+                    </ul>
+                    <strong>Interpretation:</strong> Reciprocal inhibition. Tight hip flexor inhibiting hip extensor.
+                    <br><strong>Treatment:</strong> Release psoas → Activate glute max
+                </div>
+
+                <h4>Scenario 3: No Local Driver Found</h4>
+                <div class="example-box">
+                    <strong>Test Results:</strong>
+                    <ul>
+                        <li>Right Gluteus Maximus: INHIBITED</li>
+                        <li>TL to all local muscles (hamstrings, psoas, erector spinae) → Still WEAK</li>
+                        <li>Patient has C-section scar</li>
+                        <li>TL to C-section scar (pulling superior) → Glute Max becomes STRONG</li>
+                    </ul>
+                    <strong>Interpretation:</strong> Scar tissue creating fascial restriction and neurological inhibition.
+                    <br><strong>Treatment:</strong> Scar tissue release → Activate glute max
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Treatment Application -->
+        <section id="treatment" class="content-section">
+            <h2>5. Treatment Application: From Assessment to Correction</h2>
+            
+            <div class="protocol-box">
+                <h3>The 6-Step NKT Treatment Protocol</h3>
+                
+                <div class="step">
+                    <div class="step-header">
+                        <span class="step-badge">Step 1</span>
+                        <h4>Confirm Baseline Inhibition</h4>
+                    </div>
+                    <div class="step-content">
+                        <p>Test suspected muscle - must be INHIBITED (weak/spongy)</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-header">
+                        <span class="step-badge">Step 2</span>
+                        <h4>Therapy Localization</h4>
+                    </div>
+                    <div class="step-content">
+                        <p>Apply sensory stimulation to hypothesized driver (touch or rub 2-3 seconds)</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-header">
+                        <span class="step-badge">Step 3</span>
+                        <h4>Immediate Retest</h4>
+                    </div>
+                    <div class="step-content">
+                        <p>Retest inhibited muscle within 2 seconds. If STRONG → reactive pair confirmed!</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-header">
+                        <span class="step-badge">Step 4</span>
+                        <h4>Release Facilitated Driver</h4>
+                    </div>
+                    <div class="step-content">
+                        <p><strong>Techniques (choose one):</strong></p>
+                        <ul>
+                            <li><strong>Ischemic Compression:</strong> Sustained pressure on trigger point 30-60 seconds</li>
+                            <li><strong>Pin & Stretch:</strong> Pin muscle, move joint through ROM</li>
+                            <li><strong>IASTM:</strong> Instrument-assisted soft tissue mobilization</li>
+                            <li><strong>Foam Rolling:</strong> Patient self-release with sustained pressure</li>
+                        </ul>
+                        <p><strong>Duration:</strong> 30-60 seconds to modulate muscle spindle afferents</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-header">
+                        <span class="step-badge">Step 5</span>
+                        <h4>Activate Inhibited Receiver</h4>
+                    </div>
+                    <div class="step-content">
+                        <div class="alert alert-warning">
+                            <strong>⚠️ CRITICAL:</strong> Must activate within 30-60 second neuroplastic window after release!
+                        </div>
+                        <p><strong>Activation Protocol:</strong></p>
+                        <ul>
+                            <li>3-5 repetitions</li>
+                            <li>5-second isometric hold each rep</li>
+                            <li>50-70% effort (moderate intensity)</li>
+                            <li>Isolated contraction (no substitution)</li>
+                        </ul>
+                        
+                        <div class="example-box">
+                            <strong>Example - Gluteus Maximus Activation:</strong>
+                            <br>Position: Prone, knee flexed 90°
+                            <br>Cue: "Squeeze your glute and lift heel toward ceiling. Hold 5 seconds."
+                            <br>Repeat 3-5 times with 2-second rest between reps
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-header">
+                        <span class="step-badge">Step 6</span>
+                        <h4>Retest & Prescribe Homework</h4>
+                    </div>
+                    <div class="step-content">
+                        <p><strong>Immediate Retest:</strong> Receiver must now test STRONG in isolation</p>
+                        
+                        <p><strong>Home Exercise Prescription:</strong></p>
+                        <div class="alert alert-danger">
+                            <strong>🚨 NON-NEGOTIABLE SEQUENCE:</strong>
+                            <br>1. Release Driver FIRST
+                            <br>2. Activate Receiver SECOND
+                            <br><br>Never reverse this order!
+                        </div>
+                        
+                        <ul>
+                            <li><strong>Frequency:</strong> 2-3 times daily</li>
+                            <li><strong>Duration:</strong> 2-4 weeks for synaptic consolidation</li>
+                            <li><strong>Tools:</strong> Foam roller, lacrosse ball, or manual pressure for release</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <h3>Treatment Techniques by Muscle</h3>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Facilitated Driver</th>
+                            <th>Release Technique</th>
+                            <th>Patient Position</th>
+                            <th>Duration</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Hamstrings</strong></td>
+                            <td>Ischemic compression or foam roll</td>
+                            <td>Seated or supine with leg elevated</td>
+                            <td>30-60 sec</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Psoas</strong></td>
+                            <td>Deep abdominal release</td>
+                            <td>Supine, hip/knee flexed, lateral to rectus</td>
+                            <td>30-60 sec</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Upper Trapezius</strong></td>
+                            <td>Ischemic compression</td>
+                            <td>Seated or prone</td>
+                            <td>30-60 sec</td>
+                        </tr>
+                        <tr>
+                            <td><strong>TFL</strong></td>
+                            <td>Pin & stretch or foam roll</td>
+                            <td>Side-lying</td>
+                            <td>30-60 sec</td>
+                        </tr>
+                        <tr>
+                            <td><strong>C-section Scar</strong></td>
+                            <td>Scar mobilization (8 vectors)</td>
+                            <td>Supine</td>
+                            <td>30 sec per vector</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Section 6: Documentation & Tracking -->
+        <section id="documentation" class="content-section">
+            <h2>6. Documentation & Tracking: Recording Findings for Progress Monitoring</h2>
+            
+            <div class="protocol-box">
+                <h3>Session Documentation Template</h3>
+                
+                <div class="case-study">
+                    <div class="case-header">SAMPLE DOCUMENTATION FORMAT</div>
+                    
+                    <p><strong>Patient:</strong> Jane Doe | <strong>Date:</strong> 2026-08-20 | <strong>Session:</strong> #3</p>
+                    
+                    <p><strong>Chief Complaint:</strong> Right hip pain with walking, 6/10 intensity</p>
+                    
+                    <p><strong>Functional Assessment:</strong></p>
+                    <ul>
+                        <li>Gait: Shortened right stance phase, Trendelenburg on left</li>
+                        <li>Single-leg stance (R): Hip drop, knee valgus</li>
+                    </ul>
+                    
+                    <p><strong>NKT Assessment (Interface Selections):</strong></p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Joint Selected</th>
+                                <th>Muscle Tested</th>
+                                <th>Result</th>
+                                <th>Driver Found</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Hip Joint</td>
+                                <td>Right Gluteus Maximus</td>
+                                <td>INHIBITED</td>
+                                <td>-</td>
+                            </tr>
+                            <tr>
+                                <td>Hip Joint</td>
+                                <td>Right Hamstrings (TL)</td>
+                                <td>Glute Max → STRONG</td>
+                                <td>✓ CONFIRMED</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <p><strong>Reactive Pair Identified:</strong> Right Hamstrings (Driver) → Right Gluteus Maximus (Receiver)</p>
+                    
+                    <p><strong>Treatment Applied:</strong></p>
+                    <ol>
+                        <li>Released right hamstrings (ischemic compression, 45 seconds)</li>
+                        <li>Activated right glute max (prone hip extension, 5 reps × 5 sec hold)</li>
+                        <li>Retest: Right glute max now tests STRONG ✓</li>
+                    </ol>
+                    
+                    <p><strong>Home Exercise Prescribed:</strong></p>
+                    <ul>
+                        <li>Foam roll right hamstrings (60 sec) → Glute bridges (3×10, 5-sec hold)</li>
+                        <li>Frequency: 2× daily for 2 weeks</li>
+                    </ul>
+                    
+                    <p><strong>Reassessment:</strong> Gait improved, stance phase symmetrical, pain reduced to 2/10</p>
+                    
+                    <p><strong>Plan:</strong> Continue HEP, retest in 1 week, progress to single-leg exercises</p>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <h3>Progress Tracking Metrics</h3>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Baseline</th>
+                            <th>Week 2</th>
+                            <th>Week 4</th>
+                            <th>Goal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Pain Level (0-10)</td>
+                            <td>6/10</td>
+                            <td>3/10</td>
+                            <td>1/10</td>
+                            <td>0-1/10</td>
+                        </tr>
+                        <tr>
+                            <td>Glute Max Strength</td>
+                            <td>Inhibited</td>
+                            <td>Facilitated</td>
+                            <td>Facilitated</td>
+                            <td>Facilitated</td>
+                        </tr>
+                        <tr>
+                            <td>Gait Symmetry</td>
+                            <td>Asymmetric</td>
+                            <td>Improved</td>
+                            <td>Symmetric</td>
+                            <td>Symmetric</td>
+                        </tr>
+                        <tr>
+                            <td>Single-Leg Stance (sec)</td>
+                            <td>5 sec</td>
+                            <td>15 sec</td>
+                            <td>30 sec</td>
+                            <td>30+ sec</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="protocol-box">
+                <h3>Reassessment Protocol</h3>
+                <ul>
+                    <li><strong>Week 1:</strong> Retest reactive pair, confirm receiver remains facilitated</li>
+                    <li><strong>Week 2:</strong> Full functional reassessment, adjust HEP if needed</li>
+                    <li><strong>Week 4:</strong> Discharge assessment, return-to-activity clearance</li>
+                    <li><strong>Red Flags:</strong> If receiver returns to inhibited state, look for new drivers or lifestyle factors</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section 7: Clinical Decision Trees -->
+        <section id="decision-trees" class="content-section">
+            <h2>7. Clinical Decision Trees: Common Presentations</h2>
+            
+            <div class="case-study">
+                <div class="case-header">CASE STUDY 1: Low Back Pain</div>
+                
+                <p><strong>Presentation:</strong> 35-year-old office worker, chronic low back pain, worse with sitting</p>
+                
+                <p><strong>Interface Navigation Path:</strong></p>
+                <ol>
+                    <li><strong>Joint Selection:</strong> Lumbar Spine</li>
+                    <li><strong>Functional Test:</strong> Observe sitting posture → anterior pelvic tilt, lumbar lordosis</li>
+                    <li><strong>Suspected Inhibition:</strong> Lumbar Spine → Spinal Extensors → Multifidus</li>
+                    <li><strong>Test Result:</strong> Multifidus INHIBITED</li>
+                    <li><strong>Test Drivers:</strong>
+                        <ul>
+                            <li>Hip Joint → Hip Flexors → Psoas (TL) → Multifidus STRONG ✓</li>
+                        </ul>
+                    </li>
+                    <li><strong>Treatment:</strong> Release psoas → Activate multifidus</li>
+                    <li><strong>Additional Testing:</strong> Hip Joint → Hip Extensors → Gluteus Maximus (often also inhibited)</li>
+                </ol>
+                
+                <p><strong>Outcome:</strong> Improved sitting tolerance, reduced lordosis, pain decreased 70%</p>
+            </div>
+
+            <div class="case-study">
+                <div class="case-header">CASE STUDY 2: Shoulder Impingement</div>
+                
+                <p><strong>Presentation:</strong> 42-year-old swimmer, anterior shoulder pain with overhead reach</p>
+                
+                <p><strong>Interface Navigation Path:</strong></p>
+                <ol>
+                    <li><strong>Joint Selection:</strong> Shoulder Complex</li>
+                    <li><strong>Functional Test:</strong> Overhead reach → scapular winging, rib flare</li>
+                    <li><strong>Suspected Inhibition:</strong> Shoulder Complex → Scapular Depressors → Lower Trapezius</li>
+                    <li><strong>Test Result:</strong> Lower Trapezius INHIBITED</li>
+                    <li><strong>Test Drivers:</strong>
+                        <ul>
+                            <li>Shoulder Complex → Scapular Elevators → Upper Trapezius (TL) → Lower Trap STRONG ✓</li>
+                        </ul>
+                    </li>
+                    <li><strong>Treatment:</strong> Release upper trap → Activate lower trap</li>
+                    <li><strong>Additional Testing:</strong> Shoulder Complex → Scapular Protractors → Pectoralis Minor (often also facilitated)</li>
+                </ol>
+                
+                <p><strong>Outcome:</strong> Overhead ROM improved, scapular mechanics normalized, pain-free swimming</p>
+            </div>
+
+            <div class="case-study">
+                <div class="case-header">CASE STUDY 3: Knee Pain (IT Band Syndrome)</div>
+                
+                <p><strong>Presentation:</strong> 28-year-old runner, lateral knee pain at 2 miles</p>
+                
+                <p><strong>Interface Navigation Path:</strong></p>
+                <ol>
+                    <li><strong>Joint Selection:</strong> Hip Joint (NOT Knee Joint - think proximal!)</li>
+                    <li><strong>Functional Test:</strong> Single-leg stance → Trendelenburg, knee valgus</li>
+                    <li><strong>Suspected Inhibition:</strong> Hip Joint → Hip Abductors → Gluteus Medius</li>
+                    <li><strong>Test Result:</strong> Gluteus Medius INHIBITED</li>
+                    <li><strong>Test Drivers:</strong>
+                        <ul>
+                            <li>Hip Joint → Hip Flexors → TFL (TL) → Glute Med STRONG ✓</li>
+                        </ul>
+                    </li>
+                    <li><strong>Treatment:</strong> Release TFL → Activate glute medius</li>
+                    <li><strong>Descending Chain:</strong> Also test Ankle/Foot → Ankle Invertors → Tibialis Posterior</li>
+                </ol>
+                
+                <p><strong>Outcome:</strong> Running distance increased to 5+ miles pain-free, improved hip stability</p>
+            </div>
+
+            <div class="case-study">
+                <div class="case-header">CASE STUDY 4: Plantar Fasciitis</div>
+                
+                <p><strong>Presentation:</strong> 50-year-old teacher, heel pain first steps in morning</p>
+                
+                <p><strong>Interface Navigation Path:</strong></p>
+                <ol>
+                    <li><strong>Joint Selection:</strong> Ankle/Foot Complex</li>
+                    <li><strong>Functional Test:</strong> Observe gait → foot pronation, collapsed arch</li>
+                    <li><strong>Suspected Inhibition:</strong> Ankle/Foot → Ankle Invertors → Tibialis Posterior</li>
+                    <li><strong>Test Result:</strong> Tibialis Posterior INHIBITED</li>
+                    <li><strong>Test Drivers (Local):</strong>
+                        <ul>
+                            <li>Ankle/Foot → Ankle Evertors → Peroneals (TL) → Tib Post still WEAK ✗</li>
+                        </ul>
+                    </li>
+                    <li><strong>Ascending Chain Testing:</strong>
+                        <ul>
+                            <li>Hip Joint → Hip Extensors → Gluteus Maximus (TL) → Tib Post STRONG ✓</li>
+                        </ul>
+                    </li>
+                    <li><strong>Treatment:</strong> Release glute max → Activate tibialis posterior</li>
+                </ol>
+                
+                <p><strong>Outcome:</strong> Morning pain resolved, arch support improved, returned to standing work</p>
+            </div>
+
+            <div class="info-card">
+                <h3>Decision Tree Quick Reference</h3>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Complaint</th>
+                            <th>1st Joint</th>
+                            <th>Likely Inhibited</th>
+                            <th>Common Drivers</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Low back pain</td>
+                            <td>Lumbar Spine</td>
+                            <td>Multifidus, Glute Max</td>
+                            <td>Psoas, Hamstrings, Erector Spinae</td>
+                        </tr>
+                        <tr>
+                            <td>Shoulder impingement</td>
+                            <td>Shoulder Complex</td>
+                            <td>Lower Trap, Serratus Anterior</td>
+                            <td>Upper Trap, Pec Minor, Levator Scap</td>
+                        </tr>
+                        <tr>
+                            <td>IT Band syndrome</td>
+                            <td>Hip Joint</td>
+                            <td>Gluteus Medius</td>
+                            <td>TFL, QL, Adductors</td>
+                        </tr>
+                        <tr>
+                            <td>Plantar fasciitis</td>
+                            <td>Ankle/Foot</td>
+                            <td>Tibialis Posterior</td>
+                            <td>Peroneals, Glute Max, Hamstrings</td>
+                        </tr>
+                        <tr>
+                            <td>Neck pain</td>
+                            <td>Cervical Spine</td>
+                            <td>Deep Neck Flexors</td>
+                            <td>SCM, Upper Trap, Scalenes</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Section 8: Safety & Contraindications -->
+        <section id="safety" class="content-section">
+            <h2>8. Safety Considerations & Contraindications</h2>
+            
+            <div class="alert alert-danger">
+                <h3>🚨 ABSOLUTE CONTRAINDICATIONS - DO NOT TEST/TREAT</h3>
+                <ul>
+                    <li><strong>Cauda Equina Syndrome:</strong> Saddle anesthesia, bowel/bladder incontinence, bilateral leg weakness</li>
+                    <li><strong>Acute Fracture:</strong> Unhealed bone fracture in test region</li>
+                    <li><strong>Active Infection:</strong> Fever with spinal tenderness, systemic infection</li>
+                    <li><strong>Malignancy:</strong> Known bone metastases, unexplained weight loss with pain</li>
+                    <li><strong>Acute DVT:</strong> Deep vein thrombosis, risk of embolism</li>
+                    <li><strong>Severe Osteoporosis:</strong> T-score < -3.0, high fracture risk</li>
+                </ul>
+            </div>
+
+            <div class="alert alert-warning">
+                <h3>⚠️ RELATIVE PRECAUTIONS - Modify Testing</h3>
+                <ul>
+                    <li><strong>Acute Surgical Scars (&lt;6-8 weeks):</strong> Use light touch only, no aggressive friction</li>
+                    <li><strong>Pregnancy:</strong> Avoid prone positioning after 20 weeks, modify psoas testing</li>
+                    <li><strong>Acute Inflammation:</strong> Reduce force, avoid aggravating inflamed tissues</li>
+                    <li><strong>Hypermobility Syndromes:</strong> Calibrate force carefully, focus on stability</li>
+                    <li><strong>Neurological Conditions:</strong> MS, Parkinson's - interpret results cautiously</li>
+                </ul>
+            </div>
+
+            <div class="protocol-box">
+                <h3>Joint-Specific Safety Guidelines</h3>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Joint/Region</th>
+                            <th>Precautions</th>
+                            <th>Modifications</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Cervical Spine</strong></td>
+                            <td>Vertebral artery insufficiency, cervical instability</td>
+                            <td>Avoid end-range rotation, reduce force to 5-8 lbs</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Lumbar Spine</strong></td>
+                            <td>Acute disc herniation, spondylolisthesis</td>
+                            <td>Avoid flexion testing if acute, test in neutral</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Shoulder Complex</strong></td>
+                            <td>Recent dislocation, rotator cuff tear</td>
+                            <td>Test in pain-free range, avoid end-range positions</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Hip Joint</strong></td>
+                            <td>Hip replacement (&lt;12 weeks), labral tear</td>
+                            <td>Respect hip precautions, avoid combined motions</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Knee Joint</strong></td>
+                            <td>ACL reconstruction, meniscus repair</td>
+                            <td>Avoid valgus stress, test in protected range</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="info-card">
+                <h3>When to Refer Out</h3>
+                
+                <h4>Red Flags Requiring Medical Referral:</h4>
+                <ul>
+                    <li><strong>Progressive Neurological Deficits:</strong> Worsening weakness, numbness, or loss of reflexes</li>
+                    <li><strong>Night Pain:</strong> Severe pain that wakes patient, not relieved by position changes</li>
+                    <li><strong>Constitutional Symptoms:</strong> Unexplained fever, chills, weight loss</li>
+                    <li><strong>Trauma with Deformity:</strong> Visible bone deformity, severe swelling</li>
+                    <li><strong>No Response to Treatment:</strong> No improvement after 4-6 sessions</li>
+                </ul>
+
+                <h4>Conditions Requiring Co-Management:</h4>
+                <ul>
+                    <li><strong>Complex Regional Pain Syndrome:</strong> Work with pain management specialist</li>
+                    <li><strong>Chronic Pain Syndrome:</strong> Coordinate with psychologist/psychiatrist</li>
+                    <li><strong>Autoimmune Conditions:</strong> Communicate with rheumatologist</li>
+                    <li><strong>Post-Surgical:</strong> Clear with surgeon before aggressive treatment</li>
+                </ul>
+            </div>
+
+            <div class="protocol-box">
+                <h3>Patient Education & Informed Consent</h3>
+                
+                <p><strong>Before Testing, Explain:</strong></p>
+                <ul>
+                    <li>Purpose of muscle testing (assessing motor control, not strength)</li>
+                    <li>What they'll feel (moderate pressure, should not be painful)</li>
+                    <li>Expected outcomes (improved movement, reduced pain)</li>
+                    <li>Potential soreness (mild DOMS for 24-48 hours)</li>
+                </ul>
+
+                <p><strong>During Treatment, Monitor:</strong></p>
+                <ul>
+                    <li>Pain levels (should not exceed 4/10 during treatment)</li>
+                    <li>Autonomic responses (sweating, nausea, dizziness)</li>
+                    <li>Patient tolerance (adjust force/duration as needed)</li>
+                </ul>
+
+                <p><strong>Post-Treatment Instructions:</strong></p>
+                <ul>
+                    <li>Expect mild soreness (normal adaptation)</li>
+                    <li>Perform HEP as prescribed (critical for reprogramming)</li>
+                    <li>Avoid aggravating activities for 24-48 hours</li>
+                    <li>Report any unusual symptoms immediately</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--primary-dark); color: white; padding: 2rem; text-align: center; margin-top: 4rem;">
+        <p><strong>NeuroKinetic Therapy Clinical Assessment Guide</strong></p>
+        <p style="color: #94a3b8; margin-top: 0.5rem;">Comprehensive guide for therapists using joint & muscle selection dropdown interface</p>
+        <p style="color: #94a3b8; margin-top: 1rem; font-size: 0.9rem;">© 2026 | For educational and clinical use by licensed healthcare professionals</p>
+    </footer>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
