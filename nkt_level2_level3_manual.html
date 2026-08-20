@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NeuroKinetic Therapy (NKT®) Practical Manual: Levels 2 & 3</title>
+<style>
+  :root {
+    --primary: #0f172a;
+    --primary-blue: #1e3a8a;
+    --accent-cyan: #0284c7;
+    --accent-teal: #0d9488;
+    --accent-amber: #d97706;
+    --accent-red: #dc2626;
+    --accent-green: #16a34a;
+    --accent-purple: #7c3aed;
+    --bg-light: #f8fafc;
+    --bg-card: #ffffff;
+    --text-dark: #1e293b;
+    --text-muted: #64748b;
+    --border: #e2e8f0;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    line-height: 1.6;
+  }
+
+  header {
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 60%, #0369a1 100%);
+    color: white;
+    padding: 3rem 2rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  }
+
+  .header-inner { max-width: 1200px; margin: 0 auto; }
+  .badge {
+    display: inline-block;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #bae6fd;
+    padding: 0.3rem 0.8rem;
+    border-radius: 9999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  h1 { font-size: 2.3rem; font-weight: 800; margin-bottom: 0.5rem; line-height: 1.2; }
+  .subtitle { font-size: 1.1rem; color: #cbd5e1; max-width: 900px; }
+
+  .nav-bar {
+    background: white;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  }
+
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    overflow-x: auto;
+    list-style: none;
+    padding: 0 1rem;
+  }
+
+  .nav-btn {
+    background: none;
+    border: none;
+    padding: 1rem 1.25rem;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s ease;
+  }
+
+  .nav-btn:hover { color: var(--accent-cyan); }
+  .nav-btn.active { color: var(--primary-blue); border-bottom-color: var(--primary-blue); }
+
+  .content-container { max-width: 1200px; margin: 2rem auto; padding: 0 1.5rem; }
+  .manual-section { display: none; }
+  .manual-section.active { display: block; animation: fadeIn 0.3s ease; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  }
+
+  h2 { font-size: 1.8rem; color: var(--primary); margin-bottom: 1.25rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--border); display: flex; align-items: center; gap: 0.5rem; }
+  h3 { font-size: 1.35rem; color: var(--primary-blue); margin: 1.75rem 0 0.75rem 0; }
+  h4 { font-size: 1.1rem; color: var(--text-dark); margin: 1.25rem 0 0.5rem 0; }
+  p { margin-bottom: 1rem; color: #334155; font-size: 1rem; }
+  ul, ol { margin-bottom: 1.25rem; padding-left: 1.5rem; }
+  li { margin-bottom: 0.5rem; color: #334155; }
+
+  .protocol-box {
+    background-color: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-left: 5px solid var(--primary-blue);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+  }
+
+  .protocol-box-title {
+    font-weight: 800;
+    color: var(--primary);
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 1.5rem 0; }
+  @media (max-width: 800px) { .grid-2 { grid-template-columns: 1fr; } }
+
+  .highlight-tag {
+    display: inline-block;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-right: 0.5rem;
+  }
+
+  .tag-l2 { background: #dbeafe; color: #1e40af; }
+  .tag-l3 { background: #fae8ff; color: #86198f; }
+  .tag-alert { background: #fee2e2; color: #991b1b; }
+  .tag-success { background: #dcfce7; color: #166534; }
+
+  table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.95rem; }
+  th, td { border: 1px solid var(--border); padding: 0.75rem 1rem; text-align: left; }
+  th { background-color: #f1f5f9; color: var(--primary); font-weight: 700; }
+  tr:nth-child(even) { background-color: #f8fafc; }
+
+  .ascii-art {
+    background: #0f172a;
+    color: #38bdf8;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    padding: 1.25rem;
+    border-radius: 0.5rem;
+    font-size: 0.85rem;
+    overflow-x: auto;
+    margin: 1.25rem 0;
+    line-height: 1.4;
+  }
+
+  .vector-spec {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+  }
+  .vector-spec strong { color: #166534; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="badge">NKT® Practitioner Clinical Handbook</div>
+    <h1>NeuroKinetic Therapy (NKT®) Practical Manual</h1>
+    <p class="subtitle">Complete Hands-On Field Protocols for Level 2 (Subsystems, Core, TMJ, Perturbation, Joint Compression) & Level 3 (Advanced Gait, Multi-Vector Scars, Ligamentous Interlinks, Extraocular & Cranio-Cervical Reflexes).</p>
+  </div>
+</header>
+
+<div class="nav-bar">
+  <ul class="nav-inner" id="manualNav">
+    <li><button class="nav-btn active" onclick="showSec('sec-intro')">Overview & Matrix</button></li>
+    <li><button class="nav-btn" onclick="showSec('sec-l2-slings')">L2: Kinetic Subsystems</button></li>
+    <li><button class="nav-btn" onclick="showSec('sec-l2-core')">L2: Core & Diaphragm</button></li>
+    <li><button class="nav-btn" onclick="showSec('sec-l2-tmj')">L2: TMJ & Stomatognathic</button></li>
+    <li><button class="nav-btn" onclick="showSec('sec-l2-perturb')">L2: Perturbation & Joint Comp</button></li>
+    <li><button class="nav-btn" onclick="showSec('sec-l3-gait')">L3: Advanced Gait</button></li>
+    <li><button class="nav-btn" onclick="showSec('sec-l3-scars')">L3: Multi-Vector Scars</button></li>
+    <li><button class="nav-btn" onclick="showSec('sec-l3-ligaments')">L3: Ligamentous Interlinks</button></li>
+    <li><button class="nav-btn" onclick="showSec('sec-l3-eyes')">L3: Eyes & Cranio-Cervical</button></li>
+    <li><button class="nav-btn" onclick="showSec('sec-algorithms')">Master Clinical Decision Matrix</button></li>
+  </ul>
+</div>
+
+<main class="content-container">
+
+  <!-- SECTION 0: OVERVIEW -->
+  <section id="sec-intro" class="manual-section active">
+    <div class="card">
+      <h2><span class="highlight-tag tag-l2">L2</span> <span class="highlight-tag tag-l3">L3</span> NKT Practical Curriculum Architecture</h2>
+      <p>This manual provides the complete hands-on protocols, client positioning, testing vectors, challenge methods, and corrective workflows for certified practitioners advancing into <strong>NeuroKinetic Therapy Level 2</strong> and <strong>Level 3</strong>.</p>
+      
+      <table>
+        <thead>
+          <tr>
+            <th>Curriculum Level</th>
+            <th>Core Clinical Focus</th>
+            <th>Primary Anatomical & Functional Subsystems Evaluated</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Level 1 (Foundation)</strong></td>
+            <td>Local Muscle-to-Muscle Relationships</td>
+            <td>Individual muscle MMT, local Agonist-Antagonist pairs (Reciprocal Inhibition), Agonist-Synergist pairs (Synergistic Dominance).</td>
+          </tr>
+          <tr>
+            <td><strong>Level 2 (Functional Whole-Body Systems)</strong></td>
+            <td>Kinetic Subsystems, Global Pressure & Cranial Systems</td>
+            <td>
+              • 4 Kinetic Slings (POS, AOS, DLS, Lateral)<br>
+              • Intrinsic Core Cylinder (Diaphragm, TVA, Pelvic Floor, Multifidus)<br>
+              • TMJ Muscles (Masseter, Temporalis, Medial/Lateral Pterygoids, Digastric)<br>
+              • Perturbation / Postural Balance Responses<br>
+              • Joint Compression vs. Decompression Reflexes (Hip, Ankle, Shoulder)
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Level 3 (Fine Somatosensory Integration)</strong></td>
+            <td>Sensory Receptors, Ligaments, Scars & Cranial Reflexes</td>
+            <td>
+              • Multi-Phasic Advanced Gait Dynamics (Stance, Swing, Propulsion)<br>
+              • Multi-Vector Scar Protocol (Surgical, Trauma, Navel, Scars-to-Scars)<br>
+              • Ligamentous Interlinks (ATFL, SIJ, Sacrotuberous, Alar, ACL/MCL)<br>
+              • Extraocular Muscles & Oculo-Cervical / Vestibulospinal Reflexes<br>
+              • Hyoids, Deglutition & Tongue Stabilizers<br>
+              • Reverse Therapy Localization & Layered Onion Unraveling
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- SECTION 1: L2 KINETIC SUBSYSTEMS -->
+  <section id="sec-l2-slings" class="manual-section">
+    <div class="card">
+      <h2><span class="highlight-tag tag-l2">Level 2</span> Module 1: The 4 Functional Movement Subsystems</h2>
+      <p>Movement occurs along continuous myofascial lines and force couples. In Level 2, we evaluate entire subsystem integrity and identify intra-subsystem and inter-subsystem compensations.</p>
+
+      <!-- 1.1 POS -->
+      <div class="protocol-box">
+        <div class="protocol-box-title">1. Posterior Oblique Subsystem (POS)</div>
+        <p><strong>Anatomical Chain:</strong> Latissimus Dorsi &rarr; Thoracolumbar Fascia &rarr; Contralateral Gluteus Maximus.</p>
+        <p><strong>Primary Function:</strong> Force transfer during propulsion/push-off in gait, rotational power generation, SI joint force closure.</p>
+        <div class="vector-spec">
+          <strong>Testing Protocol (Supine POS Integration Test):</strong><br>
+          • Patient supine. Right shoulder extended/internally rotated (arm pressed toward hip into table).<br>
+          • Left leg extended with hip in slight external rotation (patient pushes left heel into table).<br>
+          • <em>MMT:</em> Clinician attempts to flex the right arm while simultaneously lifting the left leg.<br>
+          • <em>Interpretation:</em> Spongy give indicates POS failure. Challenge individual components (Right Lat vs. Left Glute Max).
+        </div>
+      </div>
+
+      <!-- 1.2 AOS -->
+      <div class="protocol-box">
+        <div class="protocol-box-title">2. Anterior Oblique Subsystem (AOS)</div>
+        <p><strong>Anatomical Chain:</strong> External Oblique &rarr; Abdominal Fascia / Linea Alba &rarr; Contralateral Internal Oblique & Adductor Longus/Magnus.</p>
+        <p><strong>Primary Function:</strong> Forward torso rotation, deceleration during throwing/swinging, pubic symphysis stabilization.</p>
+        <div class="vector-spec">
+          <strong>Testing Protocol (Supine AOS Diagonal Vector):</strong><br>
+          • Patient supine. Right shoulder flexed across chest toward left ASIS.<br>
+          • Left hip flexed ($45^\circ$) and adducted toward midline.<br>
+          • <em>MMT:</em> Clinician attempts to pry right shoulder back and push left knee into abduction.<br>
+          • <em>Interpretation:</em> Common dyssynergia: Overactive Adductor Longus driving inhibition of contralateral External Oblique (Athletic Pubalgia).
+        </div>
+      </div>
+
+      <!-- 1.3 DLS -->
+      <div class="protocol-box">
+        <div class="protocol-box-title">3. Deep Longitudinal Subsystem (DLS)</div>
+        <p><strong>Anatomical Chain:</strong> Erector Spinae &rarr; Sacrotuberous Ligament &rarr; Biceps Femoris &rarr; Peroneus Longus &rarr; Tibialis Anterior.</p>
+        <p><strong>Primary Function:</strong> Ground reaction force transmission from foot contact through the pelvis to the cranium.</p>
+        <div class="vector-spec">
+          <strong>Testing Protocol:</strong> Prone straight-leg hip extension coupled with ipsilateral foot eversion/plantarflexion. Test for hamstring dominance over gluteals and sacrotuberous ligament tension.
+        </div>
+      </div>
+
+      <!-- 1.4 Lateral -->
+      <div class="protocol-box">
+        <div class="protocol-box-title">4. Lateral Subsystem</div>
+        <p><strong>Anatomical Chain:</strong> Gluteus Medius / Minimus &rarr; Tensor Fasciae Latae (TFL) &rarr; Contralateral Quadratus Lumborum (QL) & Adductors.</p>
+        <p><strong>Primary Function:</strong> Frontal plane pelvic stabilization in single-limb stance.</p>
+        <div class="vector-spec">
+          <strong>Testing Protocol:</strong> Sidelying hip abduction against ipsilateral QL lateral trunk flexion. Common pattern: Hypertonic QL compensating for inhibited contralateral Gluteus Medius.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: L2 CORE & DIAPHRAGM -->
+  <section id="sec-l2-core" class="manual-section">
+    <div class="card">
+      <h2><span class="highlight-tag tag-l2">Level 2</span> Module 2: The Core Cylinder & Diaphragm Mechanics</h2>
+      
+      <div class="protocol-box">
+        <div class="protocol-box-title">2.1 The Diaphragm as the Master Core Regulator</div>
+        <p>The diaphragm is the muscular roof of the core cylinder. Chronic emotional stress, respiratory dysfunction, or postural collapse creates chronic diaphragmatic hypertonicity, leading to global downregulation of peripheral stabilizers.</p>
+        
+        <h4>Diaphragm Assessment Protocol (Inhalation vs. Exhalation Testing):</h4>
+        <ul>
+          <li><strong>Step 1: Baseline Neuromuscular Test:</strong> Choose a strong indicator muscle (e.g., Anterior Deltoid or Psoas). Verify it is facilitated.</li>
+          <li><strong>Step 2: Inhalation Phase Test:</strong> Patient inhales deeply and holds breath. Retest indicator muscle. If it breaks &rarr; <em>Inhalation Diaphragm Facilitation</em>.</li>
+          <li><strong>Step 3: Exhalation Phase Test:</strong> Patient exhales completely and holds breath out. Retest indicator muscle. If it breaks &rarr; <em>Exhalation Diaphragm Facilitation</em>.</li>
+          <li><strong>Step 4: Challenge & Release:</strong> Palpate subcostal margin / crus of the diaphragm. Perform 45s manual subcostal release, followed immediately by 3-5 exhalation core drawing-in activations.</li>
+        </ul>
+      </div>
+
+      <div class="protocol-box">
+        <div class="protocol-box-title">2.2 The Intrinsic Core Cylinder Hierarchy</div>
+        <p><strong>The Core Cylinder consists of 4 co-contracting boundaries:</strong></p>
+        <ol>
+          <li><strong>Roof:</strong> Respiratory Diaphragm</li>
+          <li><strong>Anterior/Lateral Walls:</strong> Transversus Abdominis (TVA) & Internal Obliques</li>
+          <li><strong>Posterior Wall:</strong> Lumbar Multifidi & Quadratus Lumborum</li>
+          <li><strong>Floor:</strong> Pelvic Floor (Levator Ani, Coccygeus, Pubococcygeus)</li>
+        </ol>
+        <div class="vector-spec">
+          <strong>Testing Pelvic Floor via Kinetic Coupling:</strong><br>
+          • Pelvic floor cannot be tested directly in standard manual practice; evaluate via the <em>Obturator Internus</em>, <em>Adductor Magnus</em>, and <em>Adductor Longus</em>.<br>
+          • Test prone hip external rotation at $90^\circ$ knee flexion (Obturator Internus). Challenge lower abdominal wall or perineal reflex to identify core-pelvic floor reactive pairs.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: L2 TMJ -->
+  <section id="sec-l2-tmj" class="manual-section">
+    <div class="card">
+      <h2><span class="highlight-tag tag-l2">Level 2</span> Module 3: TMJ & Stomatognathic System</h2>
+      <p>The jaw muscles act as the primary somatic default mechanism for whole-body overcompensation. Jaw clenching provides an emergency bracing mechanism when spinal stabilizers are dormant.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Muscle</th>
+            <th>Primary Action</th>
+            <th>Testing Vector</th>
+            <th>Common Kinetic Chain Compensation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Temporalis</strong></td>
+            <td>Elevation & Retrusion</td>
+            <td>Patient bites down on posterior molars; resistance against jaw opening.</td>
+            <td>Compensates for Superficial Front Line (Deep Neck Flexors, TVA) & Superficial Back Line (Gluteals).</td>
+          </tr>
+          <tr>
+            <td><strong>Masseter</strong></td>
+            <td>Elevation & Ipsilateral Translation</td>
+            <td>Patient clenches jaw; clinician applies lateral shearing force.</td>
+            <td>Compensates for Lateral Subsystem (Gluteus Medius, QL, Peroneals).</td>
+          </tr>
+          <tr>
+            <td><strong>Medial Pterygoid</strong></td>
+            <td>Elevation & Contralateral Deviation</td>
+            <td>Patient deviates jaw to opposite side against clinician resistance.</td>
+            <td>Compensates for Contralateral Oblique slings and intrinsic pelvic floor. Associated with Tinnitus.</td>
+          </tr>
+          <tr>
+            <td><strong>Lateral Pterygoid</strong></td>
+            <td>Depression, Protrusion & Contralateral Deviation</td>
+            <td>Patient opens jaw and protrudes forward against chin resistance.</td>
+            <td>Compensates for inhibited Deep Cervical Flexors and Upper Cervical Ligaments.</td>
+          </tr>
+          <tr>
+            <td><strong>Digastric & Suprahyoids</strong></td>
+            <td>Jaw Depression / Hyoid Elevation</td>
+            <td>Patient opens mouth wide against upward force under chin.</td>
+            <td>Braces with Diaphragm & Pelvic floor during Valsalva compensation.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="protocol-box">
+        <div class="protocol-box-title">Clinical TMJ Protocol:</div>
+        <p>1. Find an inhibited muscle anywhere in the body (e.g., Left Gluteus Medius).<br>
+        2. Have the client clench their jaw or deviate to the right &rarr; Retest Gluteus Medius.<br>
+        3. If the glute immediately locks strong &rarr; <strong>The TMJ is the primary reactive driver!</strong><br>
+        4. Release the facilitated pterygoid/masseter (intra-oral or extra-oral) for 45s &rarr; Activate the glute.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: L2 PERTURBATION & COMPRESSION -->
+  <section id="sec-l2-perturb" class="manual-section">
+    <div class="card">
+      <h2><span class="highlight-tag tag-l2">Level 2</span> Module 4: Perturbation & Joint Compression/Decompression</h2>
+
+      <div class="protocol-box">
+        <div class="protocol-box-title">4.1 Perturbation / Balance Assessment</div>
+        <p>Perturbation tests evaluate the central nervous system's automatic anticipatory postural adjustments (APAs) in response to unexpected mechanical displacement.</p>
+        <ul>
+          <li><strong>Anteroposterior (A/P) Perturbation:</strong> Patient standing or seated tall. Clinician delivers sudden, gentle sternal push (posterior perturbation) or thoracic pull (anterior perturbation). Observe whether trunk corrects via intrinsic core vs. superficial neck/hip gripping.</li>
+          <li><strong>Rotational / Oblique Perturbation:</strong> Deliver gentle rotational displacement at shoulders/pelvis. Test for contralateral oblique sling engagement.</li>
+        </ul>
+      </div>
+
+      <div class="protocol-box">
+        <div class="protocol-box-title">4.2 Joint Compression vs. Decompression Protocols</div>
+        <p>Joint capsules are dense with Ruffini and Pacinian mechanoreceptors that reflexively modulate muscular tone:</p>
+        
+        <div class="grid-2">
+          <div class="vector-spec">
+            <strong>Joint Compression Testing (e.g., Hip):</strong><br>
+            • Patient supine. Flex hip to $90^\circ$.<br>
+            • Apply axial compressive force down the shaft of the femur into the acetabulum for 2 seconds.<br>
+            • Retest a key indicator muscle (e.g., Psoas or Gluteus Medius).<br>
+            • <em>If the muscle weakens:</em> Pathological capsule compression sensitivity (Hypertonic deep rotators).
+          </div>
+          <div class="vector-spec">
+            <strong>Joint Decompression / Distraction Testing:</strong><br>
+            • Apply gentle axial long-axis traction to the joint (hip, ankle, or glenohumeral joint).<br>
+            • Retest indicator muscle.<br>
+            • <em>If the muscle weakens:</em> Ligamentous instability or capsular laxity driving protective muscular splinting.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: L3 GAIT -->
+  <section id="sec-l3-gait" class="manual-section">
+    <div class="card">
+      <h2><span class="highlight-tag tag-l3">Level 3</span> Module 5: Advanced Multi-Phasic Gait Testing</h2>
+      <p>Level 3 evaluates the dynamic coordination of reciprocal gait phases. Every phase of human gait requires an exact coupling of ipsilateral and contralateral limbs.</p>
+
+      <div class="ascii-art">
+GAIT PHASE NEUROLOGICAL COUPLING MATRIX:
+========================================================================================
+ Phase 1: Heel Strike (Initial Contact)  --> Ankle Dorsiflexion + Contralat Arm Extension
+ Phase 2: Loading Response / Mid-Stance --> Gluteus Medius + Contralat Quadratus Lumborum
+ Phase 3: Terminal Stance / Push-Off    --> Gluteus Max + Contralat Latissimus Dorsi (POS)
+ Phase 4: Swing Phase                   --> Iliopsoas + Contralat Shoulder Extension
+========================================================================================
+      </div>
+
+      <div class="protocol-box">
+        <div class="protocol-box-title">Hands-On Gait Testing Vectors (Supine & Standing):</div>
+        
+        <h4>1. Reciprocal Humeral-Femoral Gait Vector (Stance/Swing Coupling):</h4>
+        <p>• Patient supine. Instruct: Flex Right Humerus ($90^\circ$) while simultaneously extending Left Hip (pressing heel down into table).<br>
+        • <em>MMT:</em> Clinician attempts to push the right arm into extension while lifting the left leg into flexion.<br>
+        • Assess the opposite pair: Left Humerus Flexion + Right Hip Extension.<br>
+        • <em>Diagnostic Yield:</em> Uncovers cross-body kinetic sling breakdown undetectable during isolated single-joint testing.</p>
+
+        <h4>2. Propulsion Vector (Toe-Off):</h4>
+        <p>• Prone. Patient performs terminal knee extension, ankle plantarflexion/inversion, and hip extension.<br>
+        • Test against resisted contralateral latissimus extension. Identifies loss of push-off force transmission.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6: L3 SCARS -->
+  <section id="sec-l3-scars" class="manual-section">
+    <div class="card">
+      <h2><span class="highlight-tag tag-l3">Level 3</span> Module 6: Multi-Vector Scar Protocol</h2>
+      <p>Surgical and traumatic scars create permanent sensory disruption. In Level 3, we test scars in <strong>8 distinct directional planes</strong> and evaluate complex <em>Scar-to-Scar</em> and <em>Scar-to-Ligament</em> relationships.</p>
+
+      <div class="protocol-box">
+        <div class="protocol-box-title">The 8-Vector Scar Assessment Protocol:</div>
+        <p>1. Find an inhibited muscle (e.g., Transversus Abdominis or Gluteus Maximus).<br>
+        2. Test the scar in specific directional shears while retesting the weak muscle:</p>
+        
+        <table>
+          <thead>
+            <tr>
+              <th>Vector #</th>
+              <th>Direction of Scar Challenge</th>
+              <th>Hand Technique</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Vector 1 (N)</strong></td><td>Superior (Cephalad) Traction</td><td>Push scar tissue upward toward head.</td></tr>
+            <tr><td><strong>Vector 2 (S)</strong></td><td>Inferior (Caudad) Traction</td><td>Push scar tissue downward toward feet.</td></tr>
+            <tr><td><strong>Vector 3 (E)</strong></td><td>Right Lateral Shear</td><td>Shift scar tissue to patient's right.</td></tr>
+            <tr><td><strong>Vector 4 (W)</strong></td><td>Left Lateral Shear</td><td>Shift scar tissue to patient's left.</td></tr>
+            <tr><td><strong>Vector 5 (CW)</strong></td><td>Clockwise Rotation / Torsion</td><td>Two-finger rotational torsion clockwise.</td></tr>
+            <tr><td><strong>Vector 6 (CCW)</strong></td><td>Counter-Clockwise Rotation</td><td>Two-finger rotational torsion counter-clockwise.</td></tr>
+            <tr><td><strong>Vector 7 (Comp)</strong></td><td>Direct Compression</td><td>Direct perpendicular pressure into deep scar bed.</td></tr>
+            <tr><td><strong>Vector 8 (Pinch)</strong></td><td>Skin Roll / Distraction Pinch</td><td>Lift and pinch scar away from underlying fascia.</td></tr>
+          </tbody>
+        </table>
+
+        <div class="vector-spec">
+          <strong>Corrective Treatment:</strong> Apply 45–60 seconds of manual cross-fiber mobilization precisely along the vector that restored muscle strength, followed immediately by 3-5 reps of isolated activation for the inhibited muscle.
+        </div>
+      </div>
+
+      <div class="protocol-box">
+        <div class="protocol-box-title">Special Scar Topologies:</div>
+        <ul>
+          <li><strong>Umbilicus / Navel Scar:</strong> The original birth scar. Affects the visceral fascia (urachus/median umbilical ligament) and frequently drives deep lumbar/pelvic floor inhibition.</li>
+          <li><strong>Episiotomy / Perineal Scars:</strong> Primary drivers of coccygeus, piriformis, and obturator internus hypertonicity.</li>
+          <li><strong>Scar-to-Scar Reactivity:</strong> A C-section scar can be reactive to an older Appendectomy scar or laparoscopic portal. Test TL on Scar A while challenging Scar B.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 7: L3 LIGAMENTS -->
+  <section id="sec-l3-ligaments" class="manual-section">
+    <div class="card">
+      <h2><span class="highlight-tag tag-l3">Level 3</span> Module 7: Advanced Ligamentous Interlinks</h2>
+      <p>Ligaments possess a high concentration of mechanoreceptors (Ruffini, Pacinian, and Type IV free nerve endings). When damaged or lax, the <strong>Ligamento-Muscular Reflex</strong> triggers protective muscular hypertonicity across surrounding joints while inhibiting dynamic stabilizers.</p>
+
+      <div class="protocol-box">
+        <div class="protocol-box-title">Comprehensive Ligament Testing Inventory:</div>
+        
+        <div class="grid-2">
+          <div>
+            <h4>1. Pelvic & Lumbar Ligaments:</h4>
+            <ul>
+              <li><strong>Sacrotuberous Ligament:</strong> Tested with ischial tuberosity to sacral shear. Compensates for Biceps Femoris / Glute Max.</li>
+              <li><strong>Sacrospinous Ligament:</strong> Challenged via deep palpation medial to ischial spine. Linked to Pudendal nerve irritation.</li>
+              <li><strong>Iliolumbar Ligament:</strong> Challenged via L5 transverse process to iliac crest glide. Compensates for QL / Psoas.</li>
+              <li><strong>Dorsal Sacroiliac Ligaments:</strong> Assessed via posterior SIJ seam distraction.</li>
+            </ul>
+          </div>
+          <div>
+            <h4>2. Ankle & Foot Ligaments:</h4>
+            <ul>
+              <li><strong>Anterior Talofibular (ATFL):</strong> Plantarflexion + Inversion stress. Drives Peroneus & Glute Med inhibition.</li>
+              <li><strong>Calcaneofibular (CFL):</strong> Pure Inversion stress in neutral dorsiflexion.</li>
+              <li><strong>Deltoid Ligament Complex:</strong> Eversion stress. Drives Tibialis Posterior & Core inhibition.</li>
+              <li><strong>Bifurcate Ligament:</strong> Palpated in sinus tarsi; key in chronic lateral foot pain.</li>
+              <li><strong>Spring Ligament:</strong> Plantar calcaneonavicular stress. Drives medial longitudinal arch collapse.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="vector-spec">
+          <strong>Ligament-to-Ligament Interlink Protocol:</strong><br>
+          • Ligaments can compensate for other ligaments! (e.g., Chronic ATFL sprain compensated by ipsilateral Sacrotuberous ligament).<br>
+          • <em>Test:</em> Challenge Ligament A (stress ATFL) &rarr; Test indicator &rarr; Weak.<br>
+          • <em>Challenge:</em> Touch/Stress Ligament B (Sacrotuberous) &rarr; Retest indicator &rarr; <strong>Locks Strong!</strong><br>
+          • <em>Correction:</em> Friction release the compensating ligament (30s) &rarr; Proprioceptively stimulate the lax ligament (tap/vibrate for 15s).
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 8: L3 EYES & CRANIO-CERVICAL -->
+  <section id="sec-l3-eyes" class="manual-section">
+    <div class="card">
+      <h2><span class="highlight-tag tag-l3">Level 3</span> Module 8: Extraocular Muscles & Cranio-Cervical Reflexes</h2>
+      
+      <div class="protocol-box">
+        <div class="protocol-box-title">8.1 Extraocular Muscle Testing (Oculo-Cervical Reflex)</div>
+        <p>The extraocular muscles have direct neural connections through the tectospinal and vestibulospinal tracts to the suboccipital complex (Rectus Capitis Posterior Major/Minor, Obliquus Capitis Superior/Inferior).</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Cranial Nerve</th>
+              <th>Extraocular Muscle</th>
+              <th>Visual Gaze Vector</th>
+              <th>Kinetic Chain Reflex Connection</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>CN III (Oculomotor)</strong></td>
+              <td>Superior Rectus</td>
+              <td>Look Up & Out</td>
+              <td>Posterior chain extension tone (Suboccipitals, Erectors).</td>
+            </tr>
+            <tr>
+              <td><strong>CN III (Oculomotor)</strong></td>
+              <td>Inferior Rectus</td>
+              <td>Look Down & Out</td>
+              <td>Anterior chain flexion tone (Deep neck flexors, Abdominals).</td>
+            </tr>
+            <tr>
+              <td><strong>CN III (Oculomotor)</strong></td>
+              <td>Medial Rectus</td>
+              <td>Look Medially (Inward)</td>
+              <td>Adductor line / Deep Front Line activation.</td>
+            </tr>
+            <tr>
+              <td><strong>CN III (Oculomotor)</strong></td>
+              <td>Inferior Oblique</td>
+              <td>Look Up & In</td>
+              <td>Contralateral cervical rotation & lateral sling.</td>
+            </tr>
+            <tr>
+              <td><strong>CN IV (Trochlear)</strong></td>
+              <td>Superior Oblique</td>
+              <td>Look Down & In</td>
+              <td>Ipsilateral vestibular balance & core stabilization.</td>
+            </tr>
+            <tr>
+              <td><strong>CN VI (Abducens)</strong></td>
+              <td>Lateral Rectus</td>
+              <td>Look Laterally (Outward)</td>
+              <td>Lateral subsystem / Gluteus Medius / SCM coupling.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="vector-spec">
+          <strong>Clinical Testing Protocol:</strong><br>
+          1. Identify an inhibited muscle (e.g., Deep Cervical Flexors or Gluteus Medius).<br>
+          2. Have patient hold maximum gaze in a specific quadrant (e.g., Eyes hard Up and to the Right).<br>
+          3. Retest the inhibited muscle while gaze is held.<br>
+          4. If it immediately locks strong &rarr; <strong>The Extraocular Muscle is the reactive driver!</strong><br>
+          5. Correct by performing eye-tracking smooth pursuit/saccade drills coupled with neck stabilizer activation.
+        </div>
+      </div>
+
+      <div class="protocol-box">
+        <div class="protocol-box-title">8.2 Hyoid Musculature & Deglutition (Swallowing) Reflex</div>
+        <p>The hyoid bone acts as a free-floating suspension bridge connecting the cranium, mandible, cervical spine, and thorax.</p>
+        <ul>
+          <li><strong>Suprahyoids (Mylohyoid, Geniohyoid, Stylohyoid, Digastric):</strong> Tested via resisted hyoid depression / jaw opening. Hypertonicity leads to anterior neck tension and thoracic outlet compression.</li>
+          <li><strong>Infrahyoids (Sternohyoid, Omohyoid, Sternothyroid, Thyrohyoid):</strong> Tested via resisted swallowing or cervical extension. Linked directly to fascial tension in the clavicle and first rib.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 9: MASTER DECISION MATRIX -->
+  <section id="sec-algorithms" class="manual-section">
+    <div class="card">
+      <h2>Master NKT Diagnostic Hierarchy & Clinical Flowchart</h2>
+      <p>When assessing complex, chronic, multi-trauma patients, use this systematic priority hierarchy to peel back compensation layers:</p>
+
+      <div class="ascii-art">
+========================================================================================
+              THE MASTER NKT CLINICAL LEVEL 1-2-3 PRIORITY DECISION FLOW
+========================================================================================
+
+ [ STEP 1: CLEAR SURGICAL SCARS & RECENT TRAUMAS (Level 3) ]
+   - C-sections, Appendectomies, Portals, Navel, Episiotomies.
+   - If scar is active, it will continually reset all downstream corrections!
+                              |
+                              v
+ [ STEP 2: CLEAR LIGAMENTOUS INSTABILITY (Level 3) ]
+   - Check history of ankle sprains (ATFL/CFL), pelvic trauma (Sacrotuberous), SIJ.
+   - Restore ligamento-muscular baseline.
+                              |
+                              v
+ [ STEP 3: ASSESS MASTER CRANIO-RESPIRATORY DRIVERS (Level 2) ]
+   - Diaphragm (Inhalation / Exhalation challenge).
+   - TMJ (Masseter, Temporalis, Pterygoids) & Hyoid system.
+                              |
+                              v
+ [ STEP 4: EVALUATE FUNCTIONAL KINETIC SUBSYSTEMS (Level 2) ]
+   - Posterior Oblique Subsystem (POS), Anterior Oblique Subsystem (AOS),
+     Deep Longitudinal (DLS), Lateral Subsystem.
+                              |
+                              v
+ [ STEP 5: REFINE LOCAL AGONIST-ANTAGONIST / SYNERGIST PAIRS (Level 1) ]
+   - Local muscle-to-muscle tests, joint isolation vectors.
+                              |
+                              v
+ [ STEP 6: ADVANCED GAIT INTEGRATION & HOMEWORK PRESCRIPTION ]
+   - Multi-phasic gait pattern activation.
+   - Enforce homework rule: Release Culprit FIRST --> Activate Victim SECOND.
+========================================================================================
+      </div>
+
+      <div class="protocol-box">
+        <div class="protocol-box-title">Reverse Therapy Localization (Reverse TL) Technique:</div>
+        <p><strong>When to use:</strong> When you have a client with severe pain in a hypertonic/facilitated tissue, but cannot easily find what is inhibited.</p>
+        <ol>
+          <li>Touch the painful, hypertonic tissue (Driver).</li>
+          <li>Scan through potential inhibited muscles across the kinetic chain (e.g., Glute Max, TVA, Lower Trap).</li>
+          <li>When you test a muscle that is normally strong, but <em>breaks weak when touching the driver</em>, you have found the inhibited receiver!</li>
+          <li>Release the painful driver &rarr; Activate the newly uncovered inhibited muscle.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  function showSec(secId) {
+    document.querySelectorAll('.manual-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    
+    document.getElementById(secId).classList.add('active');
+    
+    const navButtons = document.querySelectorAll('.nav-btn');
+    const secIds = ['sec-intro', 'sec-l2-slings', 'sec-l2-core', 'sec-l2-tmj', 'sec-l2-perturb', 'sec-l3-gait', 'sec-l3-scars', 'sec-l3-ligaments', 'sec-l3-eyes', 'sec-algorithms'];
+    const idx = secIds.indexOf(secId);
+    if (idx !== -1 && navButtons[idx]) {
+      navButtons[idx].classList.add('active');
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>

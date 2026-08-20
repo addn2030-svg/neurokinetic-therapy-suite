@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NeuroKinetic Therapy (NKT®) Master Clinical & Educational Suite</title>
+<style>
+  :root {
+    --primary-dark: #0f172a;
+    --primary-blue: #1e3a8a;
+    --accent-blue: #0284c7;
+    --accent-teal: #0d9488;
+    --accent-amber: #d97706;
+    --accent-red: #dc2626;
+    --bg-main: #f8fafc;
+    --text-dark: #1e293b;
+    --text-muted: #64748b;
+    --border: #e2e8f0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-dark);
+    line-height: 1.6;
+    padding-bottom: 4rem;
+  }
+  header {
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-blue) 60%, var(--accent-blue) 100%);
+    color: white;
+    padding: 3.5rem 2rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    text-align: center;
+  }
+  .header-inner { max-width: 900px; margin: 0 auto; }
+  .badge {
+    display: inline-block;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #bae6fd;
+    padding: 0.35rem 0.9rem;
+    border-radius: 9999px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+  }
+  h1 { font-size: 2.6rem; font-weight: 800; line-height: 1.2; margin-bottom: 0.75rem; }
+  .subtitle { font-size: 1.15rem; color: #cbd5e1; margin: 0 auto 1.5rem auto; line-height: 1.5; }
+
+  .container { max-width: 1200px; margin: 2.5rem auto; padding: 0 1.5rem; }
+  
+  .hub-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 1.75rem;
+    margin-bottom: 3rem;
+  }
+  .hub-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 0.85rem;
+    padding: 2rem;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .hub-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+  }
+  .card-tag {
+    display: inline-block;
+    padding: 0.25rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .tag-blue { background: #dbeafe; color: #1e40af; }
+  .tag-purple { background: #fae8ff; color: #86198f; }
+  .tag-teal { background: #ccfbf1; color: #0f766e; }
+  .tag-red { background: #fee2e2; color: #991b1b; }
+  .tag-green { background: #dcfce7; color: #166534; }
+
+  .card-title { font-size: 1.35rem; font-weight: 800; color: var(--primary-dark); margin-bottom: 0.75rem; }
+  .card-desc { font-size: 0.95rem; color: #475569; margin-bottom: 1.5rem; flex-grow: 1; }
+  
+  .btn-hub {
+    display: block;
+    text-align: center;
+    padding: 0.75rem 1.25rem;
+    background: var(--primary-blue);
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 0.5rem;
+    transition: background 0.2s ease;
+  }
+  .btn-hub:hover { background: var(--primary-dark); }
+
+  .meta-card {
+    background: #f1f5f9;
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    padding: 2rem;
+    margin-top: 2rem;
+  }
+  .meta-card h3 { color: var(--primary-dark); margin-bottom: 0.75rem; font-size: 1.25rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="badge">Complete NKT® Clinical & Practical Ecosystem</div>
+    <h1>NeuroKinetic Therapy Master Suite</h1>
+    <p class="subtitle">An advanced clinical learning, assessment, and neuromuscular programming ecosystem for Level 1, Level 2, and Level 3 practitioners.</p>
+  </div>
+</header>
+
+<main class="container">
+
+  <div class="hub-grid">
+
+    <!-- MODULE 1 -->
+    <div class="hub-card">
+      <div>
+        <span class="card-tag tag-blue">Foundational Level 1</span>
+        <div class="card-title">1. Interactive Learning Module & 10 MSQ Exam</div>
+        <p class="card-desc">Comprehensive lecture presentation covering the Motor Control Center (MCC) in the cerebellum, 30-60s plasticity window, MMT mechanics, compensation taxonomy, and 10 interactive critical thinking multiple-select questions with real-time scoring.</p>
+      </div>
+      <a href="nkt_learning_module.html" class="btn-hub">Launch Learning Module &rarr;</a>
+    </div>
+
+    <!-- MODULE 2 -->
+    <div class="hub-card">
+      <div>
+        <span class="card-tag tag-purple">Practical Level 2 & 3</span>
+        <div class="card-title">2. Practical Field Manual: Level 2 & Level 3</div>
+        <p class="card-desc">Complete practical handbook covering the 4 Kinetic Subsystems (POS, AOS, DLS, Lateral), Core Cylinder, Diaphragm Inhalation/Exhalation tests, TMJ protocols, 8-Vector Scars, Ligamentous Interlinks, and Cranio-Cervical Reflexes.</p>
+      </div>
+      <a href="nkt_level2_level3_manual.html" class="btn-hub">Open Practical Manual &rarr;</a>
+    </div>
+
+    <!-- MODULE 3 -->
+    <div class="hub-card">
+      <div>
+        <span class="card-tag tag-teal">Visual Clinical Atlas</span>
+        <div class="card-title">3. Visual Clinical Atlas & Vectors</div>
+        <p class="card-desc">High-resolution clinical photography and biomechanical vector guides demonstrating POS gait testing, subcostal diaphragm release, 8-directional scar mobilization, ATFL ligamentous challenge, and TMJ pterygoid release.</p>
+      </div>
+      <a href="nkt_visual_atlas.html" class="btn-hub">View Visual Atlas &rarr;</a>
+    </div>
+
+    <!-- MODULE 4 -->
+    <div class="hub-card">
+      <div>
+        <span class="card-tag tag-red">Live Video Vault</span>
+        <div class="card-title">4. Instructor Video Demonstrations</div>
+        <p class="card-desc">David Weinstock masterclass live seminar breakdown, frame-by-frame 4-step sequence transcripts, clinical coaching dialogues, and direct official video demonstration resources.</p>
+      </div>
+      <a href="nkt_video_library.html" class="btn-hub">Open Video Library &rarr;</a>
+    </div>
+
+    <!-- MODULE 5 -->
+    <div class="hub-card">
+      <div>
+        <span class="card-tag tag-green">Assessment & Tools</span>
+        <div class="card-title">5. Assessment Kit, Tools & Cert Suite</div>
+        <p class="card-desc">Interactive patient intake documentation, 10-point neurological screening checklist, Kinesiology taping (RockTape) guide, IASTM protocols, tuning forks, and official certification case study grading rubrics.</p>
+      </div>
+      <a href="nkt_master_training_suite.html" class="btn-hub">Launch Training Suite &rarr;</a>
+    </div>
+
+    <!-- MODULE 6 -->
+    <div class="hub-card">
+      <div>
+        <span class="card-tag tag-blue">AI Agent & Spec</span>
+        <div class="card-title">6. NKT Skill Specification (SKILL.md)</div>
+        <p class="card-desc">Standardized AI Skill specification and clinical reasoning engine for automated clinical diagnostic assistance, decision trees, and systematic neuromuscular protocol validation.</p>
+      </div>
+      <a href="SKILL.md" class="btn-hub" style="background:#334155;">View SKILL.md Spec &rarr;</a>
+    </div>
+
+  </div>
+
+  <div class="meta-card">
+    <h3>GitHub Repository Deployment & Clinical Integration</h3>
+    <p>This repository is fully initialized with Git and prepared for deployment. To clone or push this suite to your GitHub account, reference the root <code>README.md</code> for one-step synchronization instructions.</p>
+  </div>
+
+</main>
+
+</body>
+</html>

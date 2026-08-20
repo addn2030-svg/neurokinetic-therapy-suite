@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NKT® Visual Clinical Atlas & Advanced Application Guide</title>
+<style>
+  :root {
+    --primary: #0f172a;
+    --primary-blue: #1e3a8a;
+    --accent-cyan: #0284c7;
+    --accent-teal: #0d9488;
+    --accent-amber: #d97706;
+    --accent-red: #dc2626;
+    --bg-light: #f8fafc;
+    --text-dark: #1e293b;
+    --border: #e2e8f0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    line-height: 1.6;
+    padding-bottom: 3rem;
+  }
+  header {
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 70%, #0369a1 100%);
+    color: white;
+    padding: 3rem 2rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+  .badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    color: #bae6fd;
+    padding: 0.3rem 0.8rem;
+    border-radius: 9999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  h1 { font-size: 2.2rem; font-weight: 800; margin-bottom: 0.5rem; }
+  .subtitle { font-size: 1.1rem; color: #cbd5e1; max-width: 850px; }
+  
+  .app-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    padding: 2rem;
+    margin: 2rem 0;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+  }
+  .app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+  .app-title { font-size: 1.5rem; color: var(--primary-blue); font-weight: 800; }
+  .app-tag {
+    background: #e0f2fe;
+    color: #0369a1;
+    padding: 0.25rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .image-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+  }
+  .clinical-image {
+    width: 100%;
+    max-height: 480px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  .spec-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  @media (max-width: 800px) { .spec-grid { grid-template-columns: 1fr; } }
+
+  .spec-box {
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-radius: 0.5rem;
+    padding: 1.25rem;
+  }
+  .spec-box h4 {
+    color: var(--primary);
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .spec-box ul { padding-left: 1.25rem; font-size: 0.95rem; }
+  .spec-box li { margin-bottom: 0.4rem; color: #334155; }
+
+  .callout-action {
+    background: #f0fdf4;
+    border-left: 4px solid #16a34a;
+    padding: 1rem 1.25rem;
+    border-radius: 0 0.5rem 0.5rem 0;
+    margin-top: 1.25rem;
+    font-size: 0.95rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="badge">Visual Hands-On Clinical Reference</div>
+    <h1>NKT® Visual Clinical Atlas: Advanced Field Applications</h1>
+    <p class="subtitle">Step-by-step visual breakdowns, biomechanical vector analyses, therapist hand placements, and corrective neuroplastic repatterning algorithms.</p>
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- APPLICATION 1 -->
+  <div class="app-card" id="app-pos">
+    <div class="app-header">
+      <div class="app-title">Application 1: Posterior Oblique Subsystem (POS) & Reciprocal Gait Testing</div>
+      <span class="app-tag">Level 2 / Level 3 Sling Dynamics</span>
+    </div>
+    <div class="image-grid">
+      <img src="images/nkt_pos_gait_test.png" alt="POS Reciprocal Gait Manual Muscle Test" class="clinical-image">
+    </div>
+    <p><strong>Clinical Focus:</strong> Assesses cross-body force transmission between the Latissimus Dorsi, Thoracolumbar Fascia, and Contralateral Gluteus Maximus during terminal stance push-off in gait.</p>
+    <div class="spec-grid">
+      <div class="spec-box">
+        <h4>Client & Therapist Setup</h4>
+        <ul>
+          <li><strong>Patient Position:</strong> Supine. Right arm extended along flank; Left leg extended in neutral alignment.</li>
+          <li><strong>Therapist Placement:</strong> Standing on the patient's right side, placing one hand on the right distal forearm and one hand under the left distal achilles tendon.</li>
+          <li><strong>Patient Cue:</strong> <em>"Press your right hand and left heel down into the table. Lock your position; don't let me lift either limb."</em></li>
+        </ul>
+      </div>
+      <div class="spec-box">
+        <h4>Biomechanical Vectors & Error Detection</h4>
+        <ul>
+          <li><strong>Test Vector:</strong> Dual simultaneous upward lifting forces applied over a 2-second isometric ramp.</li>
+          <li><strong>Failure Indication:</strong> Spongy collapse in either the upper quadrant (Lat) or lower quadrant (Glute Max).</li>
+          <li><strong>Synergistic Cheat:</strong> Patient arches lumbar spine or side-bends trunk to recruit Quadratus Lumborum.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout-action">
+      <strong>Corrective Action:</strong> Release dominant Latissimus Dorsi (45s) &rarr; Immediate isolated prone Gluteus Maximus isometric extension hold (5s x 4 reps).
+    </div>
+  </div>
+
+  <!-- APPLICATION 2 -->
+  <div class="app-card" id="app-diaphragm">
+    <div class="app-header">
+      <div class="app-title">Application 2: Diaphragmatic Assessment & Zone of Apposition (ZOA) Release</div>
+      <span class="app-tag">Level 2 Intrinsic Core Regulator</span>
+    </div>
+    <div class="image-grid">
+      <img src="images/nkt_diaphragm_assessment.png" alt="Diaphragm Subcostal Assessment and Release" class="clinical-image">
+    </div>
+    <p><strong>Clinical Focus:</strong> Identifies chronic inhalation/exhalation diaphragmatic facilitation that causes global neurological downregulation of the transverse abdominis, pelvic floor, and deep neck flexors.</p>
+    <div class="spec-grid">
+      <div class="spec-box">
+        <h4>Diagnostic Test Protocol</h4>
+        <ul>
+          <li><strong>Baseline Test:</strong> Verify a strong indicator muscle (e.g., Psoas or Anterior Deltoid).</li>
+          <li><strong>Inhalation Challenge:</strong> Patient takes full inhalation and holds &rarr; Retest indicator. (Break = Inhalation facilitation).</li>
+          <li><strong>Exhalation Challenge:</strong> Patient exhales completely and holds &rarr; Retest indicator. (Break = Exhalation facilitation).</li>
+        </ul>
+      </div>
+      <div class="spec-box">
+        <h4>Hands-On Subcostal Release Technique</h4>
+        <ul>
+          <li><strong>Hand Placement:</strong> Curved fingertips placed gently beneath the 7th–10th costal cartilages bilaterally.</li>
+          <li><strong>Vector of Mobilization:</strong> Cephalad and posterior glide along the inner dome of the ribcage during slow exhalation.</li>
+          <li><strong>Duration:</strong> 45–60 seconds of gentle myofascial unwinding (never exceed patient comfort).</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout-action">
+      <strong>Corrective Repatterning:</strong> Follow release with 4 deep 360-degree diaphragmatic breaths emphasizing lateral ribcage expansion and pelvic floor relaxation.
+    </div>
+  </div>
+
+  <!-- APPLICATION 3 -->
+  <div class="app-card" id="app-scar">
+    <div class="app-header">
+      <div class="app-title">Application 3: Multi-Vector Scar Assessment & Cross-Friction Mobilization</div>
+      <span class="app-tag">Level 3 Cutaneous Disruption</span>
+    </div>
+    <div class="image-grid">
+      <img src="images/nkt_scar_vector_protocol.png" alt="Multi-Directional Scar Assessment on C-Section" class="clinical-image">
+    </div>
+    <p><strong>Clinical Focus:</strong> Evaluates surgical and traumatic scars (C-sections, appendectomies, laparoscopic portals) in 8 distinct directional planes to resolve mechanoreceptive afferent "noise" suppressing core stabilizers.</p>
+    <div class="spec-grid">
+      <div class="spec-box">
+        <h4>8-Vector Directional Testing</h4>
+        <ul>
+          <li><strong>Linear Vectors:</strong> North (Superior), South (Inferior), East (Right Lateral), West (Left Lateral).</li>
+          <li><strong>Rotational Vectors:</strong> Clockwise (CW) and Counter-Clockwise (CCW) torsion.</li>
+          <li><strong>Depth Vectors:</strong> Direct deep perpendicular compression vs. Distraction pinch/skin-rolling.</li>
+          <li><strong>Confirmation:</strong> The vector that turns the weak core muscle <em>rock solid strong</em> is the corrective vector.</li>
+        </ul>
+      </div>
+      <div class="spec-box">
+        <h4>Mobilization & Activation Workflow</h4>
+        <ul>
+          <li><strong>Friction Mobilization:</strong> Apply 60s of focused cross-fiber shear strictly along the corrective vector.</li>
+          <li><strong>Immediate Retest:</strong> Core muscle must now test strong in isolation without touching the scar.</li>
+          <li><strong>Prescription:</strong> Patient performs 1-minute self-scar friction in the exact vector followed by 5 reps of core drawing-in exercises, twice daily.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout-action">
+      <strong>Diagnostic Insight:</strong> Scars can persist as primary neurological drivers for decades until cleared through vector-specific mechanoreceptive reprogramming.
+    </div>
+  </div>
+
+  <!-- APPLICATION 4 -->
+  <div class="app-card" id="app-ligament">
+    <div class="app-header">
+      <div class="app-title">Application 4: Ligamentous Interlinks (ATFL Sprain to Pelvic Instability)</div>
+      <span class="app-tag">Level 3 Ligamento-Muscular Reflex</span>
+    </div>
+    <div class="image-grid">
+      <img src="images/nkt_ligament_atfl_pelvis.png" alt="ATFL Ligamentous Challenge and Glute Medius MMT" class="clinical-image">
+    </div>
+    <p><strong>Clinical Focus:</strong> Resolves distant postural and pelvic instability driven by chronic ankle inversion sprains via the ligamento-muscular reflex arc.</p>
+    <div class="spec-grid">
+      <div class="spec-box">
+        <h4>Ligamentous Challenge Technique</h4>
+        <ul>
+          <li><strong>Ligament Stress:</strong> Place the ankle in passive plantarflexion and inversion to apply specific tensile load to the Anterior Talofibular Ligament (ATFL).</li>
+          <li><strong>Simultaneous MMT:</strong> While holding the ligament on tension, test the contralateral Gluteus Medius ($30^\circ$ abduction, slight extension).</li>
+          <li><strong>Result:</strong> If the Gluteus Medius fails under ligament stress, the ATFL is driving the pelvic dyssynergia.</li>
+        </ul>
+      </div>
+      <div class="spec-box">
+        <h4>Corrective Intervention</h4>
+        <ul>
+          <li><strong>Step 1:</strong> Release hypertonic compensatory structures (e.g., ipsilateral Peroneus Longus or Sacrotuberous Ligament) for 30s.</li>
+          <li><strong>Step 2:</strong> Proprioceptively stimulate the lax ATFL with 15s of rapid tapping or vibratory input.</li>
+          <li><strong>Step 3:</strong> Immediately perform 4 reps of single-leg balance and Gluteus Medius isometric holds.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout-action">
+      <strong>Clinical Rule:</strong> Ligamentous pain presents as deep, aching tooth-like pain. Always evaluate the ATFL in patients with chronic contralateral SI joint dysfunction.
+    </div>
+  </div>
+
+  <!-- APPLICATION 5 -->
+  <div class="app-card" id="app-tmj">
+    <div class="app-header">
+      <div class="app-title">Application 5: TMJ Pterygoid Release & Deep Cervical Flexor Integration</div>
+      <span class="app-tag">Level 2 / Level 3 Cranial System</span>
+    </div>
+    <div class="image-grid">
+      <img src="images/nkt_tmj_cervical_application.png" alt="TMJ Pterygoid Assessment and Cervical Flexor Test" class="clinical-image">
+    </div>
+    <p><strong>Clinical Focus:</strong> Treats forward head posture, cervicogenic headaches, and suboccipital spasms by clearing compensatory hypertonicity in the medial and lateral pterygoids.</p>
+    <div class="spec-grid">
+      <div class="spec-box">
+        <h4>Palpation & Testing Vectors</h4>
+        <ul>
+          <li><strong>Lateral Pterygoid Palpation:</strong> Gloved index finger glides along the superior gingival bucco-alveolar margin posterior to the upper molars.</li>
+          <li><strong>Challenge:</strong> Apply light antero-medial pressure to pterygoid head while patient performs resisted jaw protrusion.</li>
+          <li><strong>Immediate Retest:</strong> Supine Deep Cervical Flexor test (Chin tuck + 1-inch head lift; resisted extension). Weak flexors will instantly lock strong.</li>
+        </ul>
+      </div>
+      <div class="spec-box">
+        <h4>Corrective Action & Integration</h4>
+        <ul>
+          <li><strong>Myofascial Release:</strong> 30–45s of gentle intra-oral ischemic release to the pterygoids or extra-oral masseter release.</li>
+          <li><strong>Active Activation:</strong> 5 reps of supine craniocervical flexion (nodding) with tongue pressed to roof of mouth (palatal stabilization).</li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout-action">
+      <strong>Stomatognathic Link:</strong> The pterygoids share fascial connections with the tensor veli palatini and inner ear, explaining why pterygoid facilitation frequently causes tinnitus.
+    </div>
+  </div>
+
+</main>
+
+</body>
+</html>

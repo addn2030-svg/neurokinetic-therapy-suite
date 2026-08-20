@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NKT® Master Practitioner Training Suite: Assessment, Tools & Education</title>
+<style>
+  :root {
+    --primary-dark: #0f172a;
+    --primary-blue: #1e3a8a;
+    --accent-blue: #0284c7;
+    --accent-teal: #0d9488;
+    --accent-amber: #d97706;
+    --accent-red: #dc2626;
+    --accent-green: #16a34a;
+    --bg-main: #f8fafc;
+    --card-bg: #ffffff;
+    --text-dark: #1e293b;
+    --text-muted: #64748b;
+    --border: #e2e8f0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-dark);
+    line-height: 1.6;
+  }
+  header {
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-blue) 60%, var(--accent-blue) 100%);
+    color: white;
+    padding: 3rem 2rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  }
+  .header-inner { max-width: 1200px; margin: 0 auto; }
+  .badge {
+    display: inline-block;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #bae6fd;
+    padding: 0.3rem 0.8rem;
+    border-radius: 9999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  h1 { font-size: 2.3rem; font-weight: 800; line-height: 1.2; margin-bottom: 0.5rem; }
+  .subtitle { font-size: 1.1rem; color: #cbd5e1; max-width: 900px; }
+
+  .nav-bar {
+    background: white;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  }
+  .nav-tabs {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    overflow-x: auto;
+    list-style: none;
+    padding: 0 1rem;
+  }
+  .nav-tabs button {
+    background: none;
+    border: none;
+    padding: 1rem 1.25rem;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s ease;
+  }
+  .nav-tabs button:hover { color: var(--accent-blue); }
+  .nav-tabs button.active { color: var(--primary-blue); border-bottom-color: var(--primary-blue); }
+
+  .container { max-width: 1200px; margin: 2rem auto; padding: 0 1.5rem; }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+  }
+
+  h2 { font-size: 1.75rem; color: var(--primary-dark); margin-bottom: 1.25rem; border-bottom: 2px solid var(--border); padding-bottom: 0.5rem; }
+  h3 { font-size: 1.3rem; color: var(--primary-blue); margin: 1.5rem 0 0.75rem 0; }
+  h4 { font-size: 1.1rem; color: var(--text-dark); margin: 1rem 0 0.5rem 0; }
+  p { margin-bottom: 1rem; color: #334155; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 1.5rem 0; }
+  @media (max-width: 800px) { .grid-2 { grid-template-columns: 1fr; } }
+
+  .clinical-img {
+    width: 100%;
+    max-height: 440px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    border: 1px solid var(--border);
+    margin: 1rem 0;
+  }
+
+  table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.95rem; }
+  th, td { border: 1px solid var(--border); padding: 0.75rem 1rem; text-align: left; }
+  th { background-color: #f1f5f9; color: var(--primary-dark); font-weight: 700; }
+  tr:nth-child(even) { background-color: #f8fafc; }
+
+  .form-box {
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+  }
+  .form-row {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  .form-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .form-group label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 0.25rem;
+  }
+  .form-control {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    font-size: 0.95rem;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.65rem 1.25rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+  }
+  .btn-primary { background-color: var(--primary-blue); color: white; }
+  .btn-primary:hover { background-color: var(--primary-dark); }
+
+  .callout {
+    background-color: #eff6ff;
+    border-left: 4px solid var(--accent-blue);
+    padding: 1.25rem;
+    border-radius: 0 0.5rem 0.5rem 0;
+    margin: 1.5rem 0;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="badge">Master NKT Training & Practicum Suite</div>
+    <h1>NeuroKinetic Therapy (NKT®) Complete Clinical Resource Suite</h1>
+    <p class="subtitle">Complete Assessment Documentation, Clinical Equipment Protocols, Visual Application Atlas, and Official Certification Practicum Guidelines.</p>
+  </div>
+</header>
+
+<div class="nav-bar">
+  <ul class="nav-tabs" id="suiteNav">
+    <li><button class="active" onclick="switchSuiteTab('tab-assessment')">1. Assessment Kit & Intake</button></li>
+    <li><button onclick="switchSuiteTab('tab-visual-gallery')">2. Visual Photo Atlas</button></li>
+    <li><button onclick="switchSuiteTab('tab-tools')">3. Clinical Equipment & Tape</button></li>
+    <li><button onclick="switchSuiteTab('tab-cert')">4. Certification & Case Rubrics</button></li>
+  </ul>
+</div>
+
+<main class="container">
+
+  <!-- TAB 1: ASSESSMENT KIT -->
+  <section id="tab-assessment" class="tab-content active">
+    <div class="card">
+      <h2>Complete NKT Clinical Assessment & Intake Protocol</h2>
+      <p>A successful NKT intervention begins with an exhaustive somatosensory history that captures the exact chronicity of trauma, surgical scars, dental interventions, and movement failures.</p>
+
+      <div class="form-box">
+        <h3>NKT Patient Diagnostic & Intake Form (Interactive Template)</h3>
+        <div class="form-row">
+          <div class="form-group"><label>Patient Full Name:</label><input type="text" class="form-control" placeholder="e.g. Sarah Johnson"></div>
+          <div class="form-group"><label>Date of Evaluation:</label><input type="date" class="form-control"></div>
+          <div class="form-group"><label>Chief Symptom / Site of Pain:</label><input type="text" class="form-control" placeholder="e.g. Right Anterior Shoulder Pain"></div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group"><label>Surgical History & Scars (List all C-Sections, Portals, Appendectomies, Navel):</label><input type="text" class="form-control" placeholder="e.g. C-Section (2021), Arthroscopic Right Knee (2018)"></div>
+          <div class="form-group"><label>Dental / TMJ History (Braces, Extractions, Night Clenching, Tinnitus):</label><input type="text" class="form-control" placeholder="e.g. Night clenching, Wisdom teeth removed"></div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group"><label>Trauma / Sprain History (Inversion Sprains, Whiplash, Falls):</label><input type="text" class="form-control" placeholder="e.g. Severe Right Inversion Ankle Sprain (2016)"></div>
+        </div>
+      </div>
+
+      <h3>The Official NKT Reactive Pair Diagnostic Log</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Assessment Step</th>
+            <th>Clinical Action</th>
+            <th>Observed Result</th>
+            <th>Diagnostic Implication</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1. Initial Test</strong></td>
+            <td>Test suspected victim muscle in isolated shortened range.</td>
+            <td>Weak / Inhibited (Spongy give).</td>
+            <td>Identifies receiver with delayed neural recruitment.</td>
+          </tr>
+          <tr>
+            <td><strong>2. Challenge / TL</strong></td>
+            <td>Stimulate suspected driver (Scar, TMJ, Antagonist, Synergist).</td>
+            <td>Mechanoreceptive sensory burst.</td>
+            <td>Temporarily alters cerebellar motor coordination.</td>
+          </tr>
+          <tr>
+            <td><strong>3. Retest Shift</strong></td>
+            <td>Retest weak muscle within 2 seconds of challenge.</td>
+            <td><strong>Instantly Locks Strong!</strong></td>
+            <td><strong>REACTIVE PAIR CONFIRMED.</strong></td>
+          </tr>
+          <tr>
+            <td><strong>4. Treatment</strong></td>
+            <td>Release Driver (30–60s) &rarr; Activate Receiver (5s holds x 4).</td>
+            <td>Spindle reset & motor engram encoding.</td>
+            <td>Rewires Cerebellar Motor Control Center.</td>
+          </tr>
+          <tr>
+            <td><strong>5. Retest & Verify</strong></td>
+            <td>Retest receiver in isolation (no touch).</td>
+            <td>Holds strong.</td>
+            <td>Cerebellar engram successfully updated.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- TAB 2: VISUAL GALLERY -->
+  <section id="tab-visual-gallery" class="tab-content">
+    <div class="card">
+      <h2>Visual Application Photo Atlas</h2>
+      <p>High-resolution clinical demonstrations of hands-on positioning, testing vectors, and therapeutic setups.</p>
+
+      <div class="grid-2">
+        <div>
+          <h3>Posterior Oblique Subsystem (POS) Test</h3>
+          <img src="images/nkt_pos_gait_test.png" alt="POS Test" class="clinical-img">
+          <p><em>Testing contralateral shoulder extension against hip extension to assess push-off gait dynamics.</em></p>
+        </div>
+        <div>
+          <h3>Diaphragm Subcostal Release</h3>
+          <img src="images/nkt_diaphragm_assessment.png" alt="Diaphragm Release" class="clinical-img">
+          <p><em>Subcostal manual mobilization along the lower ribcage to restore Zone of Apposition.</em></p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <h3>Multi-Vector Scar Assessment</h3>
+          <img src="images/nkt_scar_vector_protocol.png" alt="Scar Assessment" class="clinical-img">
+          <p><em>8-directional shear testing on a C-section scar to clear mechanoreceptive core inhibition.</em></p>
+        </div>
+        <div>
+          <h3>Ligamentous ATFL Challenge</h3>
+          <img src="images/nkt_ligament_atfl_pelvis.png" alt="ATFL Ligament" class="clinical-img">
+          <p><em>Plantarflexion/inversion stress testing linked to contralateral Gluteus Medius MMT.</em></p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <h3>Extraocular Reflex Assessment</h3>
+          <img src="images/nkt_ocular_testing_tool.png" alt="Eye Gaze Test" class="clinical-img">
+          <p><em>Visual gaze fixation targets used to evaluate oculo-cervical reflex stabilization.</em></p>
+        </div>
+        <div>
+          <h3>Standing Perturbation & APA Testing</h3>
+          <img src="images/nkt_standing_perturbation.png" alt="Perturbation Test" class="clinical-img">
+          <p><em>Rotational displacement testing on an unstable surface to probe anticipatory core reflexes.</em></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAB 3: TOOLS -->
+  <section id="tab-tools" class="tab-content">
+    <div class="card">
+      <h2>Clinical Tools, Equipment & Adjunctive Modalities</h2>
+      <img src="images/nkt_clinical_tools_kit.png" alt="NKT Tool Kit" class="clinical-img">
+
+      <h3>1. Kinesiology Taping (RockTape) with NKT</h3>
+      <p>Kinesiology tape acts as an external mechanoreceptive prompter, providing continuous cutaneous stimulation to reinforce cerebellar motor learning:</p>
+      <ul>
+        <li><strong>Taping for Facilitation (Inhibited Muscle):</strong> Apply tape with 25–50% tension from <em>Origin to Insertion</em> along the muscle fibers to enhance spindle recruitment.</li>
+        <li><strong>Taping for Inhibition (Facilitated Muscle):</strong> Apply tape with 0–15% light tension from <em>Insertion to Origin</em> to downregulate hyperactive muscle spindle discharge.</li>
+        <li><strong>Decompression Taping for Scars:</strong> Place a cross-pattern (two intersecting strips) with 50% center tension over a reactive surgical scar to reduce fascial tension.</li>
+      </ul>
+
+      <h3>2. Instrument-Assisted Soft Tissue Mobilization (IASTM)</h3>
+      <p>Stainless steel IASTM tools provide focused mechanoreceptive input to dense scar tissue, tendon insertions, and fascial adhesions without causing excessive soft tissue bruising:</p>
+      <ul>
+        <li><strong>Treatment Angle:</strong> $30^\circ$ to $60^\circ$ bevel edge contact.</li>
+        <li><strong>Stroke Duration:</strong> 30 to 60 seconds per reactive site (aligned with the 30-60s cerebellar learning window).</li>
+      </ul>
+
+      <h3>3. Sensory Tuning Forks (128 Hz) & Proprioceptive Stimulators</h3>
+      <p>Applying a 128 Hz vibrating tuning fork over a lax ligament (e.g., ATFL or Sacrotuberous) provides immediate high-frequency Pacinian corpuscle stimulation, re-awakening proprioceptive afferents prior to motor re-education.</p>
+    </div>
+  </section>
+
+  <!-- TAB 4: CERTIFICATION -->
+  <section id="tab-cert" class="tab-content">
+    <div class="card">
+      <h2>Official NKT Certification Pathway & Case Study Rubric</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Certification Tier</th>
+            <th>Formal Course Hours</th>
+            <th>Required Written Case Studies</th>
+            <th>Practical Examination Format</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>NKT Level 1 Certified</strong></td>
+            <td>15 Contact Hours</td>
+            <td><strong>3 Written Clinical Case Studies</strong></td>
+            <td>1-on-1 Practical Examination (In-Person or Zoom with approved certifier).</td>
+          </tr>
+          <tr>
+            <td><strong>NKT Level 2 Certified</strong></td>
+            <td>15 Contact Hours</td>
+            <td><strong>6 Written Clinical Case Studies</strong> (Subsystems, TMJ, Diaphragm, Perturbation).</td>
+            <td>1-on-1 Practical Examination covering whole-body functional chains.</td>
+          </tr>
+          <tr>
+            <td><strong>NKT Level 3 Certified (Master)</strong></td>
+            <td>15 Contact Hours</td>
+            <td><strong>5 Written Clinical Case Studies</strong> (Scars, Ligaments, Eyes, Multi-Phasic Gait).</td>
+            <td>Advanced Master Practical Examination.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Official Case Study Scoring & Submission Rubric</h3>
+      <div class="callout">
+        <h4>Required Case Study Elements:</h4>
+        <ol>
+          <li><strong>Patient Demographics & Chief Complaint:</strong> Age, activity level, onset, prior treatments.</li>
+          <li><strong>Global Movement Screen:</strong> Gait assessment, postural deviations, active range of motion limitations.</li>
+          <li><strong>NKT Protocol Breakdown:</strong> Exact muscle tested weak $\rightarrow$ Specific tissue challenged $\rightarrow$ Immediate retest verification $\rightarrow$ Identified Reactive Pair.</li>
+          <li><strong>Corrective Intervention:</strong> Exact release modality & duration (30-60s) $\rightarrow$ Exact isolated isometric activation prescribed.</li>
+          <li><strong>Sequential Homework:</strong> Clear evidence of the <em>Release FIRST &rarr; Activate SECOND</em> prescription.</li>
+          <li><strong>2-Week Objective Follow-Up:</strong> Pre vs. post-treatment outcome measures, functional retest status, and pain score changes.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  function switchSuiteTab(tabId) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.nav-tabs button').forEach(el => el.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+    
+    const tabs = ['tab-assessment', 'tab-visual-gallery', 'tab-tools', 'tab-cert'];
+    const idx = tabs.indexOf(tabId);
+    if (idx !== -1) {
+      document.querySelectorAll('.nav-tabs button')[idx].classList.add('active');
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>

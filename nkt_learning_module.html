@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NeuroKinetic Therapy (NKT) Comprehensive Learning Module</title>
+<style>
+  :root {
+    --primary: #1e3a8a;
+    --primary-dark: #0f172a;
+    --primary-light: #3b82f6;
+    --secondary: #0d9488;
+    --secondary-light: #14b8a6;
+    --accent: #d97706;
+    --danger: #dc2626;
+    --success: #16a34a;
+    --bg-main: #f8fafc;
+    --bg-card: #ffffff;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --border: #e2e8f0;
+    --border-highlight: #cbd5e1;
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    line-height: 1.6;
+  }
+
+  header {
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+    color: white;
+    padding: 2.5rem 2rem;
+    box-shadow: var(--shadow-md);
+  }
+
+  .header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .badge {
+    display: inline-block;
+    background-color: rgba(255, 255, 255, 0.15);
+    color: #93c5fd;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  h1 {
+    font-size: 2.25rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+    color: #cbd5e1;
+    max-width: 800px;
+  }
+
+  .nav-container {
+    background-color: white;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .nav-tabs {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    overflow-x: auto;
+    list-style: none;
+    padding: 0 1rem;
+  }
+
+  .nav-tabs button {
+    background: none;
+    border: none;
+    padding: 1rem 1.25rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s ease;
+  }
+
+  .nav-tabs button:hover {
+    color: var(--primary-light);
+  }
+
+  .nav-tabs button.active {
+    color: var(--primary);
+    border-bottom-color: var(--primary);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+  }
+
+  .tab-pane {
+    display: none;
+    animation: fadeIn 0.3s ease-in-out;
+  }
+
+  .tab-pane.active {
+    display: block;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card {
+    background-color: var(--bg-card);
+    border-radius: 0.75rem;
+    border: 1px solid var(--border);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-sm);
+  }
+
+  h2 {
+    font-size: 1.75rem;
+    color: var(--primary-dark);
+    margin-bottom: 1.25rem;
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  h3 {
+    font-size: 1.3rem;
+    color: var(--primary);
+    margin: 1.5rem 0 0.75rem 0;
+  }
+
+  h4 {
+    font-size: 1.1rem;
+    color: var(--text-main);
+    margin: 1rem 0 0.5rem 0;
+  }
+
+  p {
+    margin-bottom: 1rem;
+    color: #334155;
+    font-size: 1.02rem;
+  }
+
+  ul, ol {
+    margin-bottom: 1.25rem;
+    padding-left: 1.5rem;
+  }
+
+  li {
+    margin-bottom: 0.5rem;
+    color: #334155;
+  }
+
+  .callout {
+    background-color: #eff6ff;
+    border-left: 4px solid var(--primary-light);
+    padding: 1.25rem;
+    border-radius: 0 0.5rem 0.5rem 0;
+    margin: 1.5rem 0;
+  }
+
+  .callout-warning {
+    background-color: #fffbeb;
+    border-left-color: var(--accent);
+  }
+
+  .callout-success {
+    background-color: #f0fdf4;
+    border-left-color: var(--success);
+  }
+
+  .callout-title {
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin-bottom: 0.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+  }
+
+  @media (max-width: 768px) {
+    .grid-2 { grid-template-columns: 1fr; }
+  }
+
+  .diagram-box {
+    background: #0f172a;
+    color: #f8fafc;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    font-family: monospace;
+    overflow-x: auto;
+  }
+
+  .visual-card {
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    border-radius: 0.5rem;
+    padding: 1.25rem;
+    margin: 1.25rem 0;
+  }
+
+  .visual-card-header {
+    font-weight: 700;
+    color: #0f172a;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+  }
+
+  /* Table styling */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+  }
+
+  th, td {
+    border: 1px solid var(--border);
+    padding: 0.75rem 1rem;
+    text-align: left;
+  }
+
+  th {
+    background-color: #f8fafc;
+    color: var(--primary-dark);
+    font-weight: 700;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f8fafc;
+  }
+
+  /* Step container */
+  .step-list {
+    counter-reset: step-counter;
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .step-item {
+    position: relative;
+    padding-left: 3.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .step-item::before {
+    counter-increment: step-counter;
+    content: counter(step-counter);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
+
+  /* Quiz styling */
+  .quiz-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .quiz-question-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .quiz-tag {
+    background-color: #dbeafe;
+    color: #1e40af;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+  }
+
+  .question-text {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin-bottom: 1.25rem;
+  }
+
+  .options-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .option-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background-color: #ffffff;
+  }
+
+  .option-label:hover {
+    background-color: #f8fafc;
+    border-color: var(--border-highlight);
+  }
+
+  .option-label input[type="checkbox"] {
+    margin-top: 0.25rem;
+    width: 1.15rem;
+    height: 1.15rem;
+    cursor: pointer;
+    accent-color: var(--primary);
+  }
+
+  .option-text {
+    flex: 1;
+    font-size: 0.98rem;
+    color: #334155;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.65rem 1.25rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+  }
+
+  .btn-primary {
+    background-color: var(--primary);
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background-color: var(--primary-dark);
+  }
+
+  .btn-secondary {
+    background-color: #f1f5f9;
+    color: var(--text-main);
+    border: 1px solid var(--border);
+  }
+
+  .btn-secondary:hover {
+    background-color: #e2e8f0;
+  }
+
+  .feedback-box {
+    margin-top: 1.25rem;
+    padding: 1.25rem;
+    border-radius: 0.5rem;
+    display: none;
+  }
+
+  .feedback-box.correct {
+    display: block;
+    background-color: #f0fdf4;
+    border: 1px solid #bbf7d0;
+  }
+
+  .feedback-box.incorrect {
+    display: block;
+    background-color: #fef2f2;
+    border: 1px solid #fecaca;
+  }
+
+  .feedback-title {
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+  }
+
+  .feedback-box.correct .feedback-title { color: var(--success); }
+  .feedback-box.incorrect .feedback-title { color: var(--danger); }
+
+  .rationale-list {
+    margin-top: 0.75rem;
+    padding-left: 1.25rem;
+    font-size: 0.92rem;
+  }
+
+  .rationale-list li {
+    margin-bottom: 0.5rem;
+  }
+
+  .score-banner {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    color: white;
+    padding: 2rem;
+    border-radius: 0.75rem;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .score-banner h3 {
+    color: #60a5fa;
+    margin-top: 0;
+  }
+
+  .score-number {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #38bdf8;
+    margin: 0.5rem 0;
+  }
+
+  /* SVG illustration styling */
+  .svg-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1.5rem 0;
+    background: #ffffff;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-content">
+    <div class="badge">Advanced Neuromuscular Education</div>
+    <h1>NeuroKinetic Therapy (NKT®) Master Learning Module</h1>
+    <p class="subtitle">A Comprehensive Clinical Guide to Motor Control Theory, Cerebellar Reprogramming, Neuromuscular Assessment Protocols, and Corrective Kinetic Chain Integration.</p>
+  </div>
+</header>
+
+<div class="nav-container">
+  <ul class="nav-tabs" id="mainNav">
+    <li><button class="active" onclick="switchTab('tab-overview')">1. Overview & Objectives</button></li>
+    <li><button onclick="switchTab('tab-mcc')">2. Motor Control & Cerebellum</button></li>
+    <li><button onclick="switchTab('tab-mmt')">3. NKT Muscle Testing</button></li>
+    <li><button onclick="switchTab('tab-compensations')">4. Compensation Patterns</button></li>
+    <li><button onclick="switchTab('tab-protocol')">5. The Corrective Protocol</button></li>
+    <li><button onclick="switchTab('tab-cases')">6. Clinical Applications</button></li>
+    <li><button onclick="switchTab('tab-msq')">7. 10 Critical Thinking MSQs</button></li>
+  </ul>
+</div>
+
+<main class="container">
+
+  <!-- TAB 1: OVERVIEW & OBJECTIVES -->
+  <section id="tab-overview" class="tab-pane active">
+    <div class="card">
+      <h2>Module Introduction & Educational Framework</h2>
+      <p><strong>NeuroKinetic Therapy (NKT®)</strong> is an advanced system of neuromuscular assessment and corrective movement developed by David Weinstock. Based on the neurobiology of motor control theory, NKT identifies the root cause of chronic pain, postural distortion, and athletic movement dysfunction by evaluating the <strong>Motor Control Center (MCC)</strong> located in the cerebellum.</p>
+      
+      <p>Traditional musculoskeletal modalities often focus exclusively on the anatomical site of pain or tissue tension (the "victim"). NKT bridges the gap between passive manual therapy and active rehabilitation by evaluating the <strong>"culprit"</strong>—the dysfunctional neurological motor pattern stored within the central nervous system that continually drives tissue strain.</p>
+
+      <div class="callout">
+        <div class="callout-title">The Fundamental Paradigm of NKT</div>
+        <p><em>"The site of pain is rarely the site of cause. The motor control center creates compensations to protect the body following trauma, fatigue, or repetitive strain. Unless the neurological relationship between the compensating structure and the inhibited structure is specifically reprogrammed in the cerebellum, soft tissue release and strength training will only yield temporary symptomatic relief."</em></p>
+      </div>
+
+      <h3>Learning Objectives</h3>
+      <p>Upon completing this self-paced clinical learning module, the practitioner will be able to:</p>
+      <ul>
+        <li><strong>Analyze Central Motor Control:</strong> Detail the neuroanatomy and hierarchical architecture of motor learning, explaining how the cerebellum's Motor Control Center (MCC) programs movement engrams through trial, failure, and adaptation.</li>
+        <li><strong>Differentiate Neuromuscular Muscle Testing:</strong> Distinguish NKT manual muscle testing (MMT)—which measures instantaneous neurological recruitment, rate coding, and central firing capacity—from traditional orthopedic strength testing (Kendall scale).</li>
+        <li><strong>Deconstruct Dysfunctional Movement Taxonomies:</strong> Systematically identify and differentiate synergistic dominance, reciprocal inhibition, kinetic sling compensation, scar tissue disruptions, and ligamento-muscular dysfunctions.</li>
+        <li><strong>Execute the Systematic NKT Corrective Protocol:</strong> Master the 6-step NKT assessment algorithm (Test &rarr; Therapy Localize/Challenge &rarr; Retest &rarr; Release Driver &rarr; Activate Inhibited &rarr; Functional Integration).</li>
+        <li><strong>Formulate Evidence-Based Rehabilitation Strategies:</strong> Prescribe precise, sequence-dependent corrective exercise protocols that leverage the 30-to-60 second neuroplastic learning window to establish permanent engram reprogramming.</li>
+      </ul>
+
+      <div class="grid-2">
+        <div class="visual-card">
+          <div class="visual-card-header">Clinical Scope & Target Audience</div>
+          <p>Designed for physical therapists, chiropractors, osteopaths, athletic trainers, occupational therapists, physiatrists, and elite movement specialists seeking to resolve complex, recalcitrant neuromusculoskeletal conditions.</p>
+        </div>
+        <div class="visual-card">
+          <div class="visual-card-header">Pedagogical Structure</div>
+          <p>Interactive theoretical foundations, procedural visual breakdowns, real-world case simulations, and 10 multi-select clinical application questions with comprehensive explanatory rationales.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAB 2: MOTOR CONTROL & CEREBELLUM -->
+  <section id="tab-mcc" class="tab-pane">
+    <div class="card">
+      <h2>The Motor Control Center (MCC) & Neurophysiology</h2>
+      
+      <h3>The Hierarchical Control of Human Movement</h3>
+      <p>To understand why movement dysfunction persists, we must analyze the central nervous system hierarchy responsible for generating, refining, and executing motor tasks:</p>
+      
+      <ul>
+        <li><strong>1. The Cerebral Cortex (Voluntary Intent):</strong> Responsible for executive planning, voluntary movement initiation, and cognitive movement control.</li>
+        <li><strong>2. The Limbic System (Emotional & Survival Priming):</strong> Modulates autonomic tone, pain perception, protective threat reflexes, and fear-avoidance motor behaviors.</li>
+        <li><strong>3. The Cerebellum / Motor Control Center (MCC) (Coordination & Storage):</strong> The coordination nucleus of the central nervous system. The MCC organizes individual muscular contractions into smooth, coordinated multi-joint movement synergies ("motor engrams") and automates their execution.</li>
+        <li><strong>4. Basal Ganglia & Brainstem (Regulation & Postural Tone):</strong> Modulates movement amplitude, fluidity, postural equilibrium, and automatic anticipatory postural adjustments (APAs).</li>
+        <li><strong>5. The Spinal Cord & Peripheral Musculoskeletal System (Execution):</strong> Conveys efferent alpha/gamma motor neuron impulses to muscle spindles and motor units while returning sensory afferents (Golgi tendon organs, Ruffini endings, Pacinian corpuscles).</li>
+      </ul>
+
+      <div class="svg-container">
+        <svg width="680" height="260" viewBox="0 0 680 260">
+          <rect x="10" y="10" width="180" height="70" rx="8" fill="#1e3a8a" />
+          <text x="100" y="40" fill="white" font-size="14" font-weight="bold" text-anchor="middle">Cerebral Cortex</text>
+          <text x="100" y="60" fill="#93c5fd" font-size="11" text-anchor="middle">Intent & Goal Creation</text>
+
+          <rect x="250" y="10" width="180" height="70" rx="8" fill="#0f766e" />
+          <text x="340" y="40" fill="white" font-size="14" font-weight="bold" text-anchor="middle">Limbic System</text>
+          <text x="340" y="60" fill="#99f6e4" font-size="11" text-anchor="middle">Threat, Emotion, Drive</text>
+
+          <path d="M 190 45 L 250 45" stroke="#64748b" stroke-width="2" marker-end="url(#arrow)" />
+          <path d="M 340 80 L 340 120" stroke="#64748b" stroke-width="2" />
+          <path d="M 100 80 L 100 120 L 340 120" stroke="#64748b" stroke-width="2" />
+
+          <rect x="210" y="125" width="260" height="75" rx="8" fill="#d97706" />
+          <text x="340" y="155" fill="white" font-size="15" font-weight="bold" text-anchor="middle">Cerebellum (MCC)</text>
+          <text x="340" y="175" fill="#fef3c7" font-size="12" text-anchor="middle">Motor Program Engram Storage</text>
+
+          <path d="M 340 200 L 340 220" stroke="#64748b" stroke-width="2" />
+
+          <rect x="180" y="220" width="320" height="35" rx="6" fill="#334155" />
+          <text x="340" y="243" fill="white" font-size="13" font-weight="bold" text-anchor="middle">Spinal Cord & Peripheral Musculoskeletal System</text>
+        </svg>
+      </div>
+
+      <h3>How the MCC Learns: The Mechanism of Failure</h3>
+      <p>The Motor Control Center does not learn through passive instruction; it learns through <strong>trial, error, and adaptive failure</strong>. Consider an infant learning to walk:</p>
+      <ol>
+        <li>The child attempts to stand (cortical intent).</li>
+        <li>The posture fails, balance is lost, and the infant falls.</li>
+        <li>Sensory mechanoreceptors and vestibular inputs report the mechanical failure directly to the cerebellum.</li>
+        <li>The MCC adjusts motor unit recruitment timings, agonist-antagonist co-contractions, and postural vectors on the next attempt.</li>
+        <li>Once successful, the coordinated firing sequence is burned into cerebellar memory as an automated motor routine (engram), eliminating the need for conscious cortical effort.</li>
+      </ol>
+
+      <h3>The Traumatic Substitution Pattern (The "Catch-22")</h3>
+      <p>When an acute injury occurs (e.g., an ankle inversion sprain or lumbar disc herniation), or when chronic postural fatigue sets in, the injured muscle becomes neurologically inhibited (downregulated) to prevent further structural damage. To accomplish the daily tasks required for survival, the MCC immediately recruits synergists or antagonists to compensate.</p>
+
+      <div class="callout callout-warning">
+        <div class="callout-title">The Chronic Compensation Trap</div>
+        <p>Even after the injured tissue heals histologically (ligament scar formation, muscle fiber repair), <strong>the MCC does not automatically revert to the original functional pattern</strong>. The compensation pattern remains permanently burned into cerebellar memory. The compensating structure becomes chronically hypertonic and overloaded, while the inhibited structure remains dormant. Treating only the tight/painful compensating muscle with massage, stretching, or dry needling without reactivating the inhibited prime mover produces only fleeting relief because the cerebellum will re-tighten the compensator within minutes to hours.</p>
+      </div>
+
+      <h3>The 30-to-60 Second Neuroplastic Window</h3>
+      <p>Motor control science reveals a crucial clinical window: <strong>when a movement test fails, the Motor Control Center is opened to new learning for approximately 30 to 60 seconds</strong>. In NKT, a failed manual muscle test serves as a deliberate neurological probe. It registers as a "failed task" in the cerebellum, unlocking the neuroplastic window so the practitioner can release the overactive driver and immediately re-train the inhibited receiver.</p>
+    </div>
+  </section>
+
+  <!-- TAB 3: NKT MUSCLE TESTING -->
+  <section id="tab-mmt" class="tab-pane">
+    <div class="card">
+      <h2>NKT Manual Muscle Testing (MMT) Protocols</h2>
+
+      <h3>Neurological MMT vs. Orthopedic Strength Testing</h3>
+      <p>It is vital for clinicians to understand that manual muscle testing in NeuroKinetic Therapy is <strong>not</strong> an orthopedic strength test (such as the Medical Research Council 0-5 scale or Kendall scale), nor is it an endurance test. It is a <strong>real-time binary neurological test</strong> assessing whether the central nervous system can instantly recruit a specific muscle within the first 1-2 seconds of load application.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Characteristic</th>
+            <th>Traditional Orthopedic Testing (Kendall Scale)</th>
+            <th>NKT Neuromuscular Testing</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Primary Objective</strong></td>
+            <td>Measure macroscopic mechanical force output and grade structural weakness (0-5 scale).</td>
+            <td>Assess real-time central nervous system recruitment, neural rate coding, and functional inhibition.</td>
+          </tr>
+          <tr>
+            <td><strong>Contraction Type</strong></td>
+            <td>Often isotonic or dynamic "break" test against heavy resistive force.</td>
+            <td>Strictly <strong>isometric</strong> contraction with subtle, gradual force ramp-up.</td>
+          </tr>
+          <tr>
+            <td><strong>Evaluation Metric</strong></td>
+            <td>Gross poundage / resistance sustained until mechanical failure.</td>
+            <td>Instantaneous neurological "lock" (facilitated) vs delayed recruitment / spongy "give" (inhibited).</td>
+          </tr>
+          <tr>
+            <td><strong>Clinical Interpretation</strong></td>
+            <td>Assumes weak muscle has physical structural atrophy or peripheral nerve injury.</td>
+            <td>Recognizes weak muscle is functionally <em>inhibited</em> by an overactive neurological partner.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>The Biomechanical Rules of Precise NKT Testing</h3>
+      
+      <div class="step-list">
+        <div class="step-item">
+          <h4>1. Exact Vector & Joint Isolation</h4>
+          <p>Place the joint in the precise plane of action of the target muscle fibers. For example, testing the Gluteus Medius requires 30&deg; hip abduction, slight extension, and slight external rotation. If the hip flexes during testing, the Tensor Fasciae Latae (TFL) immediately assumes the load, producing a false positive "strong" test.</p>
+        </div>
+
+        <div class="step-item">
+          <h4>2. The "Shortened Range" Starting Position</h4>
+          <p>Position the muscle in its fully shortened or mid-range position before applying pressure. This tests the muscle's ability to maintain active tension where mechanical leverage is lowest, exposing subtle neurological deficits.</p>
+        </div>
+
+        <div class="step-item">
+          <h4>3. Clear Patient Cueing: "Hold, Don't Let Me Push You"</h4>
+          <p>Instruct the patient to match your force isometrically: <em>"Hold your position. Match my pressure. Do not push through me, just lock and hold."</em> This prevents the patient from initiating a violent concentric counter-attack that recruits global prime movers.</p>
+        </div>
+
+        <div class="step-item">
+          <h4>4. The 2-to-3 Second Pressure Ramp-Up</h4>
+          <p>Apply pressure smoothly over a 2-second window (0% &rarr; 50% &rarr; 100% test force) and hold for 1 second. Never "jerk" or rapidly impact the limb. A healthy, facilitated muscle will exhibit a crisp, immediate neurological "lock". An inhibited muscle will feel "spongy", yield immediately, or trigger noticeable whole-body substitution.</p>
+        </div>
+
+        <div class="step-item">
+          <h4>5. Vigilance Against Synergistic Substitution</h4>
+          <p>Watch for cheat strategies: trunk rotation, breath-holding (Valsalva maneuver), foot gripping, shoulder hiking, or limb repositioning. Any alteration of the testing vector confirms that the target muscle has failed to fire and a secondary synergist has intervened.</p>
+        </div>
+      </div>
+
+      <div class="visual-card">
+        <div class="visual-card-header">Binary Diagnostic Classification</div>
+        <p>In NKT, muscles are categorized into two functional neurological states:</p>
+        <ul>
+          <li><strong style="color:var(--success);">Facilitated (Hypertonic / Overactive / Driver):</strong> The muscle fires instantaneously, exhibits excessive tone, and frequently overpowers its functional synergists or antagonists.</li>
+          <li><strong style="color:var(--danger);">Inhibited (Hypotonic / Underactive / Receiver):</strong> The muscle exhibits delayed latency, fails to lock isometrically, and is suppressed by a dominant counterpart in the kinetic chain.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAB 4: COMPENSATION PATTERNS -->
+  <section id="tab-compensations" class="tab-pane">
+    <div class="card">
+      <h2>Taxonomy of Kinetic Chain Compensation Patterns</h2>
+      <p>The Motor Control Center coordinates movement through complex neurological relationships. When dysfunction occurs, the MCC establishes predictable compensation patterns across various biological subsystems.</p>
+
+      <h3>1. Synergistic Dominance (Agonist-Synergist Dysfunction)</h3>
+      <p>Synergistic dominance occurs when a secondary or accessory muscle takes over the primary role of a weak, inhibited prime mover. Because the synergist is biomechanically smaller or possesses inferior mechanical leverage, it quickly suffers from overuse, trigger points, and chronic tendinopathies.</p>
+      
+      <div class="callout">
+        <div class="callout-title">Classic Synergistic Dominance Pairings</div>
+        <ul>
+          <li><strong>Tensor Fasciae Latae (TFL) &rarr; Gluteus Medius:</strong> The TFL becomes hyperactive to stabilize the pelvis during single-leg stance when the gluteus medius is inhibited, leading to IT band syndrome and lateral hip bursitis.</li>
+          <li><strong>Hamstrings & Erector Spinae &rarr; Gluteus Maximus:</strong> Hamstrings and lumbar erectors compensate for an inhibited gluteus maximus during hip extension, driving hamstring strains and facet joint impingement.</li>
+          <li><strong>Upper Trapezius & Levator Scapulae &rarr; Lower Trapezius / Serratus Anterior:</strong> The upper trap over-recruits to elevate and rotate the scapula, causing neck stiffness and subacromial shoulder impingement.</li>
+        </ul>
+      </div>
+
+      <h3>2. Reciprocal Inhibition (Antagonist-Agonist Dysfunction)</h3>
+      <p>Based on Sherrington's law of reciprocal innervation, when an agonist muscle contracts, its antagonist receives an inhibitory neural signal via Ia inhibitory interneurons in the spinal cord. In pathological states, a chronically hypertonic, facilitated muscle creates sustained reciprocal neurological inhibition of its opposing antagonist.</p>
+      <ul>
+        <li><strong>Hypertonic Psoas Major / Iliacus &rarr; Inhibits Gluteus Maximus:</strong> A tight hip flexor continuously downregulates the primary hip extensor, causing anterior pelvic tilt, lumbar shear, and hip impingement.</li>
+        <li><strong>Hypertonic Pectoralis Minor &rarr; Inhibits Lower Trapezius / Rhomboids:</strong> Tight anterior chest musculature downregulates scapular retractors/depressors, locking the shoulder in protracted anterior tilt.</li>
+        <li><strong>Hypertonic Gastrocnemius / Soleus &rarr; Inhibits Tibialis Anterior:</strong> Causes foot drop tendencies, reduced dorsiflexion, and knee hyperextension during gait.</li>
+      </ul>
+
+      <h3>3. Global Kinetic Slings & Cross-Body Compensations</h3>
+      <p>Human locomotion relies on functional fascial and myofascial sling systems that transfer kinetic energy across contralateral quadrants of the body:</p>
+
+      <div class="grid-2">
+        <div class="visual-card">
+          <div class="visual-card-header">Posterior Oblique Sling (POS)</div>
+          <p><strong>Anatomy:</strong> Latissimus Dorsi &rarr; Thoracolumbar Fascia &rarr; Contralateral Gluteus Maximus.</p>
+          <p><strong>Dysfunction:</strong> A hyperactive right latissimus dorsi can neurologically inhibit the left gluteus maximus, creating rotational pelvic torsion and chronic sacroiliac joint instability.</p>
+        </div>
+
+        <div class="visual-card">
+          <div class="visual-card-header">Anterior Oblique Sling (AOS)</div>
+          <p><strong>Anatomy:</strong> External Oblique &rarr; Abdominal Fascia &rarr; Contralateral Internal Oblique & Adductor Longus.</p>
+          <p><strong>Dysfunction:</strong> Rotational sports injuries, athletic pubalgia (sports hernia), and groin strains frequently trace to an overactive adductor inhibiting contralateral core rotators.</p>
+        </div>
+      </div>
+
+      <h3>4. Specialized Neurological Drivers</h3>
+
+      <h4>A. Surgical Scars & Soft Tissue Trauma</h4>
+      <p>Surgical incisions (e.g., C-section, appendectomy, arthroscopy portals, laparoscopy sites) disrupt thousands of cutaneous and fascial mechanoreceptors. The scar tissue acts as a focal site of constant nociceptive and proprioceptive afferent "noise", causing the MCC to neurologically shut down underlying and adjacent muscular stabilization. A C-section scar is one of the most common drivers of transversus abdominis, rectus abdominis, and gluteal inhibition.</p>
+
+      <h4>B. Ligamentous Interlinks (Ligamento-Muscular Reflex)</h4>
+      <p>Ligaments are rich in mechanoreceptors (Ruffini, Pacinian, and free nerve endings). When a ligament is sprained or chronically lax (e.g., Anterior Talofibular Ligament - ATFL, Iliofemoral ligament, Sacrotuberous ligament), the CNS initiates protective muscular splinting elsewhere while inhibiting muscles crossing the unstable joint to prevent destructive shear.</p>
+
+      <h4>C. Oculo-Cervical & Vestibulospinal Reflexes</h4>
+      <p>The suboccipital triangle (rectus capitis posterior, obliquus capitis) contains the highest density of muscle spindles in the human body. Suboccipital hypertonicity frequently compensates for inhibited deep cervical flexors (Longus Colli, Longus Capitis) or inhibited intrinsic core stabilizers, driven by visual fixation and forward head posture.</p>
+    </div>
+  </section>
+
+  <!-- TAB 5: THE CORRECTIVE PROTOCOL -->
+  <section id="tab-protocol" class="tab-pane">
+    <div class="card">
+      <h2>The Step-by-Step NKT Corrective Protocol</h2>
+      <p>The NKT protocol is a rigorous scientific method for identifying the exact neurological "reactive pair" (the relationship between the facilitated driver and the inhibited receiver) and immediately reprogramming the Motor Control Center.</p>
+
+      <div class="svg-container">
+        <svg width="700" height="280" viewBox="0 0 700 280">
+          <!-- Step 1 -->
+          <circle cx="60" cy="80" r="35" fill="#1e3a8a" />
+          <text x="60" y="85" fill="white" font-weight="bold" font-size="16" text-anchor="middle">1. TEST</text>
+          <text x="60" y="135" fill="#1e293b" font-size="11" font-weight="bold" text-anchor="middle">Identify Weak</text>
+          <text x="60" y="150" fill="#64748b" font-size="10" text-anchor="middle">Muscle (Inhibited)</text>
+
+          <line x1="95" y1="80" x2="165" y2="80" stroke="#0f172a" stroke-width="2" marker-end="url(#arrow)" />
+
+          <!-- Step 2 -->
+          <circle cx="200" cy="80" r="35" fill="#0d9488" />
+          <text x="200" y="85" fill="white" font-weight="bold" font-size="14" text-anchor="middle">2. TL / RUB</text>
+          <text x="200" y="135" fill="#1e293b" font-size="11" font-weight="bold" text-anchor="middle">Stimulate</text>
+          <text x="200" y="150" fill="#64748b" font-size="10" text-anchor="middle">Suspected Driver</text>
+
+          <line x1="235" y1="80" x2="305" y2="80" stroke="#0f172a" stroke-width="2" />
+
+          <!-- Step 3 -->
+          <circle cx="340" cy="80" r="35" fill="#d97706" />
+          <text x="340" y="85" fill="white" font-weight="bold" font-size="14" text-anchor="middle">3. RETEST</text>
+          <text x="340" y="135" fill="#1e293b" font-size="11" font-weight="bold" text-anchor="middle">Confirm Shift</text>
+          <text x="340" y="150" fill="#64748b" font-size="10" text-anchor="middle">(Weak &rarr; Strong)</text>
+
+          <line x1="375" y1="80" x2="445" y2="80" stroke="#0f172a" stroke-width="2" />
+
+          <!-- Step 4 -->
+          <circle cx="480" cy="80" r="35" fill="#dc2626" />
+          <text x="480" y="85" fill="white" font-weight="bold" font-size="14" text-anchor="middle">4. RELEASE</text>
+          <text x="480" y="135" fill="#1e293b" font-size="11" font-weight="bold" text-anchor="middle">Downregulate</text>
+          <text x="480" y="150" fill="#64748b" font-size="10" text-anchor="middle">Facilitated (30-60s)</text>
+
+          <line x1="515" y1="80" x2="585" y2="80" stroke="#0f172a" stroke-width="2" />
+
+          <!-- Step 5 & 6 -->
+          <circle cx="620" cy="80" r="35" fill="#16a34a" />
+          <text x="620" y="85" fill="white" font-weight="bold" font-size="13" text-anchor="middle">5. ACTIVATE</text>
+          <text x="620" y="135" fill="#1e293b" font-size="11" font-weight="bold" text-anchor="middle">Upregulate</text>
+          <text x="620" y="150" fill="#64748b" font-size="10" text-anchor="middle">Inhibited Muscle</text>
+
+          <!-- Loop back -->
+          <path d="M 620 170 C 620 250, 60 250, 60 170" fill="none" stroke="#2563eb" stroke-dasharray="5,5" stroke-width="2" />
+          <text x="340" y="240" fill="#2563eb" font-size="12" font-weight="bold" text-anchor="middle">Step 6: Repattern & Prescribe Homework (Release &rarr; Activate Sequence)</text>
+        </svg>
+      </div>
+
+      <div class="step-list">
+        <div class="step-item">
+          <h4>Step 1: Baseline Muscle Test</h4>
+          <p>Test the suspected inhibited muscle (e.g., Right Gluteus Maximus). The muscle fails to hold the isometric position, displaying delayed neural recruitment or spongy collapse. The failure registers in the patient's Cerebellar Motor Control Center.</p>
+        </div>
+
+        <div class="step-item">
+          <h4>Step 2: Therapy Localization (TL) / Tactile Challenge</h4>
+          <p>Apply sensory stimulation to a hypothesized compensating driver. This is done by having the patient place two fingers directly on the suspected tissue (Therapy Localization) or by the practitioner briskly rubbing the muscle belly, tendon, scar, or ligament. This sensory input temporarily floods the MCC with afferent mechanoreceptive feedback.</p>
+        </div>
+
+        <div class="step-item">
+          <h4>Step 3: Immediate Retest (Verifying the Reactive Pair)</h4>
+          <p>While the sensory challenge is active (or within 2 seconds of rubbing), immediately re-test the weak muscle. If the previously weak muscle suddenly tests <strong>rock solid and strong</strong>, you have successfully verified the <strong>Reactive Pair</strong>. The sensory challenge temporarily neutralized the hypertonic inhibition, allowing the MCC to fire the inhibited muscle.</p>
+        </div>
+
+        <div class="step-item">
+          <h4>Step 4: Release the Facilitated Driver</h4>
+          <p>Apply targeted manual therapy, ischemic compression, instrument-assisted soft tissue mobilization (IASTM), deep friction, pin-and-stretch, or dry needling to the <strong>facilitated driver</strong> for 30 to 60 seconds. This mechanically downregulates muscle spindle sensitivity and resets hyperactive afferent tone.</p>
+        </div>
+
+        <div class="step-item">
+          <h4>Step 5: Immediately Activate / Strengthen the Inhibited Muscle</h4>
+          <p>Without delay (leveraging the 30-60 second cerebellar plasticity window), have the patient perform an isolated isometric activation of the <strong>previously inhibited muscle</strong> (e.g., 3 to 5 repetitions of a 5-second isometric hold with light-to-moderate resistance). This burns the newly restored neural pathway into the MCC.</p>
+        </div>
+
+        <div class="step-item">
+          <h4>Step 6: Retest & Prescribe Corrective Homework</h4>
+          <p>Retest the inhibited muscle in isolation. It should now hold with crisp neurological strength. Prescribe specific self-care homework with strict adherence to the sequence: <strong>1. Release Driver FIRST &rarr; 2. Activate Inhibited SECOND</strong> (performed 2-3 times daily for 2-4 weeks to establish permanent synaptic consolidation).</p>
+        </div>
+      </div>
+
+      <div class="callout callout-warning">
+        <div class="callout-title">The Golden Rule of NKT Homework</div>
+        <p>If a patient performs strengthening exercises on an inhibited muscle <em>without</em> first releasing the compensating driver, the Motor Control Center will immediately bypass the weak muscle and reinforce the pre-existing compensation pattern! <strong>The driver must always be downregulated immediately before the receiver is upregulated.</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAB 6: CLINICAL APPLICATIONS -->
+  <section id="tab-cases" class="tab-pane">
+    <div class="card">
+      <h2>Clinical Case Walkthroughs & Differential Diagnostic Scenarios</h2>
+      <p>Explore real-world clinical presentations to observe how NKT methodology deconstructs complex symptoms into primary neurological drivers and secondary compensation victims.</p>
+
+      <div class="grid-2">
+        <!-- CASE 1 -->
+        <div class="visual-card">
+          <div class="visual-card-header">Case 1: Chronic Low Back Pain & Lumbar Extension Impingement</div>
+          <p><strong>Patient Profile:</strong> 42-year-old desk worker and recreational runner with a 2-year history of bilateral lumbar facet pain during standing and running.</p>
+          <p><strong>Traditional Findings:</strong> Tight erector spinae, tight psoas, weak glutes. Previous physical therapy focused on core planks and glute bridges with minimal long-term relief.</p>
+          <p><strong>NKT Assessment:</strong></p>
+          <ul>
+            <li><em>Test:</em> Right Gluteus Maximus tests functionally <strong>inhibited</strong>.</li>
+            <li><em>Challenge 1:</em> Rub Right Lumbar Erector Spinae &rarr; Retest Gluteus Maximus &rarr; Remains Weak (Not the primary reactive driver).</li>
+            <li><em>Challenge 2:</em> Rub Right Psoas Major &rarr; Retest Gluteus Maximus &rarr; <strong>Instantly Tests Rock Solid Strong!</strong></li>
+          </ul>
+          <p><strong>Diagnosis:</strong> Reciprocal Inhibition of Right Gluteus Maximus driven by a Hypertonic Ipsilateral Psoas Major.</p>
+          <p><strong>Corrective Protocol:</strong> 45-second deep release of Right Psoas Major &rarr; Immediate isolated prone hip extension isometric activation (5s hold x 4 reps). Homework prescribed 2x/day.</p>
+        </div>
+
+        <!-- CASE 2 -->
+        <div class="visual-card">
+          <div class="visual-card-header">Case 2: Lateral Knee Pain & Iliotibial (IT) Band Friction Syndrome</div>
+          <p><strong>Patient Profile:</strong> 28-year-old female marathon runner presenting with severe lateral right knee pain at mile 4 of running.</p>
+          <p><strong>Traditional Findings:</strong> Tenderness over lateral femoral condyle, positive Ober's test, tight IT band.</p>
+          <p><strong>NKT Assessment:</strong></p>
+          <ul>
+            <li><em>Test:</em> Right Gluteus Medius (tested in 30&deg; abduction, slight extension, slight external rotation) tests <strong>inhibited</strong>.</li>
+            <li><em>Observation:</em> During testing, the patient's hip unconsciously flexes and internally rotates to utilize the Tensor Fasciae Latae (TFL).</li>
+            <li><em>Challenge:</em> Firm tactile challenge / rubbing over Right TFL belly &rarr; Retest Gluteus Medius &rarr; <strong>Immediately Locks Strong!</strong></li>
+          </ul>
+          <p><strong>Diagnosis:</strong> Synergistic Dominance of Right TFL over Right Gluteus Medius.</p>
+          <p><strong>Corrective Protocol:</strong> Myofascial release / foam rolling of Right TFL (45s) &rarr; Immediate sidelying pure gluteus medius abduction holds with wall slide to eliminate hip flexion. Patient remained pain-free during 10-mile trial run.</p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <!-- CASE 3 -->
+        <div class="visual-card">
+          <div class="visual-card-header">Case 3: Post-Cesarean Pelvic Instability & Core Weakness</div>
+          <p><strong>Patient Profile:</strong> 34-year-old female, 14 months post-cesarean delivery, reporting persistent lower back pain, abdominal distension, and inability to engage core stabilizers.</p>
+          <p><strong>NKT Assessment:</strong></p>
+          <ul>
+            <li><em>Test:</em> Bilateral Transversus Abdominis (TVA) and Rectus Abdominis test <strong>inhibited</strong>.</li>
+            <li><em>Challenge 1:</em> Rubbing hip flexors or thoracolumbar erectors &rarr; TVA remains weak.</li>
+            <li><em>Challenge 2:</em> Patient performs Therapy Localization (two fingers touching the Pfannenstiel C-section scar) &rarr; Retest TVA &rarr; <strong>Instantly Tests Maximum Strength!</strong></li>
+          </ul>
+          <p><strong>Diagnosis:</strong> Neurological core inhibition driven by afferent nociceptive/mechanoreceptive disruption at the surgical scar.</p>
+          <p><strong>Corrective Protocol:</strong> 60-second multidirectional cross-friction scar mobilization &rarr; Immediate quadruped drawing-in abdominal activation. Core strength was restored within 2 weeks.</p>
+        </div>
+
+        <!-- CASE 4 -->
+        <div class="visual-card">
+          <div class="visual-card-header">Case 4: Cervicogenic Headaches & Scapular Dyskinesis</div>
+          <p><strong>Patient Profile:</strong> 39-year-old software architect with chronic suboccipital throbbing headaches and burning medial scapular pain.</p>
+          <p><strong>NKT Assessment:</strong></p>
+          <ul>
+            <li><em>Test:</em> Deep Cervical Flexors (Longus Colli/Capitis) test <strong>inhibited</strong>. Lower Trapezius tests <strong>inhibited</strong>.</li>
+            <li><em>Challenge:</em> Rubbing bilateral Suboccipital muscles &rarr; Retest Deep Neck Flexors &rarr; <strong>Immediately Locks Strong!</strong></li>
+            <li><em>Kinetic Sling Retest:</em> Rubbing Upper Trapezius &rarr; Retest Lower Trapezius &rarr; <strong>Locks Strong!</strong></li>
+          </ul>
+          <p><strong>Diagnosis:</strong> Multi-tiered compensation: Suboccipitals driving Deep Neck Flexor inhibition; Upper Trapezius driving Lower Trapezius inhibition.</p>
+          <p><strong>Corrective Protocol:</strong> Suboccipital release &rarr; Supine chin tuck isometric holds (Phase 1); Upper Trapezius release &rarr; Prone Y-raise isometric holds (Phase 2).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAB 7: 10 CRITICAL THINKING MSQs -->
+  <section id="tab-msq" class="tab-pane">
+    <div class="card">
+      <h2>Comprehensive Clinical Knowledge & Critical Thinking Examination</h2>
+      <p><strong>Instructions:</strong> The following 10 clinical scenario questions are <em>Multiple-Select Questions (MSQs)</em>. Each question has <strong>multiple correct options</strong>. Select ALL correct options that apply, then click "Submit Answer" to reveal full neurophysiological rationales and scoring.</p>
+      
+      <div id="quizContainer">
+        <!-- JS will populate questions or render them directly -->
+      </div>
+
+      <div class="score-banner" id="finalScoreBanner" style="display:none;">
+        <h3>Module Completion & Clinical Competency Assessment</h3>
+        <p>Your Final Score:</p>
+        <div class="score-number" id="finalScoreText">0 / 10</div>
+        <p id="finalFeedbackText">Review the detailed clinical rationales below to reinforce your diagnostic and corrective mastery.</p>
+        <button class="btn btn-primary" onclick="resetQuiz()" style="margin-top:1rem;">Retake Examination</button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  function switchTab(tabId) {
+    document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.nav-tabs button').forEach(el => el.classList.remove('active'));
+    
+    document.getElementById(tabId).classList.add('active');
+    
+    const tabs = ['tab-overview', 'tab-mcc', 'tab-mmt', 'tab-compensations', 'tab-protocol', 'tab-cases', 'tab-msq'];
+    const idx = tabs.indexOf(tabId);
+    if (idx !== -1) {
+      document.querySelectorAll('.nav-tabs button')[idx].classList.add('active');
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  const questionsData = [
+    {
+      id: 1,
+      tag: "Neurophysiology of Motor Learning",
+      question: "Which of the following statements accurately characterize the function of the Motor Control Center (MCC) in the cerebellum and its response to movement failure?",
+      options: [
+        { id: "A", text: "The MCC stores automated, multi-joint movement synergies ('engrams') that execute without requiring ongoing conscious cerebral cortex calculation.", isCorrect: true, rationale: "Correct: The cerebellum automates motor programs (engrams) once learned, freeing the cerebral cortex from calculating micro-adjustments during voluntary movements." },
+        { id: "B", text: "When a movement or manual muscle test fails, sensory mechanoreceptors report the mechanical deficit, opening a neuroplastic window of approximately 30 to 60 seconds in the MCC.", isCorrect: true, rationale: "Correct: Motor control science demonstrates that task failure signals the cerebellum to re-evaluate motor strategies, unlocking an acute 30-60 second window receptive to new sensory and motor input." },
+        { id: "C", text: "Following soft tissue injury and histological tissue healing, the MCC automatically resets to the pre-injury movement pattern without therapeutic intervention.", isCorrect: false, rationale: "Incorrect: The MCC retains the protective compensation pattern in long-term memory indefinitely unless actively reprogrammed through specific sensory-motor cues." },
+        { id: "D", text: "Applying isolated myofascial release to a chronically tight, compensating muscle without reactivating its inhibited partner usually results in the cerebellum re-establishing the hypertonicity.", isCorrect: true, rationale: "Correct: The hypertonicity is a secondary survival adaptation; if the primary mover remains neurologically inhibited, the cerebellum must re-tighten the compensator to maintain joint stability." }
+      ]
+    },
+    {
+      id: 2,
+      tag: "NKT Muscle Testing Mechanics",
+      question: "When performing an NKT manual muscle test to evaluate neuromuscular recruitment, which procedural guidelines must be strictly maintained?",
+      options: [
+        { id: "A", text: "The examiner applies a rapid, high-velocity dynamic force to immediately break the patient's joint position.", isCorrect: false, rationale: "Incorrect: Rapid high-velocity forces elicit stretch reflexes or pain responses and test macro mechanical strength rather than pure neurological recruitment. Force must be ramped smoothly over 2 seconds." },
+        { id: "B", text: "The joint must be positioned precisely in the target muscle's anatomical line of action to minimize synergistic substitution.", isCorrect: true, rationale: "Correct: Precise vector alignment prevents secondary synergists from masking an inhibited target muscle." },
+        { id: "C", text: "The contraction must be isometric, where the patient is cued to match the examiner's gradually increasing pressure rather than pushing through it.", isCorrect: true, rationale: "Correct: Isometric testing evaluates the instantaneous neurological 'lock' and recruitment rate coding without triggering concentric counter-thrusts." },
+        { id: "D", text: "Observing compensatory trunk rotation, breath-holding, or adjacent joint repositioning is considered a positive indicator of target muscle inhibition.", isCorrect: true, rationale: "Correct: When the target muscle is neurologically inhibited, the MCC recruits adjacent synergists and global stabilizers to cheat the test." }
+      ]
+    },
+    {
+      id: 3,
+      tag: "Synergistic Dominance Identification",
+      question: "Which of the following clinical scenarios represent classic presentations of Synergistic Dominance?",
+      options: [
+        { id: "A", text: "The Tensor Fasciae Latae (TFL) becoming hypertonic and driving lateral hip pain because the primary hip abductor (Gluteus Medius) is inhibited.", isCorrect: true, rationale: "Correct: TFL is an accessory abductor that takes over pelvic stabilization during single-leg stance when the Gluteus Medius fails, causing IT band friction." },
+        { id: "B", text: "The Upper Trapezius and Levator Scapulae becoming overactive and tender during scapular upward rotation because the Lower Trapezius and Serratus Anterior are inhibited.", isCorrect: true, rationale: "Correct: Upper trapezius over-recruits to lift the shoulder girdle when lower scapular stabilizers are underactive." },
+        { id: "C", text: "The Biceps Femoris and Lumbar Erector Spinae displaying chronic hypertonicity and fatigue during hip extension due to an inhibited Gluteus Maximus.", isCorrect: true, rationale: "Correct: Hamstrings and lumbar erectors act as functional synergists that become overloaded when the prime hip extensor (Gluteus Maximus) is dormant." },
+        { id: "D", text: "A tight Psoas Major causing reciprocal neurological downregulation of the Gluteus Maximus.", isCorrect: false, rationale: "Incorrect: This represents Reciprocal Inhibition (antagonist inhibiting agonist), not Synergistic Dominance (synergist compensating for agonist)." }
+      ]
+    },
+    {
+      id: 4,
+      tag: "Reciprocal Inhibition Dynamics",
+      question: "Regarding Reciprocal Inhibition in NKT, which of the following statements are clinically accurate?",
+      options: [
+        { id: "A", text: "It is mediated at the spinal and central levels via Ia inhibitory interneurons, downregulating antagonist motor unit excitability when an agonist contracts.", isCorrect: true, rationale: "Correct: Reciprocal innervation naturally prevents agonist-antagonist co-contraction, but becomes pathological when an overactive muscle causes chronic baseline downregulation of its antagonist." },
+        { id: "B", text: "Attempting to strengthen a reciprocally inhibited muscle without first releasing its hypertonic antagonist will result in rapid, long-lasting motor recovery.", isCorrect: false, rationale: "Incorrect: The hypertonic antagonist maintains constant inhibitory outflow to the antagonist; strengthening the inhibited muscle alone fails because the neurological block is still active." },
+        { id: "C", text: "A hypertonic Pectoralis Minor can reciprocally inhibit the Middle/Lower Trapezius and Rhomboids, locking the scapula in protraction and anterior tilt.", isCorrect: true, rationale: "Correct: Anterior chest tightness downregulates posterior scapular retractors, driving impingement syndromes." },
+        { id: "D", text: "During the NKT challenge phase, rubbing or stimulating the hypertonic antagonist will cause the previously weak agonist to immediately test strong.", isCorrect: true, rationale: "Correct: Tactile/mechanoreceptive challenge to the dominant driver confirms the reactive pair by temporarily modulating cerebellar recruitment, turning the weak muscle strong." }
+      ]
+    },
+    {
+      id: 5,
+      tag: "Therapy Localization & Challenge Protocol",
+      question: "In the NKT diagnostic protocol, which of the following principles govern Therapy Localization (TL) and tactile challenge?",
+      options: [
+        { id: "A", text: "Therapy Localization involves the patient placing their fingers directly over a suspected driver tissue, altering afferent mechanoreceptive feedback to the MCC.", isCorrect: true, rationale: "Correct: Cutaneous and proprioceptive afferents generated by TL alter central processing in the cerebellum, allowing immediate re-testing of the target muscle." },
+        { id: "B", text: "Directional rubbing or spindle stimulation on a facilitated muscle temporarily alters its neurological drive, causing an inhibited partner to test strong upon immediate retest.", isCorrect: true, rationale: "Correct: Stimulating the culprit mechanoreceptors temporarily modulates the dysfunctional loop, confirming the reactive pair." },
+        { id: "C", text: "If rubbing a suspected structure does NOT change the weak muscle's test result from weak to strong, that structure is confirmed as the primary driver.", isCorrect: false, rationale: "Incorrect: If the weak muscle remains weak after challenge, that structure is NOT the primary reactive driver for that specific muscle, and other candidates must be tested." },
+        { id: "D", text: "A reactive pair can exist between two muscles crossing the same joint, between contralateral limbs, or between superficial scars and deep stabilizers.", isCorrect: true, rationale: "Correct: The MCC coordinates whole-body kinetic chains; compensation patterns span local pairs, global slings, and scar/ligament connections." }
+      ]
+    },
+    {
+      id: 6,
+      tag: "Scar Tissue & Surgical Trauma",
+      question: "Why are surgical scars (e.g., C-section, appendectomy, arthroscopy portals) significant in NKT assessment, and how are they managed?",
+      options: [
+        { id: "A", text: "Surgical incisions transect cutaneous, fascial, and muscle mechanoreceptors, creating chronic nociceptive and proprioceptive afferent 'noise' that leads to central inhibition of nearby stabilizers.", isCorrect: true, rationale: "Correct: Damaged mechanoreceptors send aberrant sensory signals to the cerebellum, causing protective downregulation of local and global core muscles." },
+        { id: "B", text: "A lower abdominal surgical scar can cause persistent neurological inhibition of the Transversus Abdominis, Rectus Abdominis, and Gluteus Maximus.", isCorrect: true, rationale: "Correct: C-section and appendectomy scars are frequent primary drivers of refractory lumbo-pelvic instability and gluteal amnesia." },
+        { id: "C", text: "When a scar is challenged via Therapy Localization and the weak muscle instantly tests strong, the correct intervention is to release/mobilize the scar and immediately activate the inhibited muscle.", isCorrect: true, rationale: "Correct: Mobilizing the scar resets aberrant mechanoreceptive input, allowing immediate synaptic activation of the inhibited stabilizer." },
+        { id: "D", text: "Scars older than 5 years lose their neurological influence on the MCC because tissue remodeling is complete.", isCorrect: false, rationale: "Incorrect: Motor control engrams and mechanoreceptive distortions from scars can persist for decades until actively reprogrammed." }
+      ]
+    },
+    {
+      id: 7,
+      tag: "Ligamentous Interlinks & Reflexes",
+      question: "Which of the following concepts describe the role of Ligamentous Interlinks and ligamento-muscular reflexes within NKT?",
+      options: [
+        { id: "A", text: "Ligaments are sensory organs densely populated with Ruffini endings, Pacinian corpuscles, and free nerve endings that directly influence motor unit recruitment.", isCorrect: true, rationale: "Correct: Ligaments provide critical proprioceptive feedback; their deformation or injury directly modulates alpha motor neuron pools via ligamento-muscular reflexes." },
+        { id: "B", text: "An unhealed or lax Anterior Talofibular Ligament (ATFL) following an ankle sprain can neurologically inhibit the ipsilateral Peroneus Longus and contralateral Gluteus Medius.", isCorrect: true, rationale: "Correct: Ligament strain triggers protective compensation throughout the gait cycle, inhibiting dynamic evertors and pelvic stabilizers." },
+        { id: "C", text: "Ligaments can only cause local muscular inhibition within 2 cm of the joint capsule and cannot influence contralateral kinetic slings.", isCorrect: false, rationale: "Incorrect: Ligamentous afferent disruption cascades through global kinetic chains, frequently driving contralateral and diagonal compensations." },
+        { id: "D", text: "Challenging a sprained ligament with directional stretch or tactile pressure can restore strength to an inhibited muscle during the diagnostic retest.", isCorrect: true, rationale: "Correct: Stimulating the ligamentous mechanoreceptors confirms whether the ligament is the neurological culprit driving remote muscular inhibition." }
+      ]
+    },
+    {
+      id: 8,
+      tag: "Cranio-Cervical & Postural Reflexes",
+      question: "In assessing forward head posture, cervicogenic pain, and TMJ dysfunctions, which NKT pairings are clinically valid?",
+      options: [
+        { id: "A", text: "Hypertonic Suboccipital muscles frequently drive neurological inhibition of the Deep Cervical Flexors (Longus Colli and Longus Capitis).", isCorrect: true, rationale: "Correct: Suboccipitals become over-facilitated to keep the gaze horizontal in forward head posture, reciprocally inhibiting deep cervical stabilizers." },
+        { id: "B", text: "Hypertonic Masseter and Temporalis muscles can compensate for inhibited deep neck flexors, pelvic floor muscles, or core stabilizers.", isCorrect: true, rationale: "Correct: TMJ/masticatory muscles are intimately linked via the trigeminal system and deep front fascial line to cervical and pelvic floor stability." },
+        { id: "C", text: "Directional eye movement (saccades and visual gaze fixation) alters suboccipital muscle tone due to oculo-cervical reflexes.", isCorrect: true, rationale: "Correct: Eye movements reflexively modulate suboccipital motor units; ocular challenges are routinely used in NKT to assess cervical stability." },
+        { id: "D", text: "Suboccipital muscles have the lowest concentration of muscle spindles in the body, making them insensitive to postural deviations.", isCorrect: false, rationale: "Incorrect: Suboccipitals have the HIGHEST spindle density in the entire human body (up to 200-500 spindles/gram), making them ultra-sensitive proprioceptive monitors." }
+      ]
+    },
+    {
+      id: 9,
+      tag: "NKT Corrective Execution & Homework",
+      question: "What are the essential clinical rules for executing the NKT corrective protocol and designing home exercise prescriptions?",
+      options: [
+        { id: "A", text: "The sequence must ALWAYS be: 1. Release the Facilitated Driver FIRST &rarr; 2. Activate the Inhibited Muscle SECOND.", isCorrect: true, rationale: "Correct: Downregulating the overactive driver removes the inhibitory neurological block, allowing the inhibited muscle to be effectively recruited." },
+        { id: "B", text: "The patient should perform high-repetition, heavy-load resistance training to exhaustion immediately following the release.", isCorrect: false, rationale: "Incorrect: High loads to fatigue trigger compensatory substitution. Activation must be low-load, high-precision isometric holds (3-5 reps of 5s) to establish neural recruitment without fatigue." },
+        { id: "C", text: "Corrective exercises should be performed in the prescribed sequence 2 to 3 times daily for 2 to 4 weeks to achieve synaptic consolidation in the cerebellum.", isCorrect: true, rationale: "Correct: Neuroplastic engram storage requires frequent, low-dose repetition over several weeks to replace the old compensation pattern permanently." },
+        { id: "D", text: "Manual release of the facilitated muscle should typically last 30 to 60 seconds to optimize spindle reset during the cerebellar plasticity window.", isCorrect: true, rationale: "Correct: A 30-60 second release effectively modulates tissue mechanoreceptors within the open learning window." }
+      ]
+    },
+    {
+      id: 10,
+      tag: "Kinetic Sling & Oblique System Integration",
+      question: "Which of the following statements correctly apply NKT principles to kinetic slings and complex athletic movement patterns?",
+      options: [
+        { id: "A", text: "In the Posterior Oblique Sling (POS), a hypertonic Right Latissimus Dorsi can drive neurological inhibition of the Left Gluteus Maximus.", isCorrect: true, rationale: "Correct: POS transfers load across the thoracolumbar fascia; an over-recruited upper quadrant driver frequently suppresses contralateral gluteal extension." },
+        { id: "B", text: "In the Anterior Oblique Sling (AOS), an overactive Adductor Longus can compensate for an inhibited contralateral External/Internal Oblique complex.", isCorrect: true, rationale: "Correct: AOS coordinates rotational acceleration during gait, throwing, and cutting; adductor dominance over core rotators is a primary cause of sports hernia / athletic pubalgia." },
+        { id: "C", text: "Kinetic sling compensations never cross the midline of the body and are strictly confined to unilateral compartments.", isCorrect: false, rationale: "Incorrect: Locomotion and human biomechanics are fundamentally contralateral and cross-body, coordinated across oblique fascial slings." },
+        { id: "D", text: "Addressing a multi-layered compensation pattern requires peeling back layers sequentially: correcting the primary reactive pair first, then re-evaluating the kinetic chain for remaining secondary adaptations.", isCorrect: true, rationale: "Correct: The body frequently layers compensations over time; clearing the primary driver allows secondary compensations to emerge cleanly for subsequent correction." }
+      ]
+    }
+  ];
+
+  let userAnswers = {};
+
+  function renderQuiz() {
+    const container = document.getElementById('quizContainer');
+    container.innerHTML = '';
+
+    questionsData.forEach((q, qIndex) => {
+      const card = document.createElement('div');
+      card.className = 'quiz-card';
+      card.id = `qCard-${q.id}`;
+
+      let optionsHtml = '';
+      q.options.forEach(opt => {
+        optionsHtml += `
+          <label class="option-label" id="label-${q.id}-${opt.id}">
+            <input type="checkbox" name="q${q.id}" value="${opt.id}" onchange="handleSelection(${q.id}, '${opt.id}')">
+            <span class="option-text"><strong>[${opt.id}]</strong> ${opt.text}</span>
+          </label>
+        `;
+      });
+
+      card.innerHTML = `
+        <div class="quiz-question-header">
+          <span class="quiz-tag">${q.tag}</span>
+          <span style="font-size:0.85rem; color:#64748b; font-weight:600;">Question ${qIndex + 1} of ${questionsData.length} (Multiple Select)</span>
+        </div>
+        <div class="question-text">${q.question}</div>
+        <div class="options-group">
+          ${optionsHtml}
+        </div>
+        <div style="display:flex; gap:0.5rem;">
+          <button class="btn btn-primary" id="btn-submit-${q.id}" onclick="submitQuestion(${q.id})">Submit Answer</button>
+        </div>
+        <div class="feedback-box" id="feedback-${q.id}">
+          <div class="feedback-title" id="feedback-title-${q.id}"></div>
+          <p id="feedback-summary-${q.id}"></p>
+          <ul class="rationale-list" id="rationale-list-${q.id}"></ul>
+        </div>
+      `;
+
+      container.appendChild(card);
+    });
+  }
+
+  function handleSelection(qId, optId) {
+    if (!userAnswers[qId]) {
+      userAnswers[qId] = new Set();
+    }
+    const set = userAnswers[qId];
+    if (set.has(optId)) {
+      set.delete(optId);
+    } else {
+      set.add(optId);
+    }
+  }
+
+  function submitQuestion(qId) {
+    const q = questionsData.find(item => item.id === qId);
+    const selected = userAnswers[qId] || new Set();
+    
+    if (selected.size === 0) {
+      alert("Please select at least one option before submitting.");
+      return;
+    }
+
+    const correctOptions = new Set(q.options.filter(o => o.isCorrect).map(o => o.id));
+    
+    // Check if exactly matches
+    let isFullyCorrect = (selected.size === correctOptions.size) && [...selected].every(val => correctOptions.has(val));
+
+    // Disable checkboxes & submit button
+    document.querySelectorAll(`input[name="q${qId}"]`).forEach(cb => cb.disabled = true);
+    document.getElementById(`btn-submit-${qId}`).disabled = true;
+    document.getElementById(`btn-submit-${qId}`).style.opacity = '0.5';
+
+    // Highlight options
+    q.options.forEach(opt => {
+      const label = document.getElementById(`label-${qId}-${opt.id}`);
+      if (opt.isCorrect) {
+        label.style.backgroundColor = '#dcfce7';
+        label.style.borderColor = '#86efac';
+      } else if (selected.has(opt.id) && !opt.isCorrect) {
+        label.style.backgroundColor = '#fee2e2';
+        label.style.borderColor = '#fca5a5';
+      }
+    });
+
+    const feedbackBox = document.getElementById(`feedback-${qId}`);
+    const titleEl = document.getElementById(`feedback-title-${qId}`);
+    const summaryEl = document.getElementById(`feedback-summary-${qId}`);
+    const rationaleList = document.getElementById(`rationale-list-${qId}`);
+
+    feedbackBox.className = 'feedback-box ' + (isFullyCorrect ? 'correct' : 'incorrect');
+    titleEl.textContent = isFullyCorrect ? "✓ Fully Correct! Excellent Clinical Reasoning." : "✗ Incomplete or Incorrect.";
+    
+    const correctListStr = [...correctOptions].sort().join(", ");
+    summaryEl.innerHTML = `<strong>Correct Options:</strong> ${correctListStr}. ${isFullyCorrect ? "You successfully identified all valid clinical statements." : "You missed one or more correct options or selected an invalid option."}`;
+
+    rationaleList.innerHTML = '';
+    q.options.forEach(opt => {
+      const li = document.createElement('li');
+      li.innerHTML = `<strong>Option [${opt.id}]:</strong> ${opt.rationale}`;
+      if (opt.isCorrect) {
+        li.style.color = '#15803d';
+      } else {
+        li.style.color = '#b91c1c';
+      }
+      rationaleList.appendChild(li);
+    });
+
+    checkAllCompleted();
+  }
+
+  function checkAllCompleted() {
+    let completedCount = 0;
+    let score = 0;
+
+    questionsData.forEach(q => {
+      const selected = userAnswers[q.id] || new Set();
+      const correctOptions = new Set(q.options.filter(o => o.isCorrect).map(o => o.id));
+      const btn = document.getElementById(`btn-submit-${q.id}`);
+      if (btn && btn.disabled) {
+        completedCount++;
+        const isFullyCorrect = (selected.size === correctOptions.size) && [...selected].every(val => correctOptions.has(val));
+        if (isFullyCorrect) score++;
+      }
+    });
+
+    if (completedCount === questionsData.length) {
+      const banner = document.getElementById('finalScoreBanner');
+      banner.style.display = 'block';
+      document.getElementById('finalScoreText').textContent = `${score} / ${questionsData.length} (${Math.round((score / questionsData.length) * 100)}%)`;
+      
+      const feedbackText = document.getElementById('finalFeedbackText');
+      if (score >= 8) {
+        feedbackText.textContent = "Outstanding Performance! You demonstrate advanced mastery of NeuroKinetic Therapy motor control principles, manual muscle testing nuances, and kinetic chain corrective algorithms.";
+      } else if (score >= 6) {
+        feedbackText.textContent = "Good Clinical Competency. Review the specific rationales above on reciprocal inhibition, scar mechanics, and MMT vector positioning to sharpen your diagnostic precision.";
+      } else {
+        feedbackText.textContent = "Educational Review Recommended. We recommend revisiting the foundational sections on the Motor Control Center and the 6-Step Corrective Protocol before retaking the assessment.";
+      }
+      banner.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  function resetQuiz() {
+    userAnswers = {};
+    document.getElementById('finalScoreBanner').style.display = 'none';
+    renderQuiz();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Initialize
+  document.addEventListener('DOMContentLoaded', () => {
+    renderQuiz();
+  });
+</script>
+
+</body>
+</html>
