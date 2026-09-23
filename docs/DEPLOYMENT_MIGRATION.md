@@ -157,6 +157,7 @@ gemini_export/
 ---
 
 ## 8) مراجع سريعة من داخل المستودع
+- 📗 لوحة متابعة النقل (المراحل + المهام + الخيارات): [ورقة جوجل](https://docs.google.com/spreadsheets/d/1XACtIdLXdz7eNM0bjeMns575gXbmXLALZtSp78nva3c/edit)
 - تحليل الوضع الحالي: `docs/ANALYSIS.md`
 - جدول التوكنز الكامل: `docs/API_TOKENS_GUIDE.md` + ورقة Google الجديدة
 - قالب متغيرات البيئة: `.env.example`
