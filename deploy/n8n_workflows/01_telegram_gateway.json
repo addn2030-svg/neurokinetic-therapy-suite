@@ -1,0 +1,82 @@
+{
+  "name": "01 — Telegram Gateway → Gemini (Chief of Staff)",
+  "nodes": [
+    {
+      "id": "tgw-trigger-0001",
+      "name": "Telegram Trigger",
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.1,
+      "position": [0, 0],
+      "parameters": {
+        "bot": { "__rl": true, "mode": "list", "value": "" }
+      },
+      "credentials": {
+        "telegramApi": { "id": "", "name": "Telegram Bot (Chief of Staff)" }
+      }
+    },
+    {
+      "id": "tgw-auth-0002",
+      "name": "Auth & Prompt",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [220, 0],
+      "parameters": {
+        "jsCode": "const allowed = ($env.TELEGRAM_ALLOWED_CHAT_IDS || '').split(',').map(s => s.trim()).filter(Boolean);\nconst msg = $input.first().json.message || {};\nconst chatId = msg.chat ? msg.chat.id : null;\nconst text = msg.text || '';\nif (!chatId || !text) return [];\nif (allowed.length && !allowed.includes(String(chatId))) return [];\nreturn [{ json: { chat_id: chatId, prompt: 'أنت رئيس المكتب الرقمي (Chief of Staff). التزم بسلم الاستقلالية: لا تنفذ أي إجراء مالي أو خارجي دون اعتماد بشري صريح. كن موجزاً واستخدم النقاط.\\nرسالة المستخدم: ' + text } }];"
+      }
+    },
+    {
+      "id": "tgw-gemini-0003",
+      "name": "Gemini Generate",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [440, 0],
+      "parameters": {
+        "method": "POST",
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "contentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ systemInstruction: { parts: [{ text: 'أنت رئيس المكتب الرقمي للمستخدم. قبل الرد، راجع المهام المفتوحة والعناصر المتأخرة من السياق المرفق إن وجد، والتزم بقواعد الحوكمة: لا اختراع بيانات، منع التكرار، الاعتماد البشري للقرارات المالية والسريرية.' }] }, contents: [{ parts: [{ text: $json.prompt }] }] }) }}",
+        "options": {}
+      },
+      "credentials": {
+        "httpHeaderAuth": { "id": "", "name": "Gemini API Key (x-goog-api-key)" }
+      }
+    },
+    {
+      "id": "tgw-extract-0004",
+      "name": "Extract Reply",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [660, 0],
+      "parameters": {
+        "jsCode": "const resp = $input.first().json;\nconst text = (resp.candidates && resp.candidates[0] && resp.candidates[0].content && resp.candidates[0].content.parts && resp.candidates[0].content.parts[0] && resp.candidates[0].content.parts[0].text) || 'عذراً، تعذر توليد الرد الآن.';\nreturn [{ json: { chat_id: $('Auth & Prompt').first().json.chat_id, text } }];"
+      }
+    },
+    {
+      "id": "tgw-send-0005",
+      "name": "Send Reply",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [880, 0],
+      "parameters": {
+        "chatId": "={{ $json.chat_id }}",
+        "text": "={{ $json.text }}",
+        "additionalFields": {}
+      },
+      "credentials": {
+        "telegramApi": { "id": "", "name": "Telegram Bot (Chief of Staff)" }
+      }
+    }
+  ],
+  "connections": {
+    "Telegram Trigger": { "main": [[{ "node": "Auth & Prompt", "type": "main", "index": 0 }]] },
+    "Auth & Prompt": { "main": [[{ "node": "Gemini Generate", "type": "main", "index": 0 }]] },
+    "Gemini Generate": { "main": [[{ "node": "Extract Reply", "type": "main", "index": 0 }]] },
+    "Extract Reply": { "main": [[{ "node": "Send Reply", "type": "main", "index": 0 }]] }
+  },
+  "settings": { "timezone": "Asia/Riyadh", "executionOrder": "v1" },
+  "pinData": {}
+}

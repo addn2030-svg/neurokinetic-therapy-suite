@@ -1,0 +1,61 @@
+{
+  "name": "04 — Daily Context Export 06:00 (بديل engine/export_for_chat.py)",
+  "nodes": [
+    {
+      "id": "dce-trigger-0001",
+      "name": "Daily 06:00",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [0, 0],
+      "parameters": {
+        "rule": { "interval": [{ "field": "cronExpression", "expression": "0 6 * * *" }] }
+      }
+    },
+    {
+      "id": "dce-query-0002",
+      "name": "Fetch Context",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [220, 0],
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT json_build_object(\n  'open_tasks', (SELECT coalesce(json_agg(t ORDER BY t.due_date NULLS LAST), '[]'::json) FROM (SELECT title, due_date FROM tasks WHERE status NOT IN ('done','closed') LIMIT 15) t),\n  'overdue',    (SELECT count(*)::int FROM v_overdue_tasks),\n  'spending_cap', (SELECT value->>'cap_sar' FROM agent_state WHERE key = 'weekly_spending_cap')\n) AS ctx;"
+      },
+      "credentials": {
+        "postgres": { "id": "", "name": "Supabase Postgres" }
+      }
+    },
+    {
+      "id": "dce-build-0003",
+      "name": "Build Context MD",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [440, 0],
+      "parameters": {
+        "jsCode": "const ctx = $input.first().json.ctx || {};\nconst open = ctx.open_tasks || [];\nconst lines = open.map(t => '- ' + t.title + (t.due_date ? ' (استحقاق: ' + String(t.due_date).slice(0, 10) + ')' : '')).join('\\n') || '- لا توجد مهام مفتوحة';\nconst text = '🌅 سياق اليوم — الصقه في بداية محادثة Gemini:\\n\\n## المهام المفتوحة (' + open.length + ')\\n' + lines + '\\n\\n## عناصر متأخرة: ' + (ctx.overdue || 0) + '\\nسقف الإنفاق الأسبوعي: ' + (ctx.spending_cap || '؟') + ' ر.س\\n\\n> تذكير للوكيل: طبّق سلم الاستقلالية (L0–L4)، ولا تنفذ إجراءً مالياً أو خارجياً دون اعتماد بشري.';\nreturn [{ json: { chat_id: $env.TELEGRAM_ADMIN_CHAT_ID || '', text } }];"
+      }
+    },
+    {
+      "id": "dce-send-0004",
+      "name": "Send Context",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [660, 0],
+      "parameters": {
+        "chatId": "={{ $json.chat_id }}",
+        "text": "={{ $json.text }}",
+        "additionalFields": {}
+      },
+      "credentials": {
+        "telegramApi": { "id": "", "name": "Telegram Bot (Chief of Staff)" }
+      }
+    }
+  ],
+  "connections": {
+    "Daily 06:00": { "main": [[{ "node": "Fetch Context", "type": "main", "index": 0 }]] },
+    "Fetch Context": { "main": [[{ "node": "Build Context MD", "type": "main", "index": 0 }]] },
+    "Build Context MD": { "main": [[{ "node": "Send Context", "type": "main", "index": 0 }]] }
+  },
+  "settings": { "timezone": "Asia/Riyadh", "executionOrder": "v1" },
+  "pinData": {}
+}
