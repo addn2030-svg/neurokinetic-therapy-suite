@@ -22,6 +22,9 @@ This repository contains the complete theoretical foundations, hands-on practica
 ├── nkt_master_training_suite.html    # Assessment Kit, Intake Forms, Tool Protocols & Cert Rubrics
 ├── nkt_visual_atlas.html             # Dedicated Visual Clinical Photo Atlas
 ├── nkt_video_library.html            # Master Instructor Video Demonstrations & Case Vault
+├── nkt_comprehensive_reference_guide.html # Deep-reference study guide: curriculum map, muscle-pair
+│                                      #   libraries, subsystem anatomy, glossary, protocol cheat-sheet,
+│                                      #   and exam-prep Q&A for Levels 1, 2 & 3
 └── images/                           # High-Resolution Clinical Photography & Anatomical Vectors
     ├── nkt_pos_gait_test.png         # Posterior Oblique Subsystem (POS) Gait Vector Test
     ├── nkt_diaphragm_assessment.png  # Subcostal Diaphragm Assessment & ZOA Release
@@ -83,6 +86,8 @@ NeuroKinetic Therapy is a sophisticated system of neuromuscular assessment and c
 ---
 
 ## 📦 Curriculum Overview
+
+> For an expanded study reference — full muscle-pair libraries, subsystem anatomy, a master glossary, a protocol cheat-sheet, and exam-prep Q&A per level, all cross-checked against David Weinstock's official course outlines — see [`nkt_comprehensive_reference_guide.html`](nkt_comprehensive_reference_guide.html).
 
 ### Level 1: Foundations of Motor Control & Manual Muscle Testing
 * Hierarchical motor control (Cerebral Cortex $\rightarrow$ Limbic System $\rightarrow$ Cerebellum $\rightarrow$ Basal Ganglia $\rightarrow$ Spinal Cord).

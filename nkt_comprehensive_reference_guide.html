@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NKT® Comprehensive Reference Guide: Levels 1, 2 & 3</title>
+<style>
+  :root {
+    --primary: #1e3a8a;
+    --primary-dark: #0f172a;
+    --primary-light: #3b82f6;
+    --secondary: #0d9488;
+    --secondary-light: #14b8a6;
+    --accent: #d97706;
+    --danger: #dc2626;
+    --success: #16a34a;
+    --purple: #7e22ce;
+    --bg-main: #f8fafc;
+    --bg-card: #ffffff;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --border: #e2e8f0;
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    line-height: 1.65;
+    padding-bottom: 4rem;
+  }
+  header {
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+    color: white;
+    padding: 2.5rem 2rem;
+    box-shadow: var(--shadow-md);
+  }
+  .header-content { max-width: 1200px; margin: 0 auto; }
+  .badge {
+    display: inline-block;
+    background-color: rgba(255,255,255,0.15);
+    color: #93c5fd;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+  h1 { font-size: 2.15rem; font-weight: 800; line-height: 1.2; margin-bottom: 0.5rem; }
+  .subtitle { font-size: 1.05rem; color: #cbd5e1; max-width: 900px; }
+  .home-link { display:inline-block; margin-top:1rem; color:#bae6fd; font-size:0.9rem; text-decoration:none; font-weight:600; }
+  .home-link:hover { text-decoration: underline; }
+
+  .nav-container {
+    background-color: white;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-sm);
+  }
+  .nav-tabs {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    overflow-x: auto;
+    list-style: none;
+    padding: 0 1rem;
+  }
+  .nav-tabs button {
+    background: none;
+    border: none;
+    padding: 1rem 1.15rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s ease;
+  }
+  .nav-tabs button:hover { color: var(--primary-light); }
+  .nav-tabs button.active { color: var(--primary); border-bottom-color: var(--primary); }
+
+  .container { max-width: 1200px; margin: 2rem auto; padding: 0 1.5rem; }
+  .tab-pane { display: none; }
+  .tab-pane.active { display: block; animation: fadeIn 0.25s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px);} to { opacity: 1; transform: translateY(0);} }
+
+  section.card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 0.85rem;
+    padding: 1.75rem 2rem;
+    margin-bottom: 1.75rem;
+    box-shadow: var(--shadow-sm);
+  }
+  h2.section-title {
+    font-size: 1.5rem;
+    color: var(--primary-dark);
+    margin-bottom: 1rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 2px solid var(--border);
+  }
+  h3.sub-title { font-size: 1.15rem; color: var(--primary); margin: 1.4rem 0 0.6rem 0; }
+  h4.mini-title { font-size: 1rem; color: var(--secondary); margin: 1rem 0 0.4rem 0; }
+  p { margin-bottom: 0.85rem; color: #334155; }
+  ul, ol { margin: 0 0 0.9rem 1.4rem; color: #334155; }
+  li { margin-bottom: 0.35rem; }
+  strong { color: var(--primary-dark); }
+  code { background: #f1f5f9; padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
+
+  .level-tag {
+    display: inline-block;
+    padding: 0.2rem 0.65rem;
+    border-radius: 6px;
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin-bottom: 0.75rem;
+  }
+  .tag-l1 { background: #dbeafe; color: #1e40af; }
+  .tag-l2 { background: #fae8ff; color: #86198f; }
+  .tag-l3 { background: #ffedd5; color: #9a3412; }
+  .tag-meta { background: #dcfce7; color: #166534; }
+
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem 0; font-size: 0.92rem; }
+  th, td { text-align: left; padding: 0.6rem 0.75rem; border: 1px solid var(--border); vertical-align: top; }
+  th { background: #f1f5f9; color: var(--primary-dark); font-weight: 700; }
+  tr:nth-child(even) td { background: #fafcff; }
+
+  .callout {
+    border-left: 4px solid var(--secondary);
+    background: #f0fdfa;
+    padding: 0.9rem 1.1rem;
+    border-radius: 0.4rem;
+    margin: 1rem 0;
+  }
+  .callout.warn { border-left-color: var(--danger); background: #fef2f2; }
+  .callout.tip { border-left-color: var(--accent); background: #fffbeb; }
+
+  details.acc {
+    border: 1px solid var(--border);
+    border-radius: 0.6rem;
+    margin-bottom: 0.7rem;
+    padding: 0.75rem 1rem;
+    background: #fff;
+  }
+  details.acc summary {
+    cursor: pointer;
+    font-weight: 700;
+    color: var(--primary-dark);
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  details.acc summary::-webkit-details-marker { display: none; }
+  details.acc summary::after { content: "+"; font-size: 1.3rem; color: var(--secondary); font-weight: 400; }
+  details.acc[open] summary::after { content: "–"; }
+  details.acc .acc-body { margin-top: 0.7rem; color: #334155; }
+  details.acc .answer {
+    margin-top: 0.6rem;
+    background: #ecfdf5;
+    border: 1px dashed var(--success);
+    padding: 0.6rem 0.8rem;
+    border-radius: 0.4rem;
+    font-size: 0.92rem;
+  }
+
+  .glossary-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap: 0.9rem; }
+  .term-card { border: 1px solid var(--border); border-radius: 0.6rem; padding: 0.9rem 1rem; background: #fff; }
+  .term-card .term { font-weight: 800; color: var(--primary); font-size: 0.95rem; }
+  .term-card .abbr { color: var(--text-muted); font-size: 0.75rem; }
+  .term-card p { margin: 0.4rem 0 0 0; font-size: 0.88rem; }
+
+  .toc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 0.9rem; margin-top: 1rem; }
+  .toc-item {
+    border: 1px solid var(--border);
+    border-radius: 0.6rem;
+    padding: 0.9rem 1rem;
+    cursor: pointer;
+    background: #fff;
+    transition: all 0.15s ease;
+  }
+  .toc-item:hover { border-color: var(--primary-light); box-shadow: var(--shadow-sm); transform: translateY(-2px); }
+  .toc-item .n { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; }
+  .toc-item .t { font-weight: 700; color: var(--primary-dark); margin-top: 0.2rem; }
+
+  .flow { background: #0f172a; color: #e2e8f0; border-radius: 0.6rem; padding: 1.2rem; font-family: "SFMono-Regular", Consolas, monospace; font-size: 0.82rem; overflow-x: auto; white-space: pre; margin: 1rem 0; }
+
+  footer { max-width: 1200px; margin: 3rem auto 0 auto; padding: 0 1.5rem; color: var(--text-muted); font-size: 0.85rem; text-align: center; }
+  a.src-link { color: var(--primary-light); text-decoration: none; }
+  a.src-link:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-content">
+    <div class="badge">Reference Library &middot; Levels 1, 2 &amp; 3</div>
+    <h1>NeuroKinetic Therapy (NKT&reg;) Comprehensive Reference Guide</h1>
+    <p class="subtitle">A deep-reference companion for the suite — expanded theory, terminology, muscle-pair libraries, subsystem anatomy, advanced Level 3 integration, a clinical protocol cheat-sheet, and exam-prep review for all three certification levels. Cross-checked against David Weinstock's official course outlines, certification FAQ, and published text.</p>
+    <a href="index.html" class="home-link">&larr; Back to Master Suite Hub</a>
+  </div>
+</header>
+
+<div class="nav-container">
+  <ul class="nav-tabs" id="mainNav">
+    <li><button class="active" onclick="switchTab('overview')">Overview &amp; Curriculum Map</button></li>
+    <li><button onclick="switchTab('level1')">Level 1 Reference</button></li>
+    <li><button onclick="switchTab('level2')">Level 2 Reference</button></li>
+    <li><button onclick="switchTab('level3')">Level 3 Reference</button></li>
+    <li><button onclick="switchTab('glossary')">Master Glossary</button></li>
+    <li><button onclick="switchTab('protocol')">Protocol Cheat-Sheet</button></li>
+    <li><button onclick="switchTab('examprep')">Exam Prep Q&amp;A</button></li>
+    <li><button onclick="switchTab('sources')">Sources &amp; Certification</button></li>
+  </ul>
+</div>
+
+<main class="container">
+
+<!-- ============================================================ OVERVIEW ============================================================ -->
+<div class="tab-pane active" id="overview">
+
+  <section class="card">
+    <span class="level-tag tag-meta">Foundations</span>
+    <h2 class="section-title">What NeuroKinetic Therapy Is (and Isn't)</h2>
+    <p><strong>NeuroKinetic Therapy&reg; (NKT&reg;)</strong> is a manual assessment and corrective-movement system developed by <strong>David Weinstock</strong> (a 1973 Johns Hopkins pre-med graduate practicing manual therapy since the 1970s). It is built on <strong>Motor Control Theory</strong>: the idea that the cerebellum's <strong>Motor Control Center (MCC)</strong> stores learned movement "programs," and that after injury, pain, or repetitive strain, the MCC substitutes a compensation pattern to keep the movement goal achievable. Tissue can heal completely while the compensation program remains permanently stored — NKT's core premise is that <em>manual muscle testing (MMT)</em> can reveal that stored program, and a structured <em>test &rarr; release &rarr; retest &rarr; activate</em> protocol can reprogram it.</p>
+    <p>NKT is <strong>not</strong> a diagnostic substitute for orthopedic/neurological exam, imaging, or medical clearance, and it is <strong>not</strong> a stand-alone treatment modality — it is a functional map that tells a practitioner <em>where</em> to apply whatever release technique (soft tissue work, IASTM, dry needling, stretching, taping) they are already trained in, followed by targeted activation exercise.</p>
+    <div class="callout">
+      <strong>Trademark & Scope Notice:</strong> NeuroKinetic Therapy&reg; and NKT&reg; are registered trademarks of David Weinstock / NeuroKinetic Therapy Seminars. This guide is an independent educational reference compiled for study purposes; it does not substitute for official seminar attendance, mentorship, or certification through <a class="src-link" href="https://neurokinetictherapy.com/" target="_blank" rel="noopener">neurokinetictherapy.com</a>.
+    </div>
+  </section>
+
+  <section class="card">
+    <h2 class="section-title">Official Curriculum Map (Level 1 &rarr; 2 &rarr; 3)</h2>
+    <p>Each level is taught as a <strong>2-day, ~15-contact-hour</strong> in-person seminar. Levels build sequentially — Level 2 assumes fluency in Level 1 manual muscle testing, and Level 3 assumes fluency in Level 2's whole-body subsystem logic.</p>
+    <table>
+      <tr><th>Level</th><th>Focus</th><th>Practitioner Tier</th><th>Certification Requirement*</th></tr>
+      <tr><td><strong>Level 1 — Fundamentals</strong></td><td>Isolated single-muscle MMT of the whole body; reciprocal inhibition &amp; synergistic dominance; the core test&ndash;release&ndash;retest protocol.</td><td>Beginner</td><td>3 written case studies + supervised session with a certifier</td></tr>
+      <tr><td><strong>Level 2 — Advanced</strong></td><td>Whole-body kinetic subsystems, core/diaphragm mechanics, joint compression &amp; decompression reflexes, TMJ/stomatognathic system.</td><td>Intermediate</td><td>6 written case studies + supervised session</td></tr>
+      <tr><td><strong>Level 3 — Masters</strong></td><td>Muscle-to-muscle testing refinement, advanced gait, ocular/cranial reflexes, hyoid, scars, and pelvic/ligamentous reflexes with Direction of Dysfunction (DOD).</td><td>Advanced</td><td>5 written case studies + supervised session</td></tr>
+    </table>
+    <p style="font-size:0.85rem;color:var(--text-muted);">*Practitioners must practice for at least one month before certifying at any level, and must be certified in a level no later than one week before starting the next class. See the <a class="src-link" href="https://neurokinetictherapy.com/certification/" target="_blank" rel="noopener">official Certification page</a> for current fees and process.</p>
+
+    <h3 class="sub-title">Level 1 Body-Region Teaching Order (official 2-day outline)</h3>
+    <table>
+      <tr><th>Day</th><th>Block</th><th>Regions / Muscles Covered</th></tr>
+      <tr><td rowspan="4">Day 1</td><td>AM Theory</td><td>Motor control theory, how the MCC coordinates &amp; controls movement, how to assess muscle imbalance</td></tr>
+      <tr><td>Low Back &amp; Core</td><td>Psoas, transversus abdominis, quadratus lumborum, transversospinalis; Directional Testing introduced</td></tr>
+      <tr><td>Pelvis &amp; Hip</td><td>Sacroiliac-related muscles, adductors, deep gluteals, gluteals, deep rotators, abductors</td></tr>
+      <tr><td>Knee</td><td>Quadriceps, hamstrings, and muscles crossing the knee</td></tr>
+      <tr><td rowspan="4">Day 2</td><td>Lower Leg &amp; Foot</td><td>Gastrocnemius, soleus, tibialis anterior/posterior, peroneals, intrinsic foot muscles</td></tr>
+      <tr><td>Shoulder Girdle</td><td>Rotator cuff, deltoids, trapezius, latissimus dorsi, rhomboids, pectorals</td></tr>
+      <tr><td>Elbow, Forearm, Hand</td><td>Biceps, triceps, forearm musculature, hand intrinsics</td></tr>
+      <tr><td>Neck</td><td>SCM, scalenes, cervical extensor group</td></tr>
+    </table>
+
+    <h3 class="sub-title">Level 2 Representative Topics (drawn from NKT study-group curriculum)</h3>
+    <ul>
+      <li>Posterior Oblique Subsystem (POS), Anterior Oblique Subsystem (AOS), Deep Longitudinal Subsystem (DLS), Lateral Subsystem assessment</li>
+      <li>Diaphragm assessment (inhale-hold vs. exhale-hold indicator testing)</li>
+      <li>Intrinsic core / "inner unit" loss, diastasis recti</li>
+      <li>Joint compression &amp; decompression reflex testing (e.g., finger, wrist, hip)</li>
+      <li>Accessory muscles of jaw movement; overbite/underbite and global (whole-body) testing</li>
+      <li>Lumbopelvic rotation and sport-specific carryover; foot &amp; rotational gait patterns</li>
+      <li>Scoliosis screening through an NKT lens</li>
+    </ul>
+
+    <h3 class="sub-title">Level 3 Teaching Order (official 2-day outline)</h3>
+    <table>
+      <tr><th>Day</th><th>Block</th><th>Content</th></tr>
+      <tr><td rowspan="3">Day 1</td><td>9–10am</td><td>Muscle-to-Muscle Testing (testing one muscle directly against another to refine reactive-pair relationships)</td></tr>
+      <tr><td>10am–1pm</td><td>Advanced Gait Relationships</td></tr>
+      <tr><td>2–5:30pm</td><td>Eye Movement and Direction of Dysfunction (DOD)</td></tr>
+      <tr><td rowspan="3">Day 2</td><td>9–10:30am</td><td>Hyoid and Direction of Dysfunction</td></tr>
+      <tr><td>10:30am–1pm</td><td>Scars, Vector of Release, Direction of Dysfunction</td></tr>
+      <tr><td>2–5:30pm</td><td>Pelvic Ligaments and Direction of Dysfunction</td></tr>
+    </table>
+    <p>(Reverse Therapy Localization and Refined MMT in supine/prone/seated/standing positions are additionally taught in NKT Symposium/Masters-level modules alongside Level 3.)</p>
+  </section>
+
+  <section class="card">
+    <h2 class="section-title">Quick Navigation</h2>
+    <div class="toc-grid">
+      <div class="toc-item" onclick="switchTab('level1')"><div class="n">Section 1</div><div class="t">Level 1 Deep Reference &rarr;</div></div>
+      <div class="toc-item" onclick="switchTab('level2')"><div class="n">Section 2</div><div class="t">Level 2 Deep Reference &rarr;</div></div>
+      <div class="toc-item" onclick="switchTab('level3')"><div class="n">Section 3</div><div class="t">Level 3 Deep Reference &rarr;</div></div>
+      <div class="toc-item" onclick="switchTab('glossary')"><div class="n">Section 4</div><div class="t">Master Glossary (A–Z) &rarr;</div></div>
+      <div class="toc-item" onclick="switchTab('protocol')"><div class="n">Section 5</div><div class="t">Protocol Cheat-Sheet &rarr;</div></div>
+      <div class="toc-item" onclick="switchTab('examprep')"><div class="n">Section 6</div><div class="t">Exam Prep Q&amp;A &rarr;</div></div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ============================================================ LEVEL 1 ============================================================ -->
+<div class="tab-pane" id="level1">
+
+  <section class="card">
+    <span class="level-tag tag-l1">Level 1 — Fundamentals</span>
+    <h2 class="section-title">The Motor Control Hierarchy</h2>
+    <p>NKT frames dysfunction as a hierarchy problem, from cognitive intent down to the muscle fiber:</p>
+    <ol>
+      <li><strong>Cerebral Cortex</strong> — conscious movement intent and strategic planning.</li>
+      <li><strong>Limbic System</strong> — emotional/threat appraisal; fear-avoidance and protective guarding can prime a pattern before any tissue is even injured.</li>
+      <li><strong>Cerebellum (Motor Control Center, MCC)</strong> — stores and automates multi-joint "motor engrams." It learns strictly through trial, error, and physical failure (the classic example: an infant learning to stand only succeeds after many failed attempts are filtered out).</li>
+      <li><strong>Basal Ganglia &amp; Brainstem</strong> — postural tone and automatic anticipatory postural adjustments (APAs).</li>
+      <li><strong>Spinal Cord &amp; Peripheral System</strong> — alpha/gamma motor neurons, muscle spindles (Ia/II afferents), Golgi tendon organs (Ib afferents), and joint mechanoreceptors that report real-time state back up the chain.</li>
+    </ol>
+    <div class="callout">
+      <strong>The Rehabilitation Catch-22:</strong> Histological healing of an injured tissue does <em>not</em> automatically erase the compensation engram the MCC built while protecting that tissue. The faulty program can persist for years after full tissue healing — this is why patients "feel fine on the table" but re-injure the same pattern under load.
+    </div>
+  </section>
+
+  <section class="card">
+    <h2 class="section-title">Manual Muscle Testing (MMT): Mechanics &amp; Grading</h2>
+    <h3 class="sub-title">Contact Pressure Categories</h3>
+    <table>
+      <tr><th>Pressure</th><th>Duration</th><th>Purpose</th></tr>
+      <tr><td><strong>Light</strong></td><td>1–2 seconds</td><td>Tests availability of the neural pathway (can the muscle be recruited at all?)</td></tr>
+      <tr><td><strong>Moderate</strong></td><td>1–2 seconds</td><td>Standard clinical strength test used for most NKT screening</td></tr>
+      <tr><td><strong>Heavy</strong></td><td>5–10 seconds, firm pressure</td><td>Tests stamina / fatigability of the motor unit pool under sustained load</td></tr>
+    </table>
+    <h3 class="sub-title">Binary Classification (Neurological, not Orthopedic)</h3>
+    <p>NKT deliberately uses a <strong>binary</strong> neurological outcome instead of the 0–5 Kendall/Daniels orthopedic grading scale, because it is testing rate-coding and recruitment latency, not raw contractile strength:</p>
+    <table>
+      <tr><th>Result</th><th>Feel</th><th>Interpretation</th></tr>
+      <tr><td><strong>Facilitated</strong></td><td>Crisp, rigid, immediate "lock"</td><td>Muscle is neurologically overactive / available for recruitment (may still be tight/short)</td></tr>
+      <tr><td><strong>Inhibited</strong></td><td>Spongy "give," delayed recruitment, or joint buckles</td><td>Muscle is neurologically underactive / not being called upon by the MCC in this pattern (may still be strong in isolation elsewhere)</td></tr>
+    </table>
+    <h3 class="sub-title">Core Execution Rules</h3>
+    <ul>
+      <li><strong>Contraction type:</strong> strictly isometric — the patient matches the examiner's force; no joint motion is allowed.</li>
+      <li><strong>Starting position:</strong> shortened / inner-to-mid range, to minimize passive non-contractile tension confounding the result.</li>
+      <li><strong>Force ramp:</strong> a smooth ~2-second ramp from 0% to 100% (roughly 10–15 lb of examiner force) — never a jerked or ballistic push.</li>
+      <li><strong>Vector alignment:</strong> the resistance vector must exactly match the muscle's anatomical line of pull; any drift invites substitution from a neighboring muscle and produces a false result.</li>
+      <li><strong>Directional Testing:</strong> testing the same joint through several resisted directions (not just the single "textbook" vector) to expose exactly which fibers/synergists are substituting.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2 class="section-title">Testing &amp; Terminology Foundations</h2>
+    <table>
+      <tr><th>Term</th><th>Meaning</th></tr>
+      <tr><td><strong>Weak in the Clear (WIC)</strong></td><td>The suspected inhibited muscle tests weak on its own, with no therapy localization or facilitation from another structure — confirms it is truly inhibited rather than being masked by a compensating synergist.</td></tr>
+      <tr><td><strong>Strong in the Clear (SIC)</strong></td><td>The suspected facilitated/driver muscle tests strong on its own — confirms it is genuinely available (often overactive), not simply appearing strong due to substitution.</td></tr>
+      <tr><td><strong>Therapy Localization (TL)</strong></td><td>The patient (or clinician) places light contact/pressure on a suspected driver tissue while an indicator muscle is retested; a shift from weak to strong confirms a neurological relationship.</td></tr>
+      <tr><td><strong>Neurolock</strong></td><td>A muscle exhibiting a rock-solid, unmistakable strong contraction — a clean, reliable neural connection with no give.</td></tr>
+      <tr><td><strong>Reactive (Muscle) Pair</strong></td><td>Two muscles linked in a kinetic chain such that releasing/inhibiting one immediately restores strength in the other on retest.</td></tr>
+    </table>
+  </section>
+
+  <section class="card">
+    <h2 class="section-title">Compensation Taxonomy: The Two Level-1 Patterns</h2>
+    <h3 class="sub-title">1. Synergistic Dominance</h3>
+    <p>When a prime mover is inhibited, a synergist that normally assists the same movement takes over and becomes chronically overworked (facilitated), while the true prime mover stays inhibited. This is an <strong>agonist-substitutes-for-agonist</strong> problem within the same movement pattern.</p>
+    <table>
+      <tr><th>Dominant Synergist (Facilitated)</th><th>True Prime Mover (Inhibited)</th><th>Common Clinical Picture</th></tr>
+      <tr><td>Tensor Fasciae Latae (TFL)</td><td>Gluteus Medius</td><td>IT band friction syndrome, greater trochanteric pain, Trendelenburg-type gait faults</td></tr>
+      <tr><td>Hamstrings / Erector Spinae</td><td>Gluteus Maximus</td><td>Hamstring strains, lumbar facet overload, "hamstring-dominant" hip extension</td></tr>
+      <tr><td>Upper Trapezius / Levator Scapulae</td><td>Lower Trapezius / Serratus Anterior</td><td>Chronic neck/shoulder spasm, subacromial impingement, scapular winging</td></tr>
+      <tr><td>Piriformis / Deep Rotators</td><td>Gluteus Maximus (extension) / Gluteus Medius (abduction)</td><td>Deep gluteal (piriformis-type) pain, posterior hip tightness</td></tr>
+      <tr><td>Rectus Femoris</td><td>Iliopsoas</td><td>Anterior hip/knee pain, quad-dominant hip flexion strategy</td></tr>
+      <tr><td>Biceps Brachii / Upper Trap Shrug</td><td>Rotator Cuff (Infraspinatus/Teres Minor)</td><td>Shoulder instability masked by shrug-and-pull substitution during overhead reach</td></tr>
+    </table>
+
+    <h3 class="sub-title">2. Reciprocal Inhibition</h3>
+    <p>Per Sherrington's Law of Reciprocal Innervation, a chronically <em>tight/overactive</em> muscle reflexively inhibits its direct antagonist across the joint. This is an <strong>antagonist-inhibits-agonist</strong> problem.</p>
+    <table>
+      <tr><th>Overactive Driver (Facilitated / Tight)</th><th>Reflexively Inhibited Antagonist</th><th>Common Clinical Picture</th></tr>
+      <tr><td>Psoas Major / Iliacus</td><td>Gluteus Maximus</td><td>Anterior pelvic tilt, hip impingement, low-back extension compensation</td></tr>
+      <tr><td>Pectoralis Minor / Major</td><td>Lower Trapezius / Rhomboids</td><td>Protracted/rounded shoulder posture, thoracic outlet symptoms</td></tr>
+      <tr><td>Gastrocnemius / Soleus</td><td>Tibialis Anterior</td><td>Loss of dorsiflexion, foot slap, tripping on uneven ground</td></tr>
+      <tr><td>Upper Trapezius</td><td>Lower Trapezius</td><td>Elevated/protracted scapula at rest, poor scapulohumeral rhythm</td></tr>
+      <tr><td>SCM / Scalenes</td><td>Deep Neck Flexors (Longus Colli/Capitis)</td><td>Forward head posture, cervicogenic headache, whiplash-associated weakness</td></tr>
+      <tr><td>Adductor Group</td><td>Gluteus Medius</td><td>Groin tightness with frontal-plane pelvic instability</td></tr>
+      <tr><td>Quadratus Lumborum</td><td>Contralateral Gluteus Medius</td><td>Lateral pelvic hike, functional leg-length asymmetry</td></tr>
+      <tr><td>Latissimus Dorsi</td><td>Lower Trapezius / Serratus Anterior</td><td>Shoulder impingement in overhead athletes (swimmers, throwers)</td></tr>
+    </table>
+    <div class="callout tip"><strong>Clinical distinction:</strong> Synergistic dominance is confirmed by testing the prime mover in isolation while the dominant synergist is neutralized/stabilized; reciprocal inhibition is confirmed by releasing the tight antagonist and immediately retesting the inhibited agonist within the neuroplastic window.</div>
+  </section>
+
+</div>
+
+<!-- ============================================================ LEVEL 2 ============================================================ -->
+<div class="tab-pane" id="level2">
+
+  <section class="card">
+    <span class="level-tag tag-l2">Level 2 — Advanced</span>
+    <h2 class="section-title">The Four Kinetic Subsystems</h2>
+    <p>Level 2 extends single-muscle testing to whole-body force-transfer "slings," conceptually aligned with the integrated core/kinetic-chain models used across manual therapy (Vleeming, Myers) but tested here through NKT's facilitated/inhibited MMT lens.</p>
+
+    <h3 class="sub-title">Posterior Oblique Subsystem (POS)</h3>
+    <p><strong>Chain:</strong> Latissimus Dorsi &harr; Thoracolumbar Fascia &harr; Contralateral Gluteus Maximus.</p>
+    <p><strong>Function:</strong> Transfers rotational/propulsive force diagonally across the trunk during gait (e.g., right lat loads through the fascia into the left glute max during arm-swing/leg-drive coupling) and helps compress and stabilize the sacroiliac joint. Assessed with cross-body gait-pattern muscle tests (contralateral shoulder extension + hip extension).</p>
+
+    <h3 class="sub-title">Anterior Oblique Subsystem (AOS)</h3>
+    <p><strong>Chain:</strong> External Oblique &harr; Linea Alba/Anterior Abdominal Fascia &harr; Contralateral Internal Oblique &amp; Adductor Complex.</p>
+    <p><strong>Function:</strong> Rotational trunk stability for cutting, kicking, and swinging motions. Dysfunction here is classically implicated in athletic pubalgia ("sports hernia") and groin-adductor overload.</p>
+
+    <h3 class="sub-title">Deep Longitudinal Subsystem (DLS)</h3>
+    <p><strong>Chain:</strong> Erector Spinae &harr; Sacrotuberous Ligament &harr; Biceps Femoris &harr; Peroneus Longus.</p>
+    <p><strong>Function:</strong> Sagittal-plane force transmission from the ground (heel strike) up through the leg, pelvis, and spine, using the sacrotuberous ligament as a key tension link between hamstring and erector spinae fascia.</p>
+
+    <h3 class="sub-title">Lateral Subsystem</h3>
+    <p><strong>Chain:</strong> Gluteus Medius &harr; TFL &harr; Contralateral Quadratus Lumborum &amp; Adductors.</p>
+    <p><strong>Function:</strong> Frontal-plane pelvic stability during single-limb stance (prevents a Trendelenburg drop). Tested with single-leg-stance indicator patterns and hip-hike/adduction challenges.</p>
+  </section>
+
+  <section class="card">
+    <h2 class="section-title">Core Cylinder, Diaphragm &amp; Breath Mechanics</h2>
+    <p>The diaphragm is treated as a central "core" muscle because of its direct fascial and functional links to the thoracic/lumbar erectors, quadratus lumborum, psoas, abdominals, pelvic floor, and — via the Valsalva mechanism — even the jaw.</p>
+    <h4 class="mini-title">Inhalation vs. Exhalation Breath-Hold Testing</h4>
+    <p>An indicator muscle is manually tested twice: once while the patient holds their breath <strong>in</strong>, and once while they hold their breath <strong>out</strong>. A muscle that is strong in one breath state and inhibited in the other implicates the diaphragm/respiratory pattern as a driver.</p>
+    <div class="callout">
+      <strong>Documented clinical pattern (chronically facilitated/overactive diaphragm):</strong> commonly correlates with inhibition of the deep neck flexors, pectoralis major (bilateral), humeral flexors/extensors (bilateral), psoas (bilateral), rectus femoris (bilateral), gluteus maximus (bilateral), and several contralateral gait patterns — reflecting how a single overburdened core muscle can radiate dysfunction through the entire kinetic chain.
+    </div>
+    <h4 class="mini-title">Zone of Apposition (ZOA)</h4>
+    <p>The area where the dome of the diaphragm directly opposes the inner rib cage. A well-restored ZOA supports optimal diaphragm length-tension and efficient intra-abdominal pressure (IAP) generation for spinal stabilization; subcostal manual release techniques aim to restore this apposition before re-testing core indicator muscles.</p>
+    <h4 class="mini-title">Intrinsic Core ("Inner Unit") &amp; Diastasis Recti</h4>
+    <p>Level 2 study material also covers spotting a loss of intrinsic/inner-unit core control (transversus abdominis, multifidus, pelvic floor, diaphragm co-contraction) and assessing diastasis recti as a driver of superficial rectus abdominis or oblique inhibition, particularly postpartum.</p>
+  </section>
+
+  <section class="card">
+    <h2 class="section-title">Joint Compression &amp; Decompression Reflexes</h2>
+    <p>Joint capsule mechanoreceptors respond differently to compressive vs. distractive load. NKT Level 2 introduces testing an indicator muscle under manual joint <strong>compression</strong> versus manual joint <strong>decompression/traction</strong> (classically demonstrated at the fingers, wrist, and hip) to determine whether a joint's mechanoreceptor signaling — rather than a muscle-to-muscle relationship — is driving the inhibition. This is clinically relevant for conditions like hammer toes, early joint arthrosis, or post-immobilization stiffness.</p>
+  </section>
+
+  <section class="card">
+    <h2 class="section-title">TMJ / Stomatognathic System</h2>
+    <p>The jaw is tested as a core-adjacent structure due to shared fascial, developmental, and neurological (trigeminal/vagal) connections to the cervical spine, pelvic floor, and diaphragm.</p>
+    <ul>
+      <li><strong>Primary jaw muscles tested:</strong> Masseter, Temporalis, Medial &amp; Lateral Pterygoids, Digastric.</li>
+      <li><strong>Accessory muscles of jaw movement:</strong> assessed for their contribution to bite-pattern compensation.</li>
+      <li><strong>Overbite/underbite global testing:</strong> checking how a structural bite abnormality changes whole-body indicator muscle results (a signature "global test" concept in NKT).</li>
+      <li><strong>Common driver-receiver relationship:</strong> Masseter/Temporalis/Pterygoid overactivity co-presenting with deep neck flexor, pelvic floor, or core stabilizer inhibition.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2 class="section-title">Perturbation &amp; Anticipatory Postural Adjustments (APAs)</h2>
+    <p>Standing rotational or multi-directional perturbation challenges are used to assess how well the basal ganglia/brainstem generate feed-forward postural bracing <em>before</em> a destabilizing force arrives — exposing subsystems that fail specifically under dynamic/reactive load even when they test fine in static, isolated MMT.</p>
+  </section>
+
+</div>
+
+<!-- ============================================================ LEVEL 3 ============================================================ -->
+<div class="tab-pane" id="level3">
+
+  <section class="card">
+    <span class="level-tag tag-l3">Level 3 — Masters</span>
+    <h2 class="section-title">Muscle-to-Muscle Testing &amp; Refined Protocol</h2>
+    <p>Where Levels 1–2 primarily use therapy localization (a hand/finger placed on a suspected driver) to confirm a reactive pair, Level 3 refines the process into direct <strong>muscle-to-muscle testing</strong>: testing the suspected driver muscle's own strength directly, then testing the suspected receiver, and comparing the pattern of weakness/strength shifts without relying purely on TL contact. This is combined with refined MMT positioning in supine, prone, seated, and standing postures to eliminate false substitution.</p>
+  </section>
+
+  <section class="card">
+    <h2 class="section-title">Advanced Multi-Phasic Gait Dynamics</h2>
+    <p>Level 3 dissects gait into its component phases and tests each contralateral/diagonal coupling independently:</p>
+    <table>
+      <tr><th>Gait Phase</th><th>What Is Assessed</th></tr>
+      <tr><td>Heel Strike / Loading Response</td><td>Eccentric control handoff from ankle dorsiflexors to hip/glute stabilizers</td></tr>
+      <tr><td>Single-Limb (Mid) Stance</td><td>Lateral Subsystem integrity — frontal-plane pelvic control</td></tr>
+      <tr><td>Terminal Stance / Propulsion</td><td>Posterior chain and DLS force transfer into push-off</td></tr>
+      <tr><td>Swing Phase / Cross-Body Coupling</td><td>Contralateral arm-leg (and diagonal) synchrony — e.g., right shoulder extension paired with left hip extension</td></tr>
+    </table>
+    <p>Beyond straight-plane gait, Level 3 also examines <strong>rotational and diagonal patterns</strong> (e.g., bringing the right arm toward the left knee) and frontal-plane variants (humeral/femoral abduction-adduction gait patterns), which are essential for sport-specific movements that a simple flexion/extension gait screen would miss entirely.</p>
+  </section>
+
+  <section class="card">
+    <h2 class="section-title">Extraocular Muscles &amp; Oculo-Cervical "Direction of Dysfunction" (DOD)</h2>
+    <p>The eyes' extraocular muscles are innervated by three cranial nerves and reflexively couple to cervical and postural tone through the vestibulo-ocular and cervico-ocular reflex arcs:</p>
+    <table>
+      <tr><th>Cranial Nerve</th><th>Muscle(s)</th><th>Primary Gaze Vector</th></tr>
+      <tr><td>CN III (Oculomotor)</td><td>Superior Rectus, Inferior Rectus, Medial Rectus, Inferior Oblique</td><td>Up, down, adduction (in and up/down)</td></tr>
+      <tr><td>CN IV (Trochlear)</td><td>Superior Oblique</td><td>Down and in (depression while adducted)</td></tr>
+      <tr><td>CN VI (Abducens)</td><td>Lateral Rectus</td><td>Abduction (out)</td></tr>
+    </table>
+    <p><strong>Direction of Dysfunction (DOD)</strong> testing has the patient direct their gaze to each of the 6–8 cardinal positions while an indicator muscle is retested; the specific gaze vector that reproduces inhibition/facilitation pinpoints which extraocular muscle (and by extension which suboccipital/cervical relationship) is the true driver — critical in post-concussive, vestibular, and chronic neck-pain cases.</p>
+  </section>
+
+  <section class="card">
+    <h2 class="section-title">Hyoid, Deglutition &amp; Tongue Stabilizers</h2>
+    <p>The hyoid bone is a floating anchor point for swallowing (deglutition), tongue position, and anterior cervical stability — dysfunction here often hides behind chronic anterior neck tension or TMJ complaints.</p>
+    <ul>
+      <li><strong>Suprahyoid group:</strong> Digastric, Mylohyoid, Geniohyoid, Stylohyoid (elevate hyoid/depress mandible).</li>
+      <li><strong>Infrahyoid group:</strong> Sternohyoid, Sternothyroid, Thyrohyoid, Omohyoid (depress/stabilize hyoid).</li>
+      <li><strong>Tongue stabilizers:</strong> Genioglossus and associated intrinsic/extrinsic tongue musculature, tested for their contribution to swallow-pattern stability.</li>
+    </ul>
+    <p>As with the eyes, the hyoid complex is assessed with <strong>Direction of Dysfunction</strong> testing — gentle manual vectoring of the hyoid in different directions while retesting an indicator muscle — to isolate exactly which suprahyoid/infrahyoid relationship is driving distant inhibition.</p>
+  </section>
+
+  <section class="card">
+    <h2 class="section-title">Scars: 8-Vector Protocol, Vector of Release &amp; DOD</h2>
+    <p>Scar tissue (surgical or traumatic) can become a chronic neurological driver, often testing hypersensitive to the touch even years after healing. Level 3 formalizes scar assessment:</p>
+    <ol>
+      <li><strong>8-Vector Mapping:</strong> the scar is challenged/therapy-localized in eight directions around its axis — North, South, East, West, Clockwise, Counter-Clockwise, Compression, and Distraction/Pinch — while an indicator muscle is retested in each vector.</li>
+      <li><strong>Vector of Release:</strong> whichever vector(s) reproduce the strongest inhibition/facilitation shift indicate the direction manual scar mobilization should be applied to normalize the distant muscle.</li>
+      <li><strong>Direction of Dysfunction (DOD):</strong> the same directional-testing logic used for eyes and hyoid, applied to the scar itself.</li>
+      <li><strong>Scar-to-Scar relationships:</strong> in patients with multiple scars (e.g., an appendectomy scar plus a C-section scar), one scar may be TL'd against another to find inter-scar driver relationships.</li>
+    </ol>
+    <p>Common clinical targets: Cesarean-section scars, appendectomy scars, arthroscopic portal scars, umbilical/navel adhesions, and episiotomy scars — frequently implicated in postpartum core weakness, chronic low-back pain, and pelvic floor dysfunction.</p>
+    <div class="callout warn"><strong>Precaution:</strong> Scars less than 6–8 weeks old should only receive light superficial sensory challenge (never aggressive deep friction), and active/open wounds are an absolute contraindication for direct scar work.</div>
+  </section>
+
+  <section class="card">
+    <h2 class="section-title">Pelvic &amp; Peripheral Ligamentous Reflexes (Ligamento-Muscular Reflex)</h2>
+    <p>Ligaments are richly innervated with mechanoreceptors and can reflexively facilitate or inhibit muscles that cross the same joint — the <strong>ligamento-muscular reflex</strong>. Level 3's "Pelvic Ligaments and DOD" module, along with broader NKT ligament work, covers:</p>
+    <table>
+      <tr><th>Ligament</th><th>Region</th><th>Commonly Linked Muscle(s)</th></tr>
+      <tr><td>Sacrotuberous Ligament</td><td>Pelvis/Sacrum</td><td>Biceps Femoris, Gluteus Maximus (part of the DLS)</td></tr>
+      <tr><td>Sacrospinous / Iliolumbar Ligament</td><td>Lumbosacral/Pelvis</td><td>Quadratus Lumborum, deep lumbar stabilizers</td></tr>
+      <tr><td>Sacroiliac Joint (SIJ) Ligamentous Complex</td><td>Pelvis</td><td>Gluteus Maximus, Lat Dorsi (via POS), pelvic floor</td></tr>
+      <tr><td>Alar Ligaments</td><td>Upper cervical (C1-C2-Occiput)</td><td>Suboccipitals, SCM, deep neck flexors</td></tr>
+      <tr><td>Anterior Talofibular (ATFL) &amp; Calcaneofibular (CFL)</td><td>Ankle</td><td>Peroneals, Gluteus Medius (distant kinetic-chain inhibition after ankle sprain)</td></tr>
+    </table>
+    <p>This explains a very common clinical finding: a patient with a history of ankle sprain (ATFL/CFL laxity) presenting years later with unexplained ipsilateral gluteus medius inhibition and hip/low-back pain, with the ankle itself asymptomatic.</p>
+  </section>
+
+  <section class="card">
+    <h2 class="section-title">Reverse Therapy Localization (Reverse TL)</h2>
+    <p>Introduced into the NKT Symposium/Masters curriculum by instructor Thomas Wells, Reverse TL solves the opposite problem from standard TL: the patient has an obvious, acutely <strong>painful, hypertonic</strong> muscle, but the clinician cannot yet identify what distant muscle is actually inhibited.</p>
+    <ol>
+      <li>Patient touches/localizes the painful, hypertonic driver.</li>
+      <li>Clinician scans and tests a series of normally-strong prime movers across the kinetic chain.</li>
+      <li>When a normally strong indicator muscle suddenly <strong>breaks weak</strong> while the patient touches the painful driver, the true inhibited receiver has been uncovered.</li>
+      <li>Release the painful driver, then activate the newly identified inhibited receiver — same activation logic as the standard protocol.</li>
+    </ol>
+  </section>
+
+</div>
+
+<!-- ============================================================ GLOSSARY ============================================================ -->
+<div class="tab-pane" id="glossary">
+  <section class="card">
+    <h2 class="section-title">Master Glossary (A–Z)</h2>
+    <p>Consolidated terminology spanning all three levels — useful as a rapid pre-exam refresher.</p>
+    <div class="glossary-grid">
+
+      <div class="term-card"><div class="term">Active TL</div><p>The patient actively contracts or touches the suspected driver tissue themselves (vs. the clinician applying it) while an indicator muscle is retested.</p></div>
+      <div class="term-card"><div class="term">Anticipatory Postural Adjustment <span class="abbr">(APA)</span></div><p>A feed-forward postural bracing response generated just before a voluntary movement or an incoming perturbation.</p></div>
+      <div class="term-card"><div class="term">Compensation Pattern</div><p>A substitute movement/muscle-recruitment strategy the MCC adopts after an injury, weakness, or repeated fault to still achieve the movement goal.</p></div>
+      <div class="term-card"><div class="term">Direction of Dysfunction <span class="abbr">(DOD)</span></div><p>Testing multiple directions/vectors of a structure (eye gaze, hyoid position, scar pull) to isolate exactly which vector reproduces the inhibitory/facilitatory relationship.</p></div>
+      <div class="term-card"><div class="term">Facilitated</div><p>Neurologically overactive; the muscle tests with a crisp, rigid "lock" and is readily/excessively recruited by the MCC.</p></div>
+      <div class="term-card"><div class="term">Inhibited</div><p>Neurologically underactive; the muscle "gives" or fails under isometric test load because the MCC is not calling on it appropriately in this pattern.</p></div>
+      <div class="term-card"><div class="term">Ligamento-Muscular Reflex</div><p>A reflex arc in which ligamentous mechanoreceptors facilitate or inhibit muscles crossing the same joint.</p></div>
+      <div class="term-card"><div class="term">Locked Muscle</div><p>A muscle held in a protective, guarded contraction that cannot be accurately tested until it is first manually "unlocked."</p></div>
+      <div class="term-card"><div class="term">Motor Control Center <span class="abbr">(MCC)</span></div><p>The cerebellar network that stores, coordinates, and automates learned multi-joint movement programs ("motor engrams").</p></div>
+      <div class="term-card"><div class="term">Neuroedge</div><p>The maximum limit of successful correction achievable within a single treatment session before returns diminish or new compensations emerge.</p></div>
+      <div class="term-card"><div class="term">Neurolock</div><p>A muscle test result showing a rock-solid, unmistakably strong neural connection with zero give.</p></div>
+      <div class="term-card"><div class="term">Neuroplastic Window</div><p>The acute ~30–60 second period after a driver is released during which corrective isometric activation of the inhibited receiver most effectively reprograms the MCC.</p></div>
+      <div class="term-card"><div class="term">Passive TL</div><p>The clinician (not the patient) applies contact/pressure to the suspected driver tissue while an indicator muscle is retested.</p></div>
+      <div class="term-card"><div class="term">Reactive (Muscle) Pair</div><p>Two muscles in a confirmed driver&ndash;receiver relationship: releasing one immediately restores strength in the other.</p></div>
+      <div class="term-card"><div class="term">Reciprocal Inhibition</div><p>A chronically tight/overactive muscle reflexively inhibits its direct antagonist (Sherrington's Law).</p></div>
+      <div class="term-card"><div class="term">Strong in the Clear <span class="abbr">(SIC)</span></div><p>A muscle tests strong in isolation, with no therapy localization applied — confirms genuine facilitation.</p></div>
+      <div class="term-card"><div class="term">Synergistic Dominance</div><p>A synergist muscle chronically substitutes for and outworks an inhibited prime mover within the same movement pattern.</p></div>
+      <div class="term-card"><div class="term">Therapy Localization <span class="abbr">(TL)</span></div><p>Applying contact/sensory stimulation to a suspected driver tissue and immediately retesting an indicator muscle to confirm a neurological relationship.</p></div>
+      <div class="term-card"><div class="term">Vector of Release</div><p>The specific directional line of manual mobilization (commonly for scars) shown by testing to normalize a distant inhibited muscle.</p></div>
+      <div class="term-card"><div class="term">Weak in the Clear <span class="abbr">(WIC)</span></div><p>A muscle tests weak in isolation, with no interference/TL applied — confirms genuine inhibition rather than a masked substitution.</p></div>
+      <div class="term-card"><div class="term">Zone of Apposition <span class="abbr">(ZOA)</span></div><p>The region where the diaphragm's dome directly opposes the inner rib cage; restoring it supports optimal length-tension and intra-abdominal pressure generation.</p></div>
+
+    </div>
+  </section>
+</div>
+
+<!-- ============================================================ PROTOCOL CHEAT SHEET ============================================================ -->
+<div class="tab-pane" id="protocol">
+
+  <section class="card">
+    <h2 class="section-title">Clinical Protocol Cheat-Sheet</h2>
+    <p>A condensed, session-ready version of the full NKT corrective algorithm for quick reference across all levels.</p>
+    <div class="flow">===================================================================================================
+                        THE NKT CORRECTIVE ALGORITHM — QUICK REFERENCE
+===================================================================================================
+
+ STEP 1 — BASELINE TEST
+   Position target muscle in a shortened, isolated vector. Apply a 2-second isometric ramp.
+   Confirm the muscle is genuinely INHIBITED (Weak in the Clear).
+
+ STEP 2 — CHALLENGE / THERAPY LOCALIZATION (TL)
+   Apply sensory stimulation (touch, rub, or patient self-contact) to the hypothesized driver.
+
+ STEP 3 — IMMEDIATE RETEST (< 2 seconds)
+   Still weak  -> hypothesis rejected, test the next candidate driver.
+   Rock solid  -> REACTIVE PAIR CONFIRMED. Continue to Step 4.
+
+ STEP 4 — RELEASE THE FACILITATED DRIVER
+   Soft tissue release / ischemic compression / IASTM / stretch for 30-60 seconds.
+
+ STEP 5 — ACTIVATE THE INHIBITED RECEIVER
+   Within the 30-60s neuroplastic window: isolated isometric activation,
+   3-5 reps x 5-second holds at 50-70% effort.
+
+ STEP 6 — RETEST IN THE CLEAR
+   Receiver must now test Strong in the Clear (no TL needed).
+
+ STEP 7 — FUNCTIONAL REPATTERNING & HOME PROGRAM
+   Non-negotiable order: 1) Release driver FIRST -> 2) Activate receiver SECOND.
+   Frequency: 2-3x daily for 2-4 weeks for synaptic consolidation.
+===================================================================================================</div>
+  </section>
+
+  <section class="card">
+    <h2 class="section-title">Written Case-Study Documentation Checklist</h2>
+    <p>Required elements for NKT certification case studies at every level (per official certification FAQ):</p>
+    <ul>
+      <li>How Therapy Localization (TL) was used</li>
+      <li>Whether Strong-in-the-Clear or Weak-in-the-Clear testing was applied (and why, if one was not applicable — e.g., testing a ligament rather than a muscle)</li>
+      <li>The process used to identify the facilitated and inhibited structures</li>
+      <li>The corrective technique performed on the driver</li>
+      <li>The results of retesting the receiver</li>
+      <li>The home exercise / corrective homework assigned</li>
+    </ul>
+    <p style="font-size:0.85rem;color:var(--text-muted);">Case study counts required: <strong>Level 1 = 3</strong>, <strong>Level 2 = 6</strong>, <strong>Level 3 = 5</strong>, plus a live or Zoom-supervised session with an approved Certifier.</p>
+  </section>
+
+  <section class="card">
+    <h2 class="section-title">Clinical Safety, Red Flags &amp; Contraindications</h2>
+    <ul>
+      <li><strong>Absolute red flags (refer out immediately):</strong> progressive bilateral neurological deficits, saddle anesthesia, bowel/bladder incontinence (cauda equina syndrome), acute unhealed fracture, fever with spinal tenderness (infectious discitis/osteomyelitis), active deep vein thrombosis (DVT).</li>
+      <li><strong>Relative precautions:</strong> surgical scars &lt;6–8 weeks old (light superficial challenge only, no deep friction), active open wounds, severe osteoporosis (calibrate MMT force downward).</li>
+    </ul>
+  </section>
+
+</div>
+
+<!-- ============================================================ EXAM PREP ============================================================ -->
+<div class="tab-pane" id="examprep">
+
+  <section class="card">
+    <span class="level-tag tag-l1">Level 1 Review</span>
+    <h2 class="section-title">Level 1 Practice Questions</h2>
+
+    <details class="acc"><summary>Q1. What does a "spongy give" during manual muscle testing indicate?</summary>
+      <div class="acc-body">The muscle's neurological availability under isometric load.
+      <div class="answer"><strong>Answer:</strong> The muscle is <strong>Inhibited</strong> — the MCC is not recruiting it properly for this pattern, even if the muscle is anatomically capable of producing force elsewhere.</div></div>
+    </details>
+
+    <details class="acc"><summary>Q2. TFL dominance over Gluteus Medius is an example of which compensation pattern?</summary>
+      <div class="acc-body">Consider whether TFL and Glute Med are agonist/synergist or true antagonists.
+      <div class="answer"><strong>Answer:</strong> <strong>Synergistic Dominance</strong> — TFL is a hip-abduction synergist that substitutes for and outworks the true prime mover, Gluteus Medius.</div></div>
+    </details>
+
+    <details class="acc"><summary>Q3. Why does NKT use a binary Facilitated/Inhibited result instead of the 0–5 Kendall scale?</summary>
+      <div class="acc-body">Think about what NKT is actually measuring.
+      <div class="answer"><strong>Answer:</strong> NKT tests <strong>rate coding and recruitment latency</strong> (a neurological availability question), not raw contractile strength, so a graded strength scale doesn't capture what's being assessed.</div></div>
+    </details>
+
+    <details class="acc"><summary>Q4. A tight Psoas reciprocally inhibiting the Gluteus Maximus is an example of what?</summary>
+      <div class="acc-body">Are Psoas and Glute Max synergists or antagonists at the hip?
+      <div class="answer"><strong>Answer:</strong> <strong>Reciprocal Inhibition</strong> — Psoas (hip flexor) and Glute Max (hip extensor) are direct antagonists; per Sherrington's Law, an overactive Psoas reflexively inhibits Glute Max.</div></div>
+    </details>
+
+    <details class="acc"><summary>Q5. What joint starting position minimizes passive tissue interference during MMT?</summary>
+      <div class="acc-body">Think about where non-contractile tension is lowest.
+      <div class="answer"><strong>Answer:</strong> A <strong>shortened / inner-to-mid range</strong> starting position.</div></div>
+    </details>
+  </section>
+
+  <section class="card">
+    <span class="level-tag tag-l2">Level 2 Review</span>
+    <h2 class="section-title">Level 2 Practice Questions</h2>
+
+    <details class="acc"><summary>Q1. Which subsystem links the Latissimus Dorsi to the contralateral Gluteus Maximus?</summary>
+      <div class="acc-body">Which sling crosses the body diagonally through the thoracolumbar fascia?
+      <div class="answer"><strong>Answer:</strong> The <strong>Posterior Oblique Subsystem (POS)</strong>.</div></div>
+    </details>
+
+    <details class="acc"><summary>Q2. What does testing an indicator muscle on an inhale-hold vs. exhale-hold reveal?</summary>
+      <div class="acc-body">Which structure is being challenged by two different breath states?
+      <div class="answer"><strong>Answer:</strong> Whether the <strong>diaphragm/respiratory pattern</strong> is acting as a hidden driver of the muscle's inhibition.</div></div>
+    </details>
+
+    <details class="acc"><summary>Q3. The Anterior Oblique Subsystem is most classically implicated in which condition?</summary>
+      <div class="acc-body">Think rotational trunk-to-groin force transfer in athletes.
+      <div class="answer"><strong>Answer:</strong> <strong>Athletic pubalgia ("sports hernia")</strong> and adductor/groin overload.</div></div>
+    </details>
+
+    <details class="acc"><summary>Q4. What is the Zone of Apposition (ZOA)?</summary>
+      <div class="acc-body">Relates to the diaphragm's mechanical relationship with the rib cage.
+      <div class="answer"><strong>Answer:</strong> The area where the diaphragm's dome directly opposes the inner rib cage, important for optimal length-tension and intra-abdominal pressure generation.</div></div>
+    </details>
+
+    <details class="acc"><summary>Q5. Testing a muscle under manual joint compression vs. decompression evaluates which type of receptor input?</summary>
+      <div class="acc-body">Not muscle spindles — think capsule.
+      <div class="answer"><strong>Answer:</strong> <strong>Joint capsule mechanoreceptors</strong>, which respond differently to compressive vs. distractive loading.</div></div>
+    </details>
+  </section>
+
+  <section class="card">
+    <span class="level-tag tag-l3">Level 3 Review</span>
+    <h2 class="section-title">Level 3 Practice Questions</h2>
+
+    <details class="acc"><summary>Q1. What are the 8 vectors used in the scar assessment protocol?</summary>
+      <div class="acc-body">Think compass directions plus rotational and pressure vectors.
+      <div class="answer"><strong>Answer:</strong> North, South, East, West, Clockwise, Counter-Clockwise, Compression, and Distraction/Pinch.</div></div>
+    </details>
+
+    <details class="acc"><summary>Q2. Which cranial nerve innervates the Superior Oblique, and what gaze direction does it primarily control?</summary>
+      <div class="acc-body">This is the only extraocular muscle innervated by this nerve.
+      <div class="answer"><strong>Answer:</strong> <strong>CN IV (Trochlear)</strong> — controls downward gaze while the eye is adducted (looking down and in).</div></div>
+    </details>
+
+    <details class="acc"><summary>Q3. In Reverse Therapy Localization, what does the clinician look for?</summary>
+      <div class="acc-body">The patient already knows what hurts — what is the clinician hunting for?
+      <div class="answer"><strong>Answer:</strong> A normally-strong indicator muscle that <strong>suddenly breaks weak</strong> while the patient touches the painful, hypertonic driver — revealing the true inhibited receiver.</div></div>
+    </details>
+
+    <details class="acc"><summary>Q4. A patient with an old ATFL/CFL ankle sprain later develops unexplained ipsilateral hip weakness. What mechanism explains this?</summary>
+      <div class="acc-body">Think about mechanoreceptor-rich connective tissue, not muscle.
+      <div class="answer"><strong>Answer:</strong> The <strong>ligamento-muscular reflex</strong> — lax/altered ankle ligament mechanoreceptors reflexively inhibit distant muscles such as Gluteus Medius.</div></div>
+    </details>
+
+    <details class="acc"><summary>Q5. What distinguishes Muscle-to-Muscle Testing from standard Therapy Localization?</summary>
+      <div class="acc-body">Consider what physically contacts the driver in each method.
+      <div class="answer"><strong>Answer:</strong> Muscle-to-Muscle Testing directly tests the suspected driver muscle's own strength and compares it to the receiver's pattern, rather than relying on a hand/finger TL contact.</div></div>
+    </details>
+
+    <details class="acc"><summary>Q6. Which ligament is part of the Deep Longitudinal Subsystem chain?</summary>
+      <div class="acc-body">Connects the hamstring to the erector spinae fascia.
+      <div class="answer"><strong>Answer:</strong> The <strong>Sacrotuberous Ligament</strong>.</div></div>
+    </details>
+  </section>
+
+</div>
+
+<!-- ============================================================ SOURCES ============================================================ -->
+<div class="tab-pane" id="sources">
+
+  <section class="card">
+    <h2 class="section-title">Certification Pathway Summary</h2>
+    <table>
+      <tr><th>Requirement</th><th>Detail</th></tr>
+      <tr><td>Course length</td><td>15-hour, 2-day in-person (or approved format) seminar per level</td></tr>
+      <tr><td>Prerequisite practice</td><td>Minimum 1 month of practice before certifying at any level</td></tr>
+      <tr><td>Sequencing rule</td><td>Must be certified in the current level no later than 1 week before the next level's class begins</td></tr>
+      <tr><td>Case studies</td><td>Level 1: 3 &nbsp;|&nbsp; Level 2: 6 &nbsp;|&nbsp; Level 3: 5</td></tr>
+      <tr><td>Practical exam</td><td>Live or Zoom-supervised session performed for an approved NKT Certifier</td></tr>
+      <tr><td>Practitioner directory tiers</td><td>Level 1 = Beginner &nbsp;|&nbsp; Level 2 = Intermediate &nbsp;|&nbsp; Level 3 = Advanced</td></tr>
+    </table>
+    <p style="font-size:0.85rem;color:var(--text-muted);">Requirements and fees change periodically — always verify current details on the official site before submitting case studies.</p>
+  </section>
+
+  <section class="card">
+    <h2 class="section-title">Sources &amp; Further Study</h2>
+    <ul>
+      <li>David Weinstock, <em>NeuroKinetic Therapy&reg;: An Innovative Approach to Manual Muscle Testing</em>, North Atlantic Books, 2010 (ISBN 978-1-55643-877-6) — the foundational text.</li>
+      <li>Official course outlines: <a class="src-link" href="https://neurokinetictherapy.com/course-outlines/level-one/" target="_blank" rel="noopener">Level One</a>, <a class="src-link" href="https://neurokinetictherapy.com/course-outlines/level-three/" target="_blank" rel="noopener">Level Three</a>, and the <a class="src-link" href="https://neurokinetictherapy.com/seminars/course-outlines" target="_blank" rel="noopener">Course Outlines index</a> at neurokinetictherapy.com.</li>
+      <li><a class="src-link" href="https://neurokinetictherapy.com/certification/" target="_blank" rel="noopener">Official Certification requirements</a> and <a class="src-link" href="https://neurokinetictherapy.com/faq/" target="_blank" rel="noopener">Seminar / Case Study FAQ</a>.</li>
+      <li><a class="src-link" href="https://neurokinetictherapy.com/the-kinetic-chain-and-its-therapeutic-application/" target="_blank" rel="noopener">"The Kinetic Chain and its Therapeutic Application"</a> — official article explaining reactive pairs and therapy localization.</li>
+      <li><a class="src-link" href="https://learn.neurokinetictherapy.com/" target="_blank" rel="noopener">NKT Learning Portal</a> — Level 1/2/3 study group topic archives referenced throughout this guide.</li>
+      <li><a class="src-link" href="https://neurokinetictherapy.com/certified-practitioners/" target="_blank" rel="noopener">Certified Practitioner Directory</a> (Beginner/Intermediate/Advanced tier definitions).</li>
+    </ul>
+    <div class="callout warn">
+      <strong>Disclaimer:</strong> This is an independent educational reference for study/reference purposes and is not affiliated with or endorsed by David Weinstock or NeuroKinetic Therapy Seminars. NKT&reg; and NeuroKinetic Therapy&reg; are registered trademarks of their respective owner. This material does not substitute for official coursework, mentorship, medical advice, or professional certification, and should be used by qualified healthcare/movement professionals (PTs, DCs, DOs, ATCs, LMTs, OTs, personal trainers) within their scope of practice.
+    </div>
+  </section>
+
+</div>
+
+</main>
+
+<footer>
+  <p>Part of the NeuroKinetic Therapy (NKT&reg;) Master Clinical &amp; Educational Suite &middot; <a class="src-link" href="index.html">Return to Hub</a></p>
+</footer>
+
+<script>
+  function switchTab(tabId) {
+    document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.nav-tabs button').forEach(el => el.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+    const tabs = ['overview','level1','level2','level3','glossary','protocol','examprep','sources'];
+    const idx = tabs.indexOf(tabId);
+    if (idx >= 0) {
+      document.querySelectorAll('.nav-tabs button')[idx].classList.add('active');
+    }
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+</script>
+
+</body>
+</html>
