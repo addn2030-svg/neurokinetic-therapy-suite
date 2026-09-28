@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NKT&reg; Session Workflow: Analysis &middot; Evaluation &middot; Plan &middot; SOAP</title>
+<style>
+  :root {
+    --primary: #1e3a8a; --primary-dark: #0f172a; --primary-light: #3b82f6;
+    --secondary: #0d9488; --secondary-light: #14b8a6; --accent: #d97706;
+    --danger: #dc2626; --success: #16a34a; --warn: #b45309;
+    --bg-main: #f8fafc; --bg-card: #ffffff; --text-main: #1e293b; --text-muted: #64748b;
+    --border: #e2e8f0;
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: var(--bg-main); color: var(--text-main); line-height: 1.6; padding-bottom: 4rem; }
+  header { background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%); color: white; padding: 2.5rem 2rem; box-shadow: var(--shadow-md); }
+  .header-content { max-width: 1200px; margin: 0 auto; }
+  .badge { display: inline-block; background: rgba(255,255,255,0.15); color: #93c5fd; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 0.75rem; }
+  h1 { font-size: 2rem; font-weight: 800; margin-bottom: 0.5rem; }
+  .subtitle { font-size: 1.02rem; color: #cbd5e1; max-width: 900px; }
+  .home-link { display:inline-block; margin-top:1rem; color:#bae6fd; font-size:0.9rem; text-decoration:none; font-weight:600; }
+  .home-link:hover { text-decoration: underline; }
+
+  .nav-container { background: white; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow-sm); }
+  .nav-tabs { max-width: 1200px; margin: 0 auto; display: flex; overflow-x: auto; list-style: none; padding: 0 1rem; }
+  .nav-tabs button { background: none; border: none; padding: 1rem 1.1rem; font-size: 0.88rem; font-weight: 700; color: var(--text-muted); cursor: pointer; white-space: nowrap; border-bottom: 3px solid transparent; transition: all 0.15s ease; }
+  .nav-tabs button:hover { color: var(--primary-light); }
+  .nav-tabs button.active { color: var(--primary); border-bottom-color: var(--primary); }
+  .nav-tabs button .step-num { display:inline-block; width:1.3rem; height:1.3rem; line-height:1.3rem; border-radius:50%; background:#e2e8f0; color:#475569; font-size:0.72rem; text-align:center; margin-right:0.4rem; }
+  .nav-tabs button.active .step-num { background: var(--primary); color: white; }
+
+  .container { max-width: 1200px; margin: 2rem auto; padding: 0 1.5rem; }
+  .tab-pane { display: none; }
+  .tab-pane.active { display: block; animation: fadeIn 0.2s ease; }
+  @keyframes fadeIn { from { opacity:0; transform: translateY(6px);} to {opacity:1; transform: translateY(0);} }
+
+  section.card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 0.85rem; padding: 1.75rem 2rem; margin-bottom: 1.75rem; box-shadow: var(--shadow-sm); }
+  h2.section-title { font-size: 1.35rem; color: var(--primary-dark); margin-bottom: 1rem; padding-bottom: 0.6rem; border-bottom: 2px solid var(--border); }
+  h3.sub-title { font-size: 1.05rem; color: var(--primary); margin: 1.2rem 0 0.6rem 0; }
+  p { margin-bottom: 0.7rem; color: #334155; }
+  label { display:block; font-weight: 700; font-size: 0.85rem; color: var(--primary-dark); margin-bottom: 0.3rem; margin-top: 0.9rem; }
+  input[type=text], input[type=number], input[type=date], select, textarea {
+    width: 100%; padding: 0.55rem 0.7rem; border: 1px solid var(--border); border-radius: 0.5rem; font-size: 0.9rem; font-family: inherit; background: #fff; color: var(--text-main);
+  }
+  textarea { min-height: 70px; resize: vertical; }
+  .grid2 { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 0 1.2rem; }
+  .grid4 { display:grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr)); gap: 0 1.2rem; }
+  .checkbox-row { display:flex; align-items:center; gap:0.5rem; margin-top: 1rem; }
+  .checkbox-row input { width: auto; }
+  .checkbox-row label { margin: 0; }
+
+  table.pairs { width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: 0.85rem; }
+  table.pairs th { background: #f1f5f9; color: var(--primary-dark); font-weight: 700; padding: 0.5rem; border: 1px solid var(--border); text-align: left; }
+  table.pairs td { border: 1px solid var(--border); padding: 0.4rem; vertical-align: top; }
+  table.pairs input, table.pairs select { font-size: 0.82rem; padding: 0.35rem; }
+  .pair-row-remove { background: var(--danger); color: white; border: none; border-radius: 0.4rem; padding: 0.4rem 0.6rem; cursor: pointer; font-size: 0.78rem; font-weight:700; }
+  .btn { display:inline-block; padding: 0.7rem 1.3rem; border-radius: 0.5rem; font-weight: 700; font-size: 0.92rem; border: none; cursor: pointer; text-decoration:none; }
+  .btn-primary { background: var(--primary); color: white; }
+  .btn-primary:hover { background: var(--primary-dark); }
+  .btn-secondary { background: #e2e8f0; color: var(--primary-dark); }
+  .btn-secondary:hover { background: #cbd5e1; }
+  .btn-teal { background: var(--secondary); color: white; }
+  .btn-teal:hover { background: #0f766e; }
+  .btn-add { background: #dbeafe; color: var(--primary); border: 1px dashed var(--primary-light); padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight:700; cursor: pointer; font-size: 0.85rem; margin-top: 0.6rem; }
+  .btn-row { display:flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 1.2rem; }
+
+  .callout { border-left: 4px solid var(--secondary); background: #f0fdfa; padding: 0.9rem 1.1rem; border-radius: 0.4rem; margin: 1rem 0; font-size: 0.9rem; }
+  .callout.warn { border-left-color: var(--danger); background: #fef2f2; }
+  .callout.tip { border-left-color: var(--accent); background: #fffbeb; }
+
+  .status-pill { display:inline-block; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.02em; }
+  .status-good { background: #dcfce7; color: #166534; }
+  .status-partial { background: #fef9c3; color: #854d0e; }
+  .status-bad { background: #fee2e2; color: #991b1b; }
+  .status-neutral { background: #e2e8f0; color: #334155; }
+
+  .analysis-item { border: 1px solid var(--border); border-radius: 0.6rem; padding: 0.9rem 1.1rem; margin-bottom: 0.8rem; background: #fafcff; }
+  .analysis-item .head { display:flex; justify-content: space-between; align-items:center; flex-wrap: wrap; gap:0.5rem; margin-bottom:0.4rem; }
+  .analysis-item .head strong { color: var(--primary-dark); font-size: 0.98rem; }
+
+  table.checklist { width:100%; border-collapse: collapse; margin-top: 1rem; font-size: 0.9rem; }
+  table.checklist th, table.checklist td { border: 1px solid var(--border); padding: 0.6rem 0.75rem; text-align:left; }
+  table.checklist th { background: #f1f5f9; }
+
+  #soapOutput { width: 100%; min-height: 480px; font-family: "SFMono-Regular", Consolas, monospace; font-size: 0.86rem; background: #0f172a; color: #e2e8f0; border-radius: 0.6rem; padding: 1.2rem; white-space: pre-wrap; border: none; }
+  .copy-msg { color: var(--success); font-weight: 700; font-size: 0.85rem; margin-left: 0.8rem; display:none; }
+
+  .empty-state { text-align:center; padding: 3rem 1rem; color: var(--text-muted); }
+  .empty-state .big { font-size: 2.2rem; margin-bottom: 0.5rem; }
+
+  footer { max-width: 1200px; margin: 3rem auto 0 auto; padding: 0 1.5rem; color: var(--text-muted); font-size: 0.85rem; text-align: center; }
+  @media print {
+    header, .nav-container, .btn-row, .no-print { display: none !important; }
+    .tab-pane { display: block !important; }
+    section.card { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-content">
+    <div class="badge">Clinical Documentation Tool</div>
+    <h1>NKT&reg; Session Workflow: Analysis &rarr; Evaluation &rarr; Plan Check &rarr; Next Session &rarr; SOAP</h1>
+    <p class="subtitle">Enter (or paste) today's findings once, then step through an automated, rule-based workflow built on the NKT protocol logic (Levels 1&ndash;3): a narrative analysis of what was tested, an evaluation of whether corrections held, a check of your plan against protocol best-practice, an auto-drafted next-session plan, and a ready-to-copy SOAP note. Everything runs locally in your browser &mdash; no data leaves this page.</p>
+    <a href="index.html" class="home-link">&larr; Back to Master Suite Hub</a>
+  </div>
+</header>
+
+<div class="nav-container">
+  <ul class="nav-tabs" id="mainNav">
+    <li><button class="active" onclick="switchTab('input')"><span class="step-num">1</span>Input &amp; Findings</button></li>
+    <li><button onclick="switchTab('analysis')"><span class="step-num">2</span>Analysis</button></li>
+    <li><button onclick="switchTab('evaluation')"><span class="step-num">3</span>Evaluation</button></li>
+    <li><button onclick="switchTab('plancheck')"><span class="step-num">4</span>Check the Plan</button></li>
+    <li><button onclick="switchTab('nextsession')"><span class="step-num">5</span>Next Session Plan</button></li>
+    <li><button onclick="switchTab('soap')"><span class="step-num">6</span>Get SOAP Note</button></li>
+  </ul>
+</div>
+
+<main class="container">
+
+<!-- ================= TAB 1: INPUT ================= -->
+<div class="tab-pane active" id="input">
+
+  <section class="card">
+    <h2 class="section-title">Session Details</h2>
+    <div class="grid4">
+      <div><label>Client Name / ID</label><input type="text" id="clientName" placeholder="e.g. J.D. or Client #104"></div>
+      <div><label>Session Date</label><input type="date" id="sessionDate"></div>
+      <div><label>Session #</label><input type="text" id="sessionNum" placeholder="e.g. 3"></div>
+      <div><label>NKT Level Used</label>
+        <select id="nktLevel">
+          <option value="1">Level 1 &mdash; Isolated Muscle Pairs</option>
+          <option value="2">Level 2 &mdash; Subsystems / Core / TMJ</option>
+          <option value="3">Level 3 &mdash; Scars, Ligaments, Ocular/Hyoid, Gait</option>
+        </select>
+      </div>
+    </div>
+    <div class="checkbox-row">
+      <input type="checkbox" id="redFlagCheck" onchange="toggleRedFlagBox()">
+      <label for="redFlagCheck" style="font-weight:600;">Any red-flag findings today (refer out)?</label>
+    </div>
+    <div id="redFlagBox" style="display:none;">
+      <label>Describe red flag / precaution</label>
+      <textarea id="redFlagText" placeholder="e.g. new saddle anesthesia, unexplained bilateral neuro deficit, fever with spinal tenderness..."></textarea>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2 class="section-title">Subjective (S)</h2>
+    <p style="font-size:0.85rem;color:var(--text-muted);margin-top:-0.4rem;">Paste raw notes here, or use the structured fields below &mdash; both feed into the final SOAP note.</p>
+    <label>Quick-paste raw subjective notes (optional)</label>
+    <textarea id="subjectiveRaw" placeholder="Paste anything the client told you today, in your own words or shorthand..."></textarea>
+    <div class="grid2">
+      <div><label>Chief complaint today</label><textarea id="chiefComplaint" placeholder="e.g. Right lateral hip pain with stairs and single-leg stance"></textarea></div>
+      <div><label>Pain level (0&ndash;10)</label><input type="number" id="painLevel" min="0" max="10" placeholder="e.g. 4"></div>
+    </div>
+    <div class="grid2">
+      <div><label>Changes since last session</label><textarea id="changesSince" placeholder="e.g. 30% less pain going up stairs; still sore after 20+ min walking"></textarea></div>
+      <div><label>Aggravating / easing factors</label><textarea id="aggEase" placeholder="e.g. Agg: prolonged standing. Eases: heat, home stretch"></textarea></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2 class="section-title">Objective (O) &mdash; Reactive Pairs Tested</h2>
+    <p style="font-size:0.85rem;color:var(--text-muted);margin-top:-0.4rem;">Add one row per driver&ndash;receiver relationship tested this session. Use standard NKT terms (Weak in the Clear, Therapy Localization, Strong in the Clear) &mdash; see the <a href="nkt_comprehensive_reference_guide.html" target="_blank">Comprehensive Reference Guide</a> for the glossary.</p>
+    <table class="pairs" id="pairsTable">
+      <thead>
+        <tr>
+          <th style="min-width:150px;">Inhibited Receiver Muscle</th>
+          <th>Baseline WIC?</th>
+          <th style="min-width:150px;">Driver Hypothesis (TL target)</th>
+          <th>TL Retest Result</th>
+          <th style="min-width:130px;">Release Technique</th>
+          <th style="width:80px;">Release Duration (sec)</th>
+          <th style="min-width:130px;">Activation Exercise</th>
+          <th style="width:90px;">Reps x Hold</th>
+          <th>Retest in the Clear</th>
+          <th class="no-print"></th>
+        </tr>
+      </thead>
+      <tbody id="pairsBody"></tbody>
+    </table>
+    <button class="btn-add no-print" onclick="addPairRow()">+ Add Driver&ndash;Receiver Pair</button>
+  </section>
+
+  <section class="card">
+    <h2 class="section-title">Functional Retest</h2>
+    <div class="grid2">
+      <div><label>Movement / test used (e.g. single-leg stance, squat, gait, reach)</label><input type="text" id="funcTest" placeholder="e.g. Single-leg stance x 10s"></div>
+      <div><label>Outcome</label>
+        <select id="funcOutcome">
+          <option value="">-- select --</option>
+          <option value="improved">Improved</option>
+          <option value="unchanged">Unchanged</option>
+          <option value="worse">Worse</option>
+        </select>
+      </div>
+    </div>
+    <label>Detail</label>
+    <textarea id="funcDetail" placeholder="e.g. Pelvis held level for 8s vs. 2s pre-treatment; no reported pain"></textarea>
+  </section>
+
+  <section class="card">
+    <h2 class="section-title">Plan (P) &mdash; Home Program &amp; Notes</h2>
+    <label>Home exercise / corrective program assigned</label>
+    <textarea id="homeProgram" placeholder="e.g. Release TFL with foam roller 60s, then Glute Med activation 4x5s isometric side-lying, 2x daily for 2 weeks"></textarea>
+    <label>Additional session notes (optional)</label>
+    <textarea id="extraNotes" placeholder="Anything else worth documenting"></textarea>
+  </section>
+
+  <div class="btn-row no-print">
+    <button class="btn btn-primary" onclick="runWorkflow()">Run Analysis &rarr;</button>
+    <button class="btn btn-secondary" onclick="loadSample()">Load Sample Session</button>
+    <button class="btn btn-secondary" onclick="clearAll()">Clear All</button>
+  </div>
+
+</div>
+
+<!-- ================= TAB 2: ANALYSIS ================= -->
+<div class="tab-pane" id="analysis">
+  <section class="card">
+    <h2 class="section-title">Session Analysis</h2>
+    <div id="analysisOutput"><div class="empty-state"><div class="big">&#128203;</div>Fill in Tab 1 and click "Run Analysis" to generate this section.</div></div>
+  </section>
+</div>
+
+<!-- ================= TAB 3: EVALUATION ================= -->
+<div class="tab-pane" id="evaluation">
+  <section class="card">
+    <h2 class="section-title">Evaluation &mdash; Did the Correction Hold?</h2>
+    <div id="evaluationOutput"><div class="empty-state"><div class="big">&#128200;</div>Run the analysis from Tab 1 first.</div></div>
+  </section>
+</div>
+
+<!-- ================= TAB 4: PLAN CHECK ================= -->
+<div class="tab-pane" id="plancheck">
+  <section class="card">
+    <h2 class="section-title">Check the Plan &mdash; Protocol Compliance</h2>
+    <p style="font-size:0.85rem;color:var(--text-muted);">Cross-checks today's documentation against the standard NKT corrective algorithm and case-study documentation checklist.</p>
+    <div id="planCheckOutput"><div class="empty-state"><div class="big">&#9989;</div>Run the analysis from Tab 1 first.</div></div>
+  </section>
+</div>
+
+<!-- ================= TAB 5: NEXT SESSION ================= -->
+<div class="tab-pane" id="nextsession">
+  <section class="card">
+    <h2 class="section-title">Next Session Plan</h2>
+    <div id="nextSessionOutput"><div class="empty-state"><div class="big">&#128197;</div>Run the analysis from Tab 1 first.</div></div>
+  </section>
+</div>
+
+<!-- ================= TAB 6: SOAP ================= -->
+<div class="tab-pane" id="soap">
+  <section class="card">
+    <h2 class="section-title">Final SOAP Note</h2>
+    <div class="btn-row no-print" style="margin-top:0;margin-bottom:1rem;">
+      <button class="btn btn-teal" onclick="copySoap()">Copy to Clipboard</button>
+      <button class="btn btn-secondary" onclick="downloadSoap()">Download as .txt</button>
+      <button class="btn btn-secondary" onclick="window.print()">Print / Save as PDF</button>
+      <span class="copy-msg" id="copyMsg">Copied!</span>
+    </div>
+    <textarea id="soapOutput" readonly>Run the analysis from Tab 1 first to generate the SOAP note here.</textarea>
+  </section>
+</div>
+
+</main>
+
+<footer>
+  <p>Part of the NeuroKinetic Therapy (NKT&reg;) Master Clinical &amp; Educational Suite &middot; <a href="index.html">Return to Hub</a></p>
+  <p style="margin-top:0.4rem;">This tool applies fixed clinical-logic rules only &mdash; it does not use an external AI service, and it is not a substitute for clinical judgment or official documentation requirements.</p>
+</footer>
+
+<script>
+/* ============================= TAB SWITCHING ============================= */
+const TABS = ['input','analysis','evaluation','plancheck','nextsession','soap'];
+function switchTab(tabId) {
+  document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.nav-tabs button').forEach(el => el.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  const idx = TABS.indexOf(tabId);
+  if (idx >= 0) document.querySelectorAll('.nav-tabs button')[idx].classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function toggleRedFlagBox() {
+  document.getElementById('redFlagBox').style.display = document.getElementById('redFlagCheck').checked ? 'block' : 'none';
+}
+
+/* ============================= PAIR ROWS ============================= */
+let pairRowCount = 0;
+function addPairRow(vals) {
+  vals = vals || {};
+  const tbody = document.getElementById('pairsBody');
+  const rid = 'row' + (pairRowCount++);
+  const tr = document.createElement('tr');
+  tr.id = rid;
+  tr.innerHTML = `
+    <td><input type="text" class="f-receiver" value="${vals.receiver||''}" placeholder="e.g. Gluteus Medius"></td>
+    <td style="text-align:center;"><input type="checkbox" class="f-wic" ${vals.wic ? 'checked' : ''}></td>
+    <td><input type="text" class="f-driver" value="${vals.driver||''}" placeholder="e.g. TFL"></td>
+    <td><select class="f-tlresult">
+      <option value="">--</option>
+      <option value="strong" ${vals.tlresult==='strong'?'selected':''}>Strong (confirmed)</option>
+      <option value="weak" ${vals.tlresult==='weak'?'selected':''}>Still weak (rejected)</option>
+    </select></td>
+    <td><input type="text" class="f-release" value="${vals.release||''}" placeholder="e.g. IASTM"></td>
+    <td><input type="number" class="f-duration" value="${vals.duration||''}" placeholder="45"></td>
+    <td><input type="text" class="f-activation" value="${vals.activation||''}" placeholder="e.g. Side-lying abduction"></td>
+    <td><input type="text" class="f-reps" value="${vals.reps||''}" placeholder="4x5s"></td>
+    <td><select class="f-retestclear">
+      <option value="">--</option>
+      <option value="strong" ${vals.retestclear==='strong'?'selected':''}>Strong</option>
+      <option value="weak" ${vals.retestclear==='weak'?'selected':''}>Still weak</option>
+      <option value="not_retested" ${vals.retestclear==='not_retested'?'selected':''}>Not retested</option>
+    </select></td>
+    <td class="no-print"><button class="pair-row-remove" onclick="document.getElementById('${rid}').remove()">Remove</button></td>
+  `;
+  tbody.appendChild(tr);
+}
+
+function collectPairs() {
+  const rows = document.querySelectorAll('#pairsBody tr');
+  const out = [];
+  rows.forEach(r => {
+    const get = sel => r.querySelector(sel);
+    const receiver = get('.f-receiver').value.trim();
+    const driver = get('.f-driver').value.trim();
+    if (!receiver && !driver) return;
+    out.push({
+      receiver, driver,
+      wic: get('.f-wic').checked,
+      tlresult: get('.f-tlresult').value,
+      release: get('.f-release').value.trim(),
+      duration: get('.f-duration').value.trim(),
+      activation: get('.f-activation').value.trim(),
+      reps: get('.f-reps').value.trim(),
+      retestclear: get('.f-retestclear').value
+    });
+  });
+  return out;
+}
+
+/* ============================= MUSCLE RELATIONSHIP LOOKUP ============================= */
+/* Built from the suite's Level 1/2/3 muscle-pair libraries, for auto-suggesting */
+/* alternate drivers / subsystems when a pair is unresolved. */
+const RELATION_MAP = [
+  { key: /glute(us)?\s*med/i, drivers: ['TFL', 'Adductor Group', 'Quadratus Lumborum (contralateral)', 'ATFL/CFL ligament (ipsilateral ankle)'], subsystem: 'Lateral Subsystem' },
+  { key: /glute(us)?\s*max/i, drivers: ['Hamstrings', 'Erector Spinae', 'Psoas Major / Iliacus', 'Piriformis / Deep Rotators'], subsystem: 'Deep Longitudinal Subsystem and Posterior Oblique Subsystem' },
+  { key: /tibialis\s*anterior/i, drivers: ['Gastrocnemius', 'Soleus'], subsystem: 'Deep Longitudinal Subsystem' },
+  { key: /(lower\s*trap|serratus)/i, drivers: ['Upper Trapezius', 'Levator Scapulae', 'Pectoralis Minor', 'Latissimus Dorsi'], subsystem: 'Scapulothoracic / POS (via Lat Dorsi)' },
+  { key: /rhomboid/i, drivers: ['Pectoralis Minor', 'Pectoralis Major', 'Latissimus Dorsi'], subsystem: 'Scapulothoracic chain' },
+  { key: /(ili(opsoas|acus)|psoas)/i, drivers: ['Rectus Femoris', 'Quadriceps'], subsystem: 'Anterior hip / core' },
+  { key: /rotator\s*cuff|infraspinatus|teres\s*minor/i, drivers: ['Biceps Brachii', 'Upper Trapezius (shrug substitution)'], subsystem: 'Shoulder girdle' },
+  { key: /deep\s*neck\s*flexor|longus\s*colli|longus\s*capitis/i, drivers: ['SCM', 'Scalenes', 'Upper Trapezius'], subsystem: 'Cervical stabilization' },
+  { key: /transvers(us|e)\s*abdominis|inner\s*unit|core/i, drivers: ['Diaphragm (breath-hold test)', 'Pelvic floor', 'Diastasis recti / scar (C-section)'], subsystem: 'Core Cylinder' },
+  { key: /adductor/i, drivers: ['External Oblique (AOS)', 'Contralateral Internal Oblique'], subsystem: 'Anterior Oblique Subsystem (AOS)' },
+  { key: /peroneus|peroneal/i, drivers: ['Biceps Femoris', 'Sacrotuberous Ligament'], subsystem: 'Deep Longitudinal Subsystem' }
+];
+function suggestForReceiver(name, alreadyTried) {
+  if (!name) return null;
+  alreadyTried = (alreadyTried || []).map(d => (d||'').toLowerCase().trim());
+  for (const r of RELATION_MAP) {
+    if (r.key.test(name)) {
+      const remaining = r.drivers.filter(d => !alreadyTried.includes(d.toLowerCase().trim()));
+      if (!remaining.length) return null; // every candidate already tested this session
+      return { drivers: remaining, subsystem: r.subsystem };
+    }
+  }
+  return null;
+}
+function driversTriedFor(receiverName) {
+  return STATE.pairs.filter(p => p.receiver && p.receiver.toLowerCase().trim() === (receiverName||'').toLowerCase().trim()).map(p => p.driver);
+}
+
+/* ============================= CORE WORKFLOW ============================= */
+let STATE = null;
+
+function runWorkflow() {
+  const pairs = collectPairs();
+  STATE = {
+    meta: {
+      client: val('clientName'), date: val('sessionDate'), sessionNum: val('sessionNum'),
+      level: document.getElementById('nktLevel').value,
+      redFlag: document.getElementById('redFlagCheck').checked,
+      redFlagText: val('redFlagText')
+    },
+    subjective: {
+      raw: val('subjectiveRaw'), chief: val('chiefComplaint'), pain: val('painLevel'),
+      changes: val('changesSince'), aggEase: val('aggEase')
+    },
+    pairs: pairs,
+    functional: { test: val('funcTest'), outcome: document.getElementById('funcOutcome').value, detail: val('funcDetail') },
+    plan: { home: val('homeProgram'), extra: val('extraNotes') }
+  };
+  renderAnalysis();
+  renderEvaluation();
+  renderPlanCheck();
+  renderNextSession();
+  renderSoap();
+  switchTab('analysis');
+}
+
+function val(id) { const el = document.getElementById(id); return el ? el.value.trim() : ''; }
+function esc(s) { return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+/* ---------- ANALYSIS ---------- */
+function renderAnalysis() {
+  const out = document.getElementById('analysisOutput');
+  if (!STATE.pairs.length && !STATE.subjective.raw && !STATE.subjective.chief) {
+    out.innerHTML = '<div class="callout warn">No findings were entered. Go back to Tab 1 and add at least a chief complaint or one driver&ndash;receiver pair.</div>';
+    return;
+  }
+  let html = '';
+  if (STATE.subjective.chief || STATE.subjective.raw) {
+    html += `<h3 class="sub-title">Presentation</h3><p>${esc(STATE.subjective.chief) || esc(STATE.subjective.raw) || 'No chief complaint recorded.'}${STATE.subjective.pain ? ' &mdash; reported pain ' + esc(STATE.subjective.pain) + '/10 today.' : ''}</p>`;
+    if (STATE.subjective.changes) html += `<p><strong>Since last session:</strong> ${esc(STATE.subjective.changes)}</p>`;
+  }
+  html += `<h3 class="sub-title">Driver&ndash;Receiver Testing (Level ${esc(STATE.meta.level)})</h3>`;
+  if (!STATE.pairs.length) {
+    html += '<p><em>No driver&ndash;receiver pairs were logged this session.</em></p>';
+  } else {
+    STATE.pairs.forEach((p, i) => {
+      let narrative = `<strong>${i+1}. ${esc(p.receiver)||'(unnamed receiver)'}</strong> `;
+      narrative += p.wic ? 'tested Weak in the Clear at baseline. ' : 'baseline WIC status not confirmed. ';
+      if (p.driver) {
+        narrative += `Therapy Localization was applied to <strong>${esc(p.driver)}</strong>; on immediate retest the receiver was `;
+        if (p.tlresult === 'strong') narrative += '<span class="status-pill status-good">STRONG</span> &mdash; reactive pair confirmed. ';
+        else if (p.tlresult === 'weak') narrative += '<span class="status-pill status-bad">STILL WEAK</span> &mdash; this hypothesis was rejected as the driver. ';
+        else narrative += '<span class="status-pill status-neutral">not recorded</span>. ';
+      }
+      if (p.tlresult === 'strong') {
+        narrative += `The driver was released via <strong>${esc(p.release)||'(technique not recorded)'}</strong>`;
+        narrative += p.duration ? ` for ${esc(p.duration)} seconds, ` : ', ';
+        narrative += `followed by isolated activation of the receiver (<strong>${esc(p.activation)||'exercise not recorded'}</strong>${p.reps ? ', ' + esc(p.reps) : ''}). `;
+        narrative += 'Retest in the clear (no TL) was ';
+        if (p.retestclear === 'strong') narrative += '<span class="status-pill status-good">STRONG</span> &mdash; correction held.';
+        else if (p.retestclear === 'weak') narrative += '<span class="status-pill status-bad">STILL WEAK</span> &mdash; correction did not fully hold.';
+        else narrative += '<span class="status-pill status-neutral">not performed</span>.';
+      }
+      html += `<div class="analysis-item">${narrative}</div>`;
+    });
+    const confirmed = STATE.pairs.filter(p => p.tlresult === 'strong').length;
+    html += `<p><strong>Summary:</strong> ${confirmed} of ${STATE.pairs.length} tested relationship(s) confirmed as a reactive pair via Therapy Localization.</p>`;
+  }
+  if (STATE.functional.test) {
+    html += `<h3 class="sub-title">Functional Retest</h3><p><strong>${esc(STATE.functional.test)}:</strong> outcome recorded as <span class="status-pill ${STATE.functional.outcome==='improved'?'status-good':(STATE.functional.outcome==='worse'?'status-bad':'status-neutral')}">${esc(STATE.functional.outcome)||'not recorded'}</span>. ${esc(STATE.functional.detail)}</p>`;
+  }
+  out.innerHTML = html;
+}
+
+/* ---------- EVALUATION ---------- */
+function renderEvaluation() {
+  const out = document.getElementById('evaluationOutput');
+  if (!STATE.pairs.length) {
+    out.innerHTML = '<div class="callout warn">No driver&ndash;receiver pairs were logged, so an outcome cannot be evaluated. Consider whether today\'s session was purely assessment/education.</div>';
+    return;
+  }
+  let html = '';
+  let successCount = 0, partialCount = 0, unresolvedCount = 0;
+  STATE.pairs.forEach((p, i) => {
+    let status, text;
+    if (p.tlresult !== 'strong') {
+      status = 'status-neutral'; text = 'Hypothesis not confirmed as a reactive pair &mdash; no correction was applied to this relationship. Consider re-screening with an alternate driver.';
+      unresolvedCount++;
+    } else if (p.retestclear === 'strong') {
+      status = 'status-good'; text = 'Correction held on retest in the clear &mdash; the receiver is no longer dependent on the driver being released. Effective this session.';
+      successCount++;
+    } else if (p.retestclear === 'weak') {
+      status = 'status-bad'; text = 'Correction did not hold &mdash; receiver reverted to weak without TL. Consider: incomplete driver release (check duration/technique), an additional/deeper driver in the same chain, or joint/ligament involvement (Level 3).';
+      unresolvedCount++;
+    } else {
+      status = 'status-partial'; text = 'Retest in the clear was not performed or not recorded &mdash; outcome for this pair is unconfirmed.';
+      partialCount++;
+    }
+    html += `<div class="analysis-item"><div class="head"><strong>${i+1}. ${esc(p.receiver)||'(unnamed)'} &larr; ${esc(p.driver)||'(driver)'}</strong><span class="status-pill ${status}">${status==='status-good'?'Effective':status==='status-bad'?'Unresolved':status==='status-partial'?'Unconfirmed':'Not a driver'}</span></div><p style="margin:0;">${text}</p></div>`;
+  });
+
+  let overall, overallClass;
+  const total = STATE.pairs.length;
+  if (successCount === total) { overall = 'Successful Session'; overallClass = 'status-good'; }
+  else if (successCount > 0 && (unresolvedCount > 0 || partialCount > 0)) { overall = 'Partially Successful'; overallClass = 'status-partial'; }
+  else if (successCount === 0 && unresolvedCount > 0) { overall = 'Unresolved / Re-evaluate Approach'; overallClass = 'status-bad'; }
+  else { overall = 'Inconclusive'; overallClass = 'status-neutral'; }
+
+  if (STATE.functional.outcome === 'worse') { overall += ' (flagged: functional retest worse)'; overallClass = 'status-bad'; }
+
+  html = `<p style="margin-bottom:1.2rem;"><strong>Overall session rating:</strong> <span class="status-pill ${overallClass}" style="font-size:0.85rem;">${overall}</span></p>` + html;
+  out.innerHTML = html;
+}
+
+/* ---------- PLAN CHECK ---------- */
+function renderPlanCheck() {
+  const out = document.getElementById('planCheckOutput');
+  const rows = [];
+
+  // Rule: each confirmed pair should have a release technique documented
+  const confirmedPairs = STATE.pairs.filter(p => p.tlresult === 'strong');
+  const missingRelease = confirmedPairs.filter(p => !p.release);
+  rows.push(chk(missingRelease.length === 0, 'Driver release technique documented',
+    missingRelease.length === 0 ? 'All confirmed drivers have a release technique recorded.' : `${missingRelease.length} confirmed driver(s) are missing a documented release technique.`));
+
+  // Rule: release duration 30-60s window
+  const badDuration = confirmedPairs.filter(p => p.duration && (Number(p.duration) < 20));
+  rows.push(chk(badDuration.length === 0, 'Release duration within effective range (~30\u201360s)',
+    badDuration.length === 0 ? 'Recorded release durations are consistent with protocol (or not yet specified).' : `${badDuration.length} release(s) recorded under 20s \u2014 confirm enough time was given for mechanoreceptor modulation.`));
+
+  // Rule: activation documented with reps for confirmed pairs
+  const missingActivation = confirmedPairs.filter(p => !p.activation || !p.reps);
+  rows.push(chk(missingActivation.length === 0, 'Isolated activation (reps x hold) documented',
+    missingActivation.length === 0 ? 'Activation exercise and dosage documented for confirmed pairs.' : `${missingActivation.length} confirmed pair(s) missing an activation exercise or rep/hold count.`));
+
+  // Rule: retest in the clear performed
+  const missingRetest = confirmedPairs.filter(p => !p.retestclear || p.retestclear === 'not_retested');
+  rows.push(chk(missingRetest.length === 0, 'Retest-in-the-clear performed after activation',
+    missingRetest.length === 0 ? 'Every confirmed pair was retested without TL support.' : `${missingRetest.length} confirmed pair(s) were not retested in the clear \u2014 outcome unconfirmed.`));
+
+  // Rule: home program present
+  rows.push(chk(!!STATE.plan.home, 'Home exercise / corrective program assigned',
+    STATE.plan.home ? 'Home program documented.' : 'No home exercise program was recorded for this session.'));
+
+  // Rule: home program specifies sequencing (release-then-activate) and frequency
+  const homeLower = (STATE.plan.home || '').toLowerCase();
+  const hasFrequency = /daily|day|week|x\/|times a|2-3|2\u20133/.test(homeLower);
+  rows.push(chk(hasFrequency, 'Home program specifies frequency',
+    hasFrequency ? 'A frequency/schedule is specified in the home program.' : 'Home program does not clearly state a frequency (recommend 2\u20133x daily for 2\u20134 weeks).'));
+
+  const hasSequenceHint = /release|foam|stretch|massage|iastm|roll/.test(homeLower) && /activat|hold|isometric|contract|strengthen/.test(homeLower);
+  rows.push(chk(hasSequenceHint, 'Home program follows Release-first, Activate-second rule',
+    hasSequenceHint ? 'Home program appears to include both a release and an activation step.' : 'Could not confirm the home program includes both a release step and an activation step in that order \u2014 verify manually.'));
+
+  // Rule: functional retest performed
+  rows.push(chk(!!STATE.functional.test, 'Functional/global retest performed',
+    STATE.functional.test ? 'A functional movement retest was documented.' : 'No functional/global retest recorded \u2014 isolated MMT gains do not always transfer to function; consider adding one.'));
+
+  // Rule: red flags addressed
+  if (STATE.meta.redFlag) {
+    rows.push(chk(false, 'Red flag noted this session', 'A red flag / precaution was flagged \u2014 confirm referral or medical follow-up has been initiated before continuing corrective work.', true));
+  }
+
+  let html = '<table class="checklist"><tr><th style="width:40px;"></th><th>Check</th><th>Note</th></tr>';
+  rows.forEach(r => {
+    html += `<tr><td style="text-align:center;font-size:1.1rem;">${r.icon}</td><td><strong>${r.label}</strong></td><td>${r.note}</td></tr>`;
+  });
+  html += '</table>';
+  out.innerHTML = html;
+}
+function chk(pass, label, note, forceWarnIcon) {
+  const icon = forceWarnIcon ? '&#9888;&#65039;' : (pass ? '&#9989;' : '&#9888;&#65039;');
+  return { icon, label, note };
+}
+
+/* ---------- NEXT SESSION PLAN ---------- */
+function renderNextSession() {
+  const out = document.getElementById('nextSessionOutput');
+  let html = '<h3 class="sub-title">Priority Retests</h3><ul>';
+  if (STATE.pairs.length) {
+    STATE.pairs.forEach(p => {
+      if (p.tlresult === 'strong') {
+        html += `<li>Re-test <strong>${esc(p.receiver)}</strong> WIC status first thing next visit to confirm carryover from the ${esc(p.driver)} correction ${p.retestclear === 'weak' ? '(reverted last session &mdash; high priority)' : ''}.</li>`;
+      } else if (p.driver) {
+        html += `<li><strong>${esc(p.receiver)||'Receiver'}</strong> did not confirm with ${esc(p.driver)} as the driver &mdash; screen alternate candidates next session.</li>`;
+      }
+    });
+  } else {
+    html += '<li>No pairs logged this session &mdash; begin next visit with a fresh baseline screen of the chief complaint region.</li>';
+  }
+  html += '</ul>';
+
+  html += '<h3 class="sub-title">Suggested Additional Drivers to Screen</h3><ul>';
+  let anySuggestion = false;
+  STATE.pairs.forEach(p => {
+    if (!p.receiver) return;
+    if (p.retestclear === 'weak' || p.tlresult !== 'strong') {
+      const suggestion = suggestForReceiver(p.receiver, driversTriedFor(p.receiver));
+      if (suggestion) {
+        anySuggestion = true;
+        html += `<li>For <strong>${esc(p.receiver)}</strong>: consider TL to ${suggestion.drivers.join(', ')}. Related subsystem to assess: <em>${suggestion.subsystem}</em>.</li>`;
+      }
+    }
+  });
+  if (!anySuggestion) html += '<li>No unresolved pairs required alternate-driver suggestions, or the receiver name did not match the built-in lookup table &mdash; refer to the Comprehensive Reference Guide\'s muscle-pair tables for manual cross-checking.</li>';
+  html += '</ul>';
+
+  html += '<h3 class="sub-title">Homework &amp; Compliance</h3><ul>';
+  html += STATE.plan.home ? `<li>Review compliance with: <em>${esc(STATE.plan.home)}</em></li>` : '<li>No home program was recorded last time \u2014 assign one this session if appropriate.</li>';
+  html += '<li>Ask about any new symptoms, aggravation, or functional changes since the home program started.</li>';
+  html += '</ul>';
+
+  html += '<h3 class="sub-title">Suggested Follow-Up Interval</h3>';
+  const overallBad = STATE.pairs.some(p => p.retestclear === 'weak') || STATE.functional.outcome === 'worse';
+  html += `<p>${overallBad ? 'Consider a shorter interval (3\u20135 days) given at least one correction did not hold or function regressed.' : 'A standard 1-week interval is reasonable given today\'s findings, consistent with the 2\u20134 week neuroplastic consolidation window.'}</p>`;
+
+  if (STATE.meta.level !== '3') {
+    html += `<div class="callout tip">Consider progressing to <strong>Level ${Number(STATE.meta.level)+1<=3? Number(STATE.meta.level)+1 : 3}</strong> concepts next session if isolated pairs keep confirming but function/global tests remain limited (e.g. subsystem, core/diaphragm, or ligament/scar screening).</div>`;
+  }
+
+  out.innerHTML = html;
+}
+
+/* ---------- SOAP ---------- */
+function renderSoap() {
+  const m = STATE.meta, s = STATE.subjective, f = STATE.functional, pl = STATE.plan;
+  let soap = '';
+  soap += `NKT SESSION NOTE\n`;
+  soap += `Client: ${m.client || '__________'}    Date: ${m.date || '__________'}    Session #: ${m.sessionNum || '__'}    NKT Level: ${m.level}\n`;
+  soap += `${'='.repeat(70)}\n\n`;
+
+  if (m.redFlag) {
+    soap += `!! RED FLAG NOTED: ${m.redFlagText || '(described above)'}\n\n`;
+  }
+
+  soap += `S — SUBJECTIVE\n${'-'.repeat(70)}\n`;
+  if (s.raw) soap += s.raw + '\n';
+  if (s.chief) soap += `Chief complaint: ${s.chief}\n`;
+  if (s.pain) soap += `Pain today: ${s.pain}/10\n`;
+  if (s.changes) soap += `Changes since last session: ${s.changes}\n`;
+  if (s.aggEase) soap += `Aggravating/Easing: ${s.aggEase}\n`;
+  soap += '\n';
+
+  soap += `O — OBJECTIVE\n${'-'.repeat(70)}\n`;
+  if (!STATE.pairs.length) {
+    soap += '(No driver-receiver MMT pairs logged this session.)\n';
+  } else {
+    STATE.pairs.forEach((p, i) => {
+      soap += `${i+1}. Receiver: ${p.receiver || '(unspecified)'}${p.wic ? ' [WIC confirmed]' : ''}\n`;
+      if (p.driver) soap += `   TL to driver "${p.driver}" -> retest: ${p.tlresult === 'strong' ? 'STRONG (reactive pair confirmed)' : p.tlresult === 'weak' ? 'still weak (rejected)' : 'not recorded'}\n`;
+      if (p.tlresult === 'strong') {
+        soap += `   Release: ${p.release || '(not recorded)'}${p.duration ? ' x ' + p.duration + 's' : ''}\n`;
+        soap += `   Activation: ${p.activation || '(not recorded)'}${p.reps ? ' (' + p.reps + ')' : ''}\n`;
+        soap += `   Retest in the clear: ${p.retestclear === 'strong' ? 'STRONG (held)' : p.retestclear === 'weak' ? 'still weak (did not hold)' : 'not retested'}\n`;
+      }
+    });
+  }
+  if (f.test) soap += `Functional retest — ${f.test}: ${f.outcome || 'not recorded'}. ${f.detail || ''}\n`;
+  soap += '\n';
+
+  soap += `A — ASSESSMENT\n${'-'.repeat(70)}\n`;
+  const confirmed = STATE.pairs.filter(p => p.tlresult === 'strong');
+  const held = confirmed.filter(p => p.retestclear === 'strong');
+  soap += `${confirmed.length} of ${STATE.pairs.length} tested relationship(s) confirmed as reactive pairs; ${held.length} correction(s) held on retest in the clear.\n`;
+  if (f.outcome) soap += `Functional status: ${f.outcome}.\n`;
+  let rating = 'Inconclusive';
+  if (STATE.pairs.length) {
+    if (held.length === confirmed.length && confirmed.length === STATE.pairs.length && STATE.pairs.length>0) rating = 'Successful session';
+    else if (held.length > 0) rating = 'Partially successful session';
+    else rating = 'Unresolved / re-evaluate approach';
+  }
+  soap += `Overall clinical impression: ${rating}.\n\n`;
+
+  soap += `P — PLAN\n${'-'.repeat(70)}\n`;
+  soap += pl.home ? `Home program: ${pl.home}\n` : 'Home program: (none assigned this session)\n';
+  soap += `Non-negotiable order reminder given to client: release driver FIRST, activate receiver SECOND.\n`;
+  soap += `\nNext session plan:\n`;
+  STATE.pairs.forEach(p => {
+    if (p.tlresult === 'strong') soap += ` - Re-test ${p.receiver} for carryover from ${p.driver} release.\n`;
+  });
+  STATE.pairs.forEach(p => {
+    if (p.receiver && p.tlresult !== 'strong') {
+      const sug = suggestForReceiver(p.receiver, driversTriedFor(p.receiver));
+      if (sug) soap += ` - Screen alternate drivers for ${p.receiver}: ${sug.drivers.join(', ')} (${sug.subsystem}).\n`;
+    }
+  });
+  const overallBad = STATE.pairs.some(pp => pp.retestclear === 'weak') || f.outcome === 'worse';
+  soap += ` - Suggested follow-up interval: ${overallBad ? '3-5 days' : '~1 week'}.\n`;
+  if (pl.extra) soap += `\nAdditional notes: ${pl.extra}\n`;
+
+  document.getElementById('soapOutput').value = soap;
+}
+
+function copySoap() {
+  const ta = document.getElementById('soapOutput');
+  ta.select();
+  navigator.clipboard.writeText(ta.value).then(() => {
+    const msg = document.getElementById('copyMsg');
+    msg.style.display = 'inline';
+    setTimeout(() => msg.style.display = 'none', 2000);
+  }).catch(() => { document.execCommand('copy'); });
+}
+
+function downloadSoap() {
+  const text = document.getElementById('soapOutput').value;
+  const blob = new Blob([text], {type: 'text/plain'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const name = (STATE && STATE.meta && STATE.meta.client) ? STATE.meta.client.replace(/[^a-z0-9]/gi,'_') : 'nkt_session';
+  a.href = url; a.download = `SOAP_${name}_${(STATE && STATE.meta.date) || 'session'}.txt`;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+/* ============================= SAMPLE / RESET ============================= */
+function loadSample() {
+  document.getElementById('clientName').value = 'Sample Client (J.T.)';
+  document.getElementById('sessionDate').value = new Date().toISOString().slice(0,10);
+  document.getElementById('sessionNum').value = '3';
+  document.getElementById('nktLevel').value = '1';
+  document.getElementById('chiefComplaint').value = 'Right lateral hip pain with stairs and single-leg stance, ongoing 6 weeks.';
+  document.getElementById('painLevel').value = '4';
+  document.getElementById('changesSince').value = 'Reports 30% less pain going up stairs since last session; still sore after 20+ minutes of walking.';
+  document.getElementById('aggEase').value = 'Agg: prolonged standing, stairs. Eases: heat, home stretch routine.';
+  document.getElementById('pairsBody').innerHTML = '';
+  pairRowCount = 0;
+  addPairRow({ receiver: 'Gluteus Medius', wic: true, driver: 'TFL', tlresult: 'strong', release: 'IASTM + foam roll', duration: '45', activation: 'Side-lying hip abduction isometric', reps: '4x5s', retestclear: 'strong' });
+  addPairRow({ receiver: 'Gluteus Medius', wic: false, driver: 'Quadratus Lumborum', tlresult: 'weak' });
+  document.getElementById('funcTest').value = 'Single-leg stance, eyes open';
+  document.getElementById('funcOutcome').value = 'improved';
+  document.getElementById('funcDetail').value = 'Pelvis held level for 8s post-treatment vs. 2s pre-treatment; no reported pain.';
+  document.getElementById('homeProgram').value = 'Foam roll TFL 60s, then side-lying glute medius isometric holds 4x5s, 2x daily for 2 weeks.';
+  document.getElementById('extraNotes').value = 'Client advised to avoid deep hip flexion stretching until next visit.';
+}
+
+function clearAll() {
+  document.querySelectorAll('#input input[type=text], #input input[type=number], #input input[type=date], #input textarea').forEach(el => el.value = '');
+  document.getElementById('nktLevel').value = '1';
+  document.getElementById('funcOutcome').value = '';
+  document.getElementById('redFlagCheck').checked = false;
+  toggleRedFlagBox();
+  document.getElementById('pairsBody').innerHTML = '';
+  pairRowCount = 0;
+  addPairRow();
+}
+
+/* init */
+document.getElementById('sessionDate').value = new Date().toISOString().slice(0,10);
+addPairRow();
+</script>
+
+</body>
+</html>

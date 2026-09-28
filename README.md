@@ -25,6 +25,9 @@ This repository contains the complete theoretical foundations, hands-on practica
 ├── nkt_comprehensive_reference_guide.html # Deep-reference study guide: curriculum map, muscle-pair
 │                                      #   libraries, subsystem anatomy, glossary, protocol cheat-sheet,
 │                                      #   and exam-prep Q&A for Levels 1, 2 & 3
+├── nkt_soap_session_workflow.html    # Rule-based session workflow tool: paste/enter findings, then
+│                                      #   auto-generate Analysis, Evaluation, a Protocol Plan Check,
+│                                      #   a Next-Session Plan, and a copy/download-ready SOAP note
 └── images/                           # High-Resolution Clinical Photography & Anatomical Vectors
     ├── nkt_pos_gait_test.png         # Posterior Oblique Subsystem (POS) Gait Vector Test
     ├── nkt_diaphragm_assessment.png  # Subcostal Diaphragm Assessment & ZOA Release
