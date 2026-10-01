@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NKT&reg; Practical Session Walkthrough: Start to Finish</title>
+<style>
+  :root {
+    --primary: #1e3a8a; --primary-dark: #0f172a; --primary-light: #3b82f6;
+    --secondary: #0d9488; --accent: #d97706; --danger: #dc2626; --success: #16a34a;
+    --bg-main: #f8fafc; --bg-card: #ffffff; --text-main: #1e293b; --text-muted: #64748b;
+    --border: #e2e8f0;
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: var(--bg-main); color: var(--text-main); line-height: 1.65; padding-bottom: 4rem; }
+  header { background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%); color: white; padding: 2.75rem 2rem; box-shadow: var(--shadow-md); }
+  .header-content { max-width: 1200px; margin: 0 auto; }
+  .badge { display: inline-block; background: rgba(255,255,255,0.15); color: #93c5fd; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 0.75rem; }
+  h1 { font-size: 2.1rem; font-weight: 800; margin-bottom: 0.5rem; }
+  .subtitle { font-size: 1.02rem; color: #cbd5e1; max-width: 900px; }
+  .home-link { display:inline-block; margin-top:1rem; color:#bae6fd; font-size:0.9rem; text-decoration:none; font-weight:600; margin-right: 1.5rem;}
+  .home-link:hover { text-decoration: underline; }
+
+  .container { max-width: 1100px; margin: 2.5rem auto; padding: 0 1.5rem; }
+
+  .intro-card { background: white; border: 1px solid var(--border); border-radius: 0.85rem; padding: 1.75rem 2rem; margin-bottom: 2rem; box-shadow: var(--shadow-sm); }
+  .intro-card h2 { color: var(--primary-dark); margin-bottom: 0.75rem; font-size: 1.3rem; }
+  .intro-card p { color: #334155; margin-bottom: 0.7rem; }
+
+  .step-map { display:flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.1rem; }
+  .step-map a { background:#eff6ff; color: var(--primary); border: 1px solid #bfdbfe; padding: 0.4rem 0.8rem; border-radius: 9999px; font-size: 0.8rem; font-weight: 700; text-decoration: none; }
+  .step-map a:hover { background: var(--primary); color: white; }
+
+  .step { background: white; border: 1px solid var(--border); border-radius: 1rem; margin-bottom: 2.2rem; overflow: hidden; box-shadow: var(--shadow-sm); scroll-margin-top: 1.5rem; }
+  .step-img { width: 100%; height: 340px; object-fit: cover; display: block; background: #e2e8f0; }
+  .step-body { padding: 1.75rem 2rem 2rem 2rem; }
+  .step-kicker { display:flex; align-items:center; gap: 0.7rem; margin-bottom: 0.6rem; }
+  .step-num-badge { width: 2.3rem; height: 2.3rem; border-radius: 50%; background: var(--primary); color: white; display:flex; align-items:center; justify-content:center; font-weight: 800; font-size: 1.05rem; flex-shrink:0; }
+  .step-kicker h2 { font-size: 1.35rem; color: var(--primary-dark); }
+  .step-body p { color: #334155; margin-bottom: 0.8rem; }
+  .step-terms { display:flex; flex-wrap:wrap; gap: 0.4rem; margin: 0.6rem 0 1rem 0; }
+  .term-chip { background: #f0fdfa; color: #0f766e; border: 1px solid #99f6e4; padding: 0.2rem 0.65rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 700; }
+  .step-tip { border-left: 4px solid var(--accent); background: #fffbeb; padding: 0.8rem 1rem; border-radius: 0.4rem; font-size: 0.88rem; margin-top: 0.8rem; }
+  .step-tip strong { color: var(--primary-dark); }
+  .step-tool-link { display:inline-block; margin-top: 1rem; font-size: 0.85rem; font-weight: 700; color: var(--secondary); text-decoration: none; }
+  .step-tool-link:hover { text-decoration: underline; }
+
+  .checklist-card { background: var(--primary-dark); color: #e2e8f0; border-radius: 1rem; padding: 2rem; margin-top: 2.5rem; }
+  .checklist-card h2 { color: white; margin-bottom: 1rem; font-size: 1.3rem; }
+  .checklist-card ol { margin-left: 1.3rem; }
+  .checklist-card li { margin-bottom: 0.5rem; }
+  .cta-row { margin-top: 1.5rem; display:flex; gap: 1rem; flex-wrap: wrap; }
+  .btn { display:inline-block; padding: 0.75rem 1.4rem; border-radius: 0.5rem; font-weight: 700; font-size: 0.92rem; text-decoration:none; }
+  .btn-light { background: white; color: var(--primary-dark); }
+  .btn-outline { background: transparent; color: white; border: 1px solid rgba(255,255,255,0.4); }
+
+  footer { max-width: 1100px; margin: 3rem auto 0 auto; padding: 0 1.5rem; color: var(--text-muted); font-size: 0.85rem; text-align: center; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-content">
+    <div class="badge">Practical Walkthrough</div>
+    <h1>How a Real NKT&reg; Session Runs, Start to Finish</h1>
+    <p class="subtitle">An illustrated, step-by-step walkthrough of a typical NeuroKinetic Therapy treatment session &mdash; from intake through home program handoff &mdash; so you can see exactly what each stage looks like in the room before logging it in the Session Workflow tool.</p>
+    <a href="index.html" class="home-link">&larr; Back to Master Suite Hub</a>
+    <a href="nkt_soap_session_workflow.html" class="home-link">Open the Session Workflow &amp; SOAP Tool &rarr;</a>
+  </div>
+</header>
+
+<main class="container">
+
+  <section class="intro-card">
+    <h2>8 Steps, One Session</h2>
+    <p>Every NKT session &mdash; whether it's a 15-minute single-pair fix or a full Level 3 evaluation &mdash; follows the same underlying logic: find what's genuinely weak, find what's secretly driving that weakness, release the driver, then immediately re-teach the weak muscle to fire on its own. The 8 steps below map directly onto the fields in the <a href="nkt_soap_session_workflow.html">Session Workflow tool</a>, so you can fill it in as you go.</p>
+    <div class="step-map">
+      <a href="#step1">1. Intake</a>
+      <a href="#step2">2. Baseline Test</a>
+      <a href="#step3">3. Find the Driver</a>
+      <a href="#step4">4. Release</a>
+      <a href="#step5">5. Activate</a>
+      <a href="#step6">6. Retest Clear</a>
+      <a href="#step7">7. Functional Retest</a>
+      <a href="#step8">8. Home Program</a>
+    </div>
+  </section>
+
+  <!-- STEP 1 -->
+  <div class="step" id="step1">
+    <img class="step-img" src="images/nkt_session_intake_interview.jpg" alt="Therapist interviewing a seated client during intake">
+    <div class="step-body">
+      <div class="step-kicker"><div class="step-num-badge">1</div><h2>Intake &amp; Subjective History</h2></div>
+      <p>Before any testing begins, get the story: what hurts, when it started, what makes it better or worse, and what's changed since the last visit. This becomes your <strong>Subjective (S)</strong> section later. Listen for movement patterns in the complaint itself &mdash; "it hurts going up stairs" tells you to look at hip extension and single-leg stability, not just the painful joint.</p>
+      <div class="step-terms"><span class="term-chip">Chief Complaint</span><span class="term-chip">Aggravating/Easing Factors</span><span class="term-chip">Pain Scale 0&ndash;10</span></div>
+      <div class="step-tip"><strong>Tip:</strong> Resist the urge to treat the painful spot directly &mdash; in NKT the pain site is very often the <em>compensating</em> structure, not the true driver. Note the complaint, then go find the baseline weakness.</div>
+      <a class="step-tool-link" href="nkt_soap_session_workflow.html#input">&rarr; Log this in the "Subjective" fields of the Workflow tool</a>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step" id="step2">
+    <img class="step-img" src="images/nkt_session_baseline_mmt.jpg" alt="Therapist performing a baseline manual muscle test on a client's hip">
+    <div class="step-body">
+      <div class="step-kicker"><div class="step-num-badge">2</div><h2>Baseline Manual Muscle Test</h2></div>
+      <p>Isolate a muscle related to the complaint (here, Gluteus Medius for lateral hip pain) in a shortened position, and apply a smooth 2-second isometric ramp. You're checking for a crisp, rigid lock (<strong>Facilitated</strong>) versus a spongy give (<strong>Inhibited</strong>) &mdash; not raw strength on a 0&ndash;5 scale.</p>
+      <div class="step-terms"><span class="term-chip">Weak in the Clear (WIC)</span><span class="term-chip">Isometric Ramp</span><span class="term-chip">Facilitated / Inhibited</span></div>
+      <div class="step-tip"><strong>Tip:</strong> Confirm the muscle is genuinely <em>Weak in the Clear</em> first &mdash; no therapy localization, no help from anywhere else &mdash; before you start hunting for a driver. Testing a muscle that isn't really inhibited wastes the rest of the protocol.</div>
+      <a class="step-tool-link" href="nkt_soap_session_workflow.html#input">&rarr; Log the receiver muscle + tick "Baseline WIC?" in the Workflow tool</a>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step" id="step3">
+    <img class="step-img" src="images/nkt_session_driver_search_tl.jpg" alt="Therapist palpating a client's lower back to search for a driver muscle">
+    <div class="step-body">
+      <div class="step-kicker"><div class="step-num-badge">3</div><h2>Search for the Driver (Therapy Localization)</h2></div>
+      <p>Working through likely candidates (start with the Level 1 muscle-pair library &mdash; e.g. TFL, Quadratus Lumborum, Adductors for a Glute Medius receiver), apply light contact or a brief rub to each suspect, then <em>immediately</em> retest the inhibited muscle. Still weak? Move to the next candidate. Snaps to rock-solid strong? You've found a reactive pair.</p>
+      <div class="step-terms"><span class="term-chip">Therapy Localization (TL)</span><span class="term-chip">Reactive Pair</span><span class="term-chip">Neurolock</span></div>
+      <div class="step-tip"><strong>Tip:</strong> Retest within about 2 seconds of applying TL &mdash; the shift you're looking for is immediate. If several candidates all "work," that's usually a sign of a sloppy retest, not multiple true drivers.</div>
+      <a class="step-tool-link" href="nkt_soap_session_workflow.html#input">&rarr; Log the driver hypothesis + TL retest result in the Workflow tool</a>
+    </div>
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="step" id="step4">
+    <img class="step-img" src="images/nkt_session_release_iastm.jpg" alt="Therapist using an IASTM tool to release a client's thigh muscle">
+    <div class="step-body">
+      <div class="step-kicker"><div class="step-num-badge">4</div><h2>Release the Confirmed Driver</h2></div>
+      <p>Once a reactive pair is confirmed, spend 30&ndash;60 seconds releasing the driver using whatever technique you're trained in &mdash; soft tissue work, IASTM, ischemic compression, or stretching. The goal is to modulate the overactive muscle spindle afferents feeding that driver's "on" signal.</p>
+      <div class="step-terms"><span class="term-chip">30&ndash;60s Release Window</span><span class="term-chip">IASTM</span><span class="term-chip">Ischemic Compression</span></div>
+      <div class="step-tip"><strong>Tip:</strong> Don't skip straight to activation if the release felt incomplete (tissue still guarding, no softening). A rushed release is one of the most common reasons a correction fails to hold at retest.</div>
+      <a class="step-tool-link" href="nkt_soap_session_workflow.html#input">&rarr; Log release technique + duration in the Workflow tool</a>
+    </div>
+  </div>
+
+  <!-- STEP 5 -->
+  <div class="step" id="step5">
+    <img class="step-img" src="images/nkt_session_activation_isometric.jpg" alt="Therapist coaching a client through an isometric hip activation exercise">
+    <div class="step-body">
+      <div class="step-kicker"><div class="step-num-badge">5</div><h2>Activate the Receiver</h2></div>
+      <p>Without delay &mdash; you're working inside the ~30&ndash;60 second neuroplastic window right after the release &mdash; cue an isolated isometric contraction of the receiver muscle: typically 3&ndash;5 reps of a 5-second hold at 50&ndash;70% effort. This is the step that actually re-teaches the Motor Control Center to use the muscle again.</p>
+      <div class="step-terms"><span class="term-chip">Neuroplastic Window</span><span class="term-chip">Isolated Isometric Activation</span></div>
+      <div class="step-tip"><strong>Tip:</strong> Keep the activation strictly isolated &mdash; if the client substitutes with a bigger, more dominant muscle here, you reinforce the exact compensation pattern you just released.</div>
+      <a class="step-tool-link" href="nkt_soap_session_workflow.html#input">&rarr; Log activation exercise + reps/hold in the Workflow tool</a>
+    </div>
+  </div>
+
+  <!-- STEP 6 -->
+  <div class="step" id="step6">
+    <img class="step-img" src="images/nkt_pos_gait_test.png" alt="Therapist retesting a client's leg strength and alignment on a treatment table">
+    <div class="step-body">
+      <div class="step-kicker"><div class="step-num-badge">6</div><h2>Retest in the Clear</h2></div>
+      <p>Test the receiver muscle again in isolation &mdash; no TL, no help. It should now test <strong>Strong in the Clear</strong>. If it does, the correction held for this moment; if it's still weak, the driver release may have been incomplete, or there's a second driver in the same chain still to find.</p>
+      <div class="step-terms"><span class="term-chip">Strong in the Clear (SIC)</span><span class="term-chip">Retest</span></div>
+      <div class="step-tip"><strong>Tip:</strong> If the retest fails, don't panic and move on &mdash; go back to Step 3 and screen another candidate driver for the same receiver before ending the session on an unresolved pair.</div>
+      <a class="step-tool-link" href="nkt_soap_session_workflow.html#input">&rarr; Log the "Retest in the Clear" result in the Workflow tool</a>
+    </div>
+  </div>
+
+  <!-- STEP 7 -->
+  <div class="step" id="step7">
+    <img class="step-img" src="images/nkt_standing_perturbation.png" alt="Therapist assessing a client's standing balance and perturbation response">
+    <div class="step-body">
+      <div class="step-kicker"><div class="step-num-badge">7</div><h2>Functional / Global Retest</h2></div>
+      <p>An isolated muscle testing strong doesn't guarantee it holds under real movement. Re-check a functional task tied to the chief complaint &mdash; single-leg stance, a squat, gait, or a standing perturbation &mdash; and compare it to how it looked before treatment.</p>
+      <div class="step-terms"><span class="term-chip">Global Test</span><span class="term-chip">Anticipatory Postural Adjustment (APA)</span></div>
+      <div class="step-tip"><strong>Tip:</strong> This is the step clients actually feel and remember &mdash; "stand on one leg" before and after is a powerful, visible way to demonstrate progress in the room.</div>
+      <a class="step-tool-link" href="nkt_soap_session_workflow.html#input">&rarr; Log the functional test + outcome in the Workflow tool</a>
+    </div>
+  </div>
+
+  <!-- STEP 8 -->
+  <div class="step" id="step8">
+    <img class="step-img" src="images/nkt_session_home_handoff.jpg" alt="Therapist handing a client a printed home exercise program at the end of a session">
+    <div class="step-body">
+      <div class="step-kicker"><div class="step-num-badge">8</div><h2>Home Program &amp; Next-Session Plan</h2></div>
+      <p>Hand off a simple home program that mirrors exactly what you just did in the room: release the driver first, then activate the receiver &mdash; typically 2&ndash;3 times a day for 2&ndash;4 weeks to let the new pattern consolidate. Note what you'll re-check first at the next visit.</p>
+      <div class="step-terms"><span class="term-chip">Release-First, Activate-Second Rule</span><span class="term-chip">2&ndash;4 Week Consolidation</span></div>
+      <div class="step-tip"><strong>Tip:</strong> Keep the home program to one driver/receiver pair at a time if possible &mdash; compliance drops fast once you hand someone five different exercises for five different muscles.</div>
+      <a class="step-tool-link" href="nkt_soap_session_workflow.html#soap">&rarr; Generate the final SOAP note in the Workflow tool</a>
+    </div>
+  </div>
+
+  <section class="checklist-card">
+    <h2>Quick Recap Checklist</h2>
+    <ol>
+      <li>Take a subjective history &mdash; don't treat the pain site yet.</li>
+      <li>Confirm a muscle is genuinely Weak in the Clear.</li>
+      <li>Therapy-localize candidate drivers and retest immediately until one confirms.</li>
+      <li>Release the confirmed driver for 30&ndash;60 seconds.</li>
+      <li>Activate the receiver immediately, isolated, 3&ndash;5 reps x 5s holds.</li>
+      <li>Retest the receiver in the clear &mdash; it should now test strong.</li>
+      <li>Re-check a functional/global movement tied to the complaint.</li>
+      <li>Assign home program (release first, activate second) and plan the next visit.</li>
+    </ol>
+    <div class="cta-row">
+      <a class="btn btn-light" href="nkt_soap_session_workflow.html">Log This Session &rarr;</a>
+      <a class="btn btn-outline" href="nkt_comprehensive_reference_guide.html">Review Full Reference Guide &rarr;</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>Part of the NeuroKinetic Therapy (NKT&reg;) Master Clinical &amp; Educational Suite &middot; <a href="index.html">Return to Hub</a></p>
+  <p style="margin-top:0.4rem;">Photos are illustrative stock-style clinical scenes for educational purposes and do not depict a real patient encounter.</p>
+</footer>
+
+</body>
+</html>
