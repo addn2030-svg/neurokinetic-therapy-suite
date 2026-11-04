@@ -1,0 +1,11 @@
+# Render Blueprint — NKT Suite static site
+# Deploy: Render Dashboard -> New -> Blueprint -> select this repo
+services:
+  - type: web
+    name: nkt-suite
+    runtime: static
+    buildCommand: echo "Static site - no build step required"
+    staticPublishPath: .
+    envVars:
+      - key: SITE_NAME
+        value: neurokinetic-therapy-suite

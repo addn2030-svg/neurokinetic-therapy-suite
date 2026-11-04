@@ -1,0 +1,94 @@
+{
+  "name": "02 — Proactive Scan: Overdue Tasks Alert (بديل engine/proactive.py)",
+  "nodes": [
+    {
+      "id": "psc-trigger-0001",
+      "name": "Every 20 min",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [0, 0],
+      "parameters": {
+        "rule": { "interval": [{ "field": "minutes", "minutesInterval": 20 }] }
+      }
+    },
+    {
+      "id": "psc-query-0002",
+      "name": "Overdue Tasks",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [220, 0],
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT t.id, t.title, t.due_date\nFROM tasks t\nWHERE t.status NOT IN ('done','closed')\n  AND t.due_date < now()\n  AND NOT EXISTS (SELECT 1 FROM sent_notifications s WHERE s.event_key = 'task_overdue_' || t.id)\nORDER BY t.due_date\nLIMIT 5;"
+      },
+      "credentials": {
+        "postgres": { "id": "", "name": "Supabase Postgres" }
+      }
+    },
+    {
+      "id": "psc-key-0003",
+      "name": "Add event_key",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [440, 0],
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const r = $input.item.json;\nreturn { json: { ...r, event_key: 'task_overdue_' + r.id } };"
+      }
+    },
+    {
+      "id": "psc-mark-0004",
+      "name": "Mark Sent",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [660, 0],
+      "parameters": {
+        "operation": "insert",
+        "schema": { "__rl": true, "mode": "list", "value": "public" },
+        "table": { "__rl": true, "mode": "list", "value": "sent_notifications" },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": { "event_key": "={{ $json.event_key }}" }
+        },
+        "options": {}
+      },
+      "credentials": {
+        "postgres": { "id": "", "name": "Supabase Postgres" }
+      }
+    },
+    {
+      "id": "psc-build-0005",
+      "name": "Build Alert",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [880, 0],
+      "parameters": {
+        "jsCode": "const rows = $input.all().map(i => i.json);\nconst lines = rows.map(r => '⚠️ ' + r.title + ' — استحقاق ' + String(r.due_date).slice(0, 10)).join('\\n');\nreturn [{ json: { chat_id: $env.TELEGRAM_ADMIN_CHAT_ID || '', text: '🔔 فحص استباقي — ' + rows.length + ' مهمة متأخرة:\\n' + lines } }];"
+      }
+    },
+    {
+      "id": "psc-notify-0006",
+      "name": "Notify",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [1100, 0],
+      "parameters": {
+        "chatId": "={{ $json.chat_id }}",
+        "text": "={{ $json.text }}",
+        "additionalFields": {}
+      },
+      "credentials": {
+        "telegramApi": { "id": "", "name": "Telegram Bot (Chief of Staff)" }
+      }
+    }
+  ],
+  "connections": {
+    "Every 20 min": { "main": [[{ "node": "Overdue Tasks", "type": "main", "index": 0 }]] },
+    "Overdue Tasks": { "main": [[{ "node": "Add event_key", "type": "main", "index": 0 }]] },
+    "Add event_key": { "main": [[{ "node": "Mark Sent", "type": "main", "index": 0 }]] },
+    "Mark Sent": { "main": [[{ "node": "Build Alert", "type": "main", "index": 0 }]] },
+    "Build Alert": { "main": [[{ "node": "Notify", "type": "main", "index": 0 }]] }
+  },
+  "settings": { "timezone": "Asia/Riyadh", "executionOrder": "v1" },
+  "pinData": {}
+}

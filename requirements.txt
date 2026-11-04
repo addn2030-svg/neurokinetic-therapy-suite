@@ -1,0 +1,2 @@
+# No dependencies — the NKT suite is a static site served by the Python stdlib.
+# This file exists so Railway/Nixpacks detects the Python runtime.
